@@ -20,11 +20,13 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 
 ```text
 ├── index.html          # Main offline interactive checkpoint & technical documentation
-├── docs/               # Full Markdown engineering specification
+├── docs/               # Engineering specification, M1A runbook & verified findings
+├── uefi/m1a_probe/     # Milestone 1A read-only UEFI telemetry probe (PCI/BAR5/SMU7/GMUX/IOMMU)
 ├── diag/
 │   ├── acpi_setos/     # 24 raw .dat + decompiled .dsl ACPI tables from AppleSetOs boot
 │   ├── acpi_normal/    # 24 raw .dat + decompiled .dsl + dmar.dsl from normal boot
 │   ├── dump_1b0/       # WATCHDOG-20261125-1333.dmp, extracted blobs, and kd.exe analyses
+│   ├── m1a/            # Milestone 1A UEFI probe logs, Windows snapshots & diff analysis
 │   └── pci_state_*.txt # PnP / D-state / driver stack snapshots for both boot modes
 ├── scripts/            # PowerShell helpers (Phase 0 diag, Polaris 11 Boot Camp fix, USB rEFInd)
 ├── tools/acpica/       # Intel ACPICA 20260408 Windows tools (acpidump, iasl, acpixtract)
@@ -33,6 +35,8 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 
 ## Next Milestones
 
-1. **Milestone 1A (Fix `polaris10_start_smu` -> Hybrid Dual-GPU):** Isolate EFI SMU7 state (`BAR5` indirect register probe in UEFI) vs. `00:02.0`/`DMAR`/`igdkmd64` coexistence.
-2. **Milestone 1B (Port `t2-gmux-uefi` Mode 4 -> Intel-Only Power Saving):** Implement `gmux_indexed.c` (`0x7C2/0x7D0/0x7D4`), adapt `int_acpi.c` for `DSDT` `DD01._BCM`, and compile `SSDT_IGPU_MBP133.aml` calling native `PEG0.GFX0.SGMX`/`ABCM`.
-3. **Milestone 2 (Full Mode 5 Hybrid):** Intel HD 530 primary display (desktop/Electron) + AMD Radeon Pro 455 dedicated to 3D/Compute workloads.
+1. **Milestone 1A (UEFI Telemetry & `igdkmd64.sys` Isolation — Completed):**
+   - UEFI probe (`uefi/m1a_probe/mbp133_m1a_probe.c`), Windows collector/isolator (`scripts/Run-M1A-Collect.ps1`), diff analyzer (`scripts/Parse-M1A-Probe.py`), runbook ([`docs/MILESTONE_1A_RUNBOOK.md`](docs/MILESTONE_1A_RUNBOOK.md)), raw analysis ([`diag/m1a/M1A_ANALYSIS.md`](diag/m1a/M1A_ANALYSIS.md)), and **verified findings** ([`docs/MILESTONE_1A_FINDINGS.md`](docs/MILESTONE_1A_FINDINGS.md)):
+   - **Proved:** `igdkmd64.sys` driver conflict (H2) is **100% disproven**; pre-`ExitBootServices` UEFI state is **100% identical** between `normal`, `SetOS 10.15`, and `SetOS 10.9`; Intel OpRegion already carries `$VBT SKYLAKE` and Indexed I/O GMUX (`0x55AA`, `0x04001D00`) is hardware-verified.
+2. **Milestone 1B (Next — Port to `MacBookPro13,3` Intel-Only Mode 4):** Implement Indexed I/O GMUX switch (`0x7C2/0x7D0/0x7D4`), `DDI_BUF_CTL_A` 4-lane strap + AUX-A probe, and `SSDT_IGPU_MBP133` targeting `DSDT` `IGPU.DD01._BCM` / `PEG0.GFX0.SGMX`/`ABCM` on USB `REFIND_USB`.
+3. **Milestone 1A-2 & Milestone 2 (Hybrid Dual-GPU):** Isolate Apple EFI `ExitBootServices` hook vs. PCI `00:02.0` visibility (`DEVEN.D2EN` + VT-d `0xFED91000`) so Intel HD 530 + AMD Radeon Pro 455 run concurrently.

@@ -1,0 +1,195 @@
+﻿=== Hot-Disable Intel Isolation Test | 2026-11-25T16:03:44.2573979+01:00 ===
+Before: Intel=Error/CM_PROB_DISABLED AMD=Error/CM_PROB_FAILED_POST_START
+pnputil /disable-device Intel: Microsoft PnP Utility  Disabling device:          PCI\VEN_8086&DEV_191B&SUBSYS_015F106B&REV_06\3&11583659&0&10 Device disabled successfully. 
+pnputil /restart-device AMD: Microsoft PnP Utility  Restarting device:         PCI\VEN_1002&DEV_67EF&SUBSYS_0166106B&REV_C7\4&fed5e4c&0&0008 Device restarted successfully. 
+After Hot-Disable: AMD=Error Problem=CM_PROB_FAILED_POST_START CMError=CM_PROB_FAILED_POST_START
+
+=== M1A WINDOWS SNAPSHOT: hot_disable_intel | 2026-11-25T16:03:53.2754503+01:00 ===
+DetectedBootMode=setos | Intel=disabled(22) | AMD=Error(CM_PROB_FAILED_POST_START)
+
+--- PnP Devices (Display / PEG0 / GMUX / Backlight / Monitor) ---
+
+[Generic Monitor (Color LCD)] DISPLAY\APPA030\1&8713BCA&0&UID0
+  Status=OK Problem=CM_PROB_NONE CMError=CM_PROB_NONE
+  DEVPKEY_Device_HardwareIds = MONITOR\APPA030
+  DEVPKEY_Device_Service = monitor
+  DEVPKEY_Device_Driver = {4d36e96e-e325-11ce-bfc1-08002be10318}\0000
+  DEVPKEY_Device_BusNumber = 0
+  DEVPKEY_Device_Address = 0
+  DEVPKEY_Device_PowerData = 38 00 00 00 01 00 00 00 09 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 01 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 00 00 00 00
+  DEVPKEY_Device_DevNodeStatus = 25190410
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_HasProblem = False
+  DEVPKEY_Device_Stack = \Driver\monitor, \Driver\BasicDisplay
+  DEVPKEY_Device_DriverDate = 06/21/2006 02:00:00
+  DEVPKEY_Device_DriverVersion = 10.0.26100.9818
+  DEVPKEY_Device_DriverDesc = Generic PnP Monitor
+  DEVPKEY_Device_DriverInfPath = monitor.inf
+  DEVPKEY_Device_DriverInfSection = PnPMonitor.Install
+  DEVPKEY_Device_DriverProvider = Microsoft
+  DEVPKEY_Device_DriverRank = 16719872
+
+[Intel(R) HD Graphics 530] PCI\VEN_8086&DEV_191B&SUBSYS_015F106B&REV_06\3&11583659&0&10
+  Status=Error Problem=CM_PROB_DISABLED CMError=CM_PROB_DISABLED
+  DEVPKEY_Device_HardwareIds = PCI\VEN_8086&DEV_191B&SUBSYS_015F106B&REV_06, PCI\VEN_8086&DEV_191B&SUBSYS_015F106B, PCI\VEN_8086&DEV_191B&CC_030000, PCI\VEN_8086&DEV_191B&CC_0300
+  DEVPKEY_Device_Service = igfx
+  DEVPKEY_Device_Driver = {4d36e968-e325-11ce-bfc1-08002be10318}\0001
+  DEVPKEY_Device_LocationInfo = PCI bus 0, device 2, function 0
+  DEVPKEY_Device_BusNumber = 0
+  DEVPKEY_Device_Address = 131072
+  DEVPKEY_Device_PowerData = 38 00 00 00 04 00 00 00 09 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 00 00 00 00
+  DEVPKEY_Device_DevNodeStatus = 25175040
+  DEVPKEY_Device_ProblemCode = 22
+  DEVPKEY_Device_ProblemStatus = 0
+  DEVPKEY_Device_HasProblem = False
+  DEVPKEY_Device_Stack = \Driver\ACPI, \Driver\pci
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.IGPU
+  DEVPKEY_Device_DriverDate = 11/16/2022 01:00:00
+  DEVPKEY_Device_DriverVersion = 31.0.101.2115
+  DEVPKEY_Device_DriverDesc = Intel(R) HD Graphics 530
+  DEVPKEY_Device_DriverInfPath = oem80.inf
+  DEVPKEY_Device_DriverInfSection = iSKLD_w10_DS
+  DEVPKEY_Device_DriverProvider = Intel Corporation
+  DEVPKEY_Device_DriverRank = 13574145
+
+[Apple panel backlight] ACPI\APP0002\10
+  Status=OK Problem=CM_PROB_NONE CMError=CM_PROB_NONE
+  DEVPKEY_Device_HardwareIds = ACPI\VEN_APP&DEV_0002, ACPI\APP0002, *APP0002
+  DEVPKEY_Device_Driver = {4d36e97d-e325-11ce-bfc1-08002be10318}\0053
+  DEVPKEY_Device_BusNumber = 0
+  DEVPKEY_Device_Address = 0
+  DEVPKEY_Device_PowerData = 38 00 00 00 04 00 00 00 09 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 00 00 00 00
+  DEVPKEY_Device_DevNodeStatus = 1098915840
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_HasProblem = False
+  DEVPKEY_Device_Stack = \Driver\ACPI
+  DEVPKEY_Device_BiosDeviceName = \_SB.PNLF
+  DEVPKEY_Device_DriverDate = 10/19/2021 02:00:00
+  DEVPKEY_Device_DriverVersion = 6.1.8100.0
+  DEVPKEY_Device_DriverDesc = Apple panel backlight
+  DEVPKEY_Device_DriverInfPath = oem7.inf
+  DEVPKEY_Device_DriverInfSection = NullDeviceInstall.NT
+  DEVPKEY_Device_DriverProvider = Apple Inc.
+  DEVPKEY_Device_DriverRank = 16711681
+
+[AMD Radeon RX 560X] PCI\VEN_1002&DEV_67EF&SUBSYS_0166106B&REV_C7\4&FED5E4C&0&0008
+  Status=Error Problem=CM_PROB_FAILED_POST_START CMError=CM_PROB_FAILED_POST_START
+  DEVPKEY_Device_HardwareIds = PCI\VEN_1002&DEV_67EF&SUBSYS_0166106B&REV_C7, PCI\VEN_1002&DEV_67EF&SUBSYS_0166106B, PCI\VEN_1002&DEV_67EF&CC_030000, PCI\VEN_1002&DEV_67EF&CC_0300
+  DEVPKEY_Device_Service = amduw23g
+  DEVPKEY_Device_Driver = {4d36e968-e325-11ce-bfc1-08002be10318}\0000
+  DEVPKEY_Device_LocationInfo = PCI bus 1, device 0, function 0
+  DEVPKEY_Device_BusNumber = 1
+  DEVPKEY_Device_Address = 0
+  DEVPKEY_Device_PowerData = 38 00 00 00 04 00 00 00 8F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00
+  DEVPKEY_Device_DevNodeStatus = 25175040
+  DEVPKEY_Device_ProblemCode = 43
+  DEVPKEY_Device_ProblemStatus = 0
+  DEVPKEY_Device_HasProblem = True
+  DEVPKEY_Device_Stack = \Driver\ACPI, \Driver\pci
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.PEG0.GFX0
+  DEVPKEY_Device_DriverDate = 02/25/2025 01:00:00
+  DEVPKEY_Device_DriverVersion = 31.0.23013.14001
+  DEVPKEY_Device_DriverDesc = AMD Radeon RX 560X
+  DEVPKEY_Device_DriverInfPath = oem89.inf
+  DEVPKEY_Device_DriverInfSection = ati2mtag_Polaris11
+  DEVPKEY_Device_DriverProvider = Advanced Micro Devices, Inc.
+  DEVPKEY_Device_DriverRank = 13574144
+
+[Intel(R) Xeon(R) E3 - 1200/1500 v5/6th Gen Intel(R) Core(TM) PCIe Controller (x16) - 1901] PCI\VEN_8086&DEV_1901&SUBSYS_015F106B&REV_07\3&11583659&0&08
+  Status=OK Problem=CM_PROB_NONE CMError=CM_PROB_NONE
+  DEVPKEY_Device_HardwareIds = PCI\VEN_8086&DEV_1901&SUBSYS_015F106B&REV_07, PCI\VEN_8086&DEV_1901&SUBSYS_015F106B, PCI\VEN_8086&DEV_1901&CC_060400, PCI\VEN_8086&DEV_1901&CC_0604
+  DEVPKEY_Device_Service = pci
+  DEVPKEY_Device_Driver = {4d36e97d-e325-11ce-bfc1-08002be10318}\0014
+  DEVPKEY_Device_LocationInfo = PCI bus 0, device 1, function 0
+  DEVPKEY_Device_BusNumber = 0
+  DEVPKEY_Device_Address = 65536
+  DEVPKEY_Device_PowerData = 38 00 00 00 01 00 00 00 89 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00
+  DEVPKEY_Device_DevNodeStatus = 25174026
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_HasProblem = False
+  DEVPKEY_Device_Stack = \Driver\pci, \Driver\ACPI, \Driver\pci
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.PEG0
+  DEVPKEY_Device_DriverDate = 07/12/2016 02:00:00
+  DEVPKEY_Device_DriverVersion = 10.1.1.33
+  DEVPKEY_Device_DriverDesc = Intel(R) Xeon(R) E3 - 1200/1500 v5/6th Gen Intel(R) Core(TM) PCIe Controller (x16) - 1901
+  DEVPKEY_Device_DriverInfPath = oem5.inf
+  DEVPKEY_Device_DriverInfSection = Needs_PCI_DRV
+  DEVPKEY_Device_DriverProvider = INTEL
+  DEVPKEY_Device_DriverRank = 16719873
+
+[High Definition Audio Bus] PCI\VEN_1002&DEV_AAE0&SUBSYS_AAE01002&REV_00\4&FED5E4C&0&0108
+  Status=OK Problem=CM_PROB_NONE CMError=CM_PROB_NONE
+  DEVPKEY_Device_HardwareIds = PCI\VEN_1002&DEV_AAE0&SUBSYS_AAE01002&REV_00, PCI\VEN_1002&DEV_AAE0&SUBSYS_AAE01002, PCI\VEN_1002&DEV_AAE0&CC_040300, PCI\VEN_1002&DEV_AAE0&CC_0403
+  DEVPKEY_Device_Service = HDAudBus
+  DEVPKEY_Device_Driver = {4d36e97d-e325-11ce-bfc1-08002be10318}\0032
+  DEVPKEY_Device_LocationInfo = PCI bus 1, device 0, function 1
+  DEVPKEY_Device_BusNumber = 1
+  DEVPKEY_Device_Address = 1
+  DEVPKEY_Device_PowerData = 38 00 00 00 01 00 00 00 0F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 00 00 00 00
+  DEVPKEY_Device_DevNodeStatus = 25174026
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_HasProblem = False
+  DEVPKEY_Device_Stack = \Driver\HDAudBus, \Driver\ACPI, \Driver\pci
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.PEG0.HDAU
+  DEVPKEY_Device_DriverDate = 06/07/2024 02:00:00
+  DEVPKEY_Device_DriverVersion = 24.10.0.1
+  DEVPKEY_Device_DriverDesc = High Definition Audio Bus
+  DEVPKEY_Device_DriverInfPath = oem49.inf
+  DEVPKEY_Device_DriverInfSection = amdafd_Install
+  DEVPKEY_Device_DriverProvider = AMD
+  DEVPKEY_Device_DriverRank = 16719874
+
+[AMD High Definition Audio Device] HDAUDIO\FUNC_01&VEN_1002&DEV_AA01&SUBSYS_00AA0100&REV_1007\5&C7C083&10&0001
+  Status=OK Problem=CM_PROB_NONE CMError=CM_PROB_NONE
+  DEVPKEY_Device_HardwareIds = HDAUDIO\FUNC_01&VEN_1002&DEV_AA01&SUBSYS_00AA0100&REV_1007, HDAUDIO\FUNC_01&VEN_1002&DEV_AA01&SUBSYS_00AA0100
+  DEVPKEY_Device_Service = AtiHDAudioService
+  DEVPKEY_Device_Driver = {4d36e96c-e325-11ce-bfc1-08002be10318}\0000
+  DEVPKEY_Device_LocationInfo = Internal High Definition Audio Bus
+  DEVPKEY_Device_BusNumber = 0
+  DEVPKEY_Device_Address = 1
+  DEVPKEY_Device_PowerData = 38 00 00 00 04 00 00 00 09 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 00 00 00 00
+  DEVPKEY_Device_DevNodeStatus = 25174026
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_HasProblem = False
+  DEVPKEY_Device_Stack = \Driver\ksthunk, \Driver\AtiHDAudioService, \Driver\HDAudBus
+  DEVPKEY_Device_DriverDate = 05/06/2024 02:00:00
+  DEVPKEY_Device_DriverVersion = 10.0.1.30
+  DEVPKEY_Device_DriverDesc = AMD High Definition Audio Device
+  DEVPKEY_Device_DriverInfPath = oem52.inf
+  DEVPKEY_Device_DriverInfSection = HDAudioInstallwNxt
+  DEVPKEY_Device_DriverProvider = Advanced Micro Devices
+  DEVPKEY_Device_DriverRank = 16711680
+
+[Apple graphics mux] ACPI\APP000B\4&1096773&0
+  Status=OK Problem=CM_PROB_NONE CMError=CM_PROB_NONE
+  DEVPKEY_Device_HardwareIds = ACPI\VEN_APP&DEV_000B, ACPI\APP000B, *APP000B
+  DEVPKEY_Device_Driver = {4d36e97d-e325-11ce-bfc1-08002be10318}\0054
+  DEVPKEY_Device_BusNumber = 0
+  DEVPKEY_Device_PowerData = 38 00 00 00 04 00 00 00 89 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00 04 00 00 00
+  DEVPKEY_Device_DevNodeStatus = 1098915840
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_HasProblem = False
+  DEVPKEY_Device_Stack = \Driver\ACPI
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.LPCB.GMUX
+  DEVPKEY_Device_DriverDate = 10/19/2021 02:00:00
+  DEVPKEY_Device_DriverVersion = 6.1.8100.0
+  DEVPKEY_Device_DriverDesc = Apple graphics mux
+  DEVPKEY_Device_DriverInfPath = oem7.inf
+  DEVPKEY_Device_DriverInfSection = NullDeviceInstall.NT
+  DEVPKEY_Device_DriverProvider = Apple Inc.
+  DEVPKEY_Device_DriverRank = 16711681
+
+--- Allocated Resources ---
+
+--- VBS / HVCI / Kernel DMA Protection ---
+  VbsStatus=2 SecurityServicesConfigured=2 SecurityServicesRunning=2
+  HVCI Enabled=1 WasEnabledBy=2
+
+--- Display Class Registry Keys ---
+  0000: Desc=AMD Radeon RX 560X | Ver=31.0.23013.14001 | Match=pci\ven_1002&dev_67ef&rev_c7 | ULPS=0 | BC=1
+  0001: Desc=Intel(R) HD Graphics 530 | Ver=31.0.101.2115 | Match=PCI\VEN_8086&DEV_191B | ULPS= | BC=
+
+--- System Events Since Boot (Display/PCI/PnP/DxgKrnl/AMD/Intel) ---
+  [16:00:52.710] Microsoft-Windows-Kernel-PnP #219 (Warning): The driver \Driver\WUDFRd failed to load. Device: HID\VID_05AC&PID_8600&MI_03&Col01\7&26dc0433&0&0000 Status: 0xC0000365
+
+pnputil /enable-device Intel: Microsoft PnP Utility  Enabling device:          PCI\VEN_8086&DEV_191B&SUBSYS_015F106B&REV_06\3&11583659&0&10 Device enabled successfully. 

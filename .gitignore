@@ -18,7 +18,9 @@ symbols/
 *.log
 *.tmp
 
-# OS / Editor noise
+# OS / Editor / Python noise
+__pycache__/
+*.pyc
 .DS_Store
 Thumbs.db
 desktop.ini
