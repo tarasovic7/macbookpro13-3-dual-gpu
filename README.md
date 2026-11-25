@@ -3,6 +3,7 @@
 Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabling **Intel HD Graphics 530** (`PCI 00:02.0`) alongside **AMD Radeon Pro 455** (`Polaris 11`, `PCI 01:00.0`) on an Apple **MacBookPro13,3** (15" Late 2016 Touch Bar, **Apple T1** — pre-T2 Indexed I/O GMUX `Renesas R4F2113`) running **Windows 11 Boot Camp** (with HVCI enabled).
 
 > **Interactive Checkpoint & Full Documentation:** Open [`index.html`](index.html) locally in any browser (100% offline, searchable, links directly to all dumps, decompiled ACPI tables, scripts, and reference sources), or read the Markdown specification in [`docs/macbookpro13_3_windows_dual_gpu_spec.md`](docs/macbookpro13_3_windows_dual_gpu_spec.md).
+> **Want to build it yourself or port it to another MacBook Pro?** See [`docs/BUILD_AND_PORT_GUIDE.md`](docs/BUILD_AND_PORT_GUIDE.md) (WSL build, `scripts/Deploy-USB.ps1 -Profile clean|dev`, and a copy-paste AI-Agent Porting Guide).
 
 ## Key Findings (Phase 0 Forensics Complete)
 
@@ -20,12 +21,12 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 
 ```text
 ├── index.html          # Main offline interactive checkpoint & technical documentation
-├── docs/               # Engineering specification, M1A, M1A-2, M1B & M2 runbooks & verified findings
+├── docs/               # Engineering specification, build/port guide, M1A/M1A-2/M1B/M2 runbooks & findings
 ├── uefi/
 │   ├── m1a_probe/      # Milestone 1A read-only UEFI telemetry probe (PCI/BAR5/SMU7/GMUX/IOMMU)
 │   ├── m1a2_ebs/       # Milestone 1A-2 ExitBootServices() X-Ray hook & 3-register Dual-GPU Fix
 │   ├── m1b_igpu/       # Milestone 1B Intel-Only UEFI loader + SSDT_IGPU_MBP133 ACPI bridge
-│   └── m2_hybrid/      # Milestone 2 Unified 4-mode Hybrid loader (VFCT/DOD patch + SSDT_HYBRID_MBP133)
+│   └── m2_hybrid/      # Milestone 2 Unified 4-mode Hybrid loader (VFCT/DOD/NVRAM + SSDT_HYBRID_MBP133)
 ├── diag/
 │   ├── acpi_setos/     # 24 raw .dat + decompiled .dsl ACPI tables from AppleSetOs boot
 │   ├── acpi_normal/    # 24 raw .dat + decompiled .dsl + dmar.dsl from normal boot
@@ -35,7 +36,7 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 │   ├── m1b/            # Milestone 1B Intel-Only UEFI logs, Windows snapshots & battery power
 │   ├── m2/             # Milestone 2 Hybrid Mode 5 verification logs (including post-S3 wake)
 │   └── pci_state_*.txt # PnP / D-state / driver stack snapshots for both boot modes
-├── scripts/            # PowerShell helpers (Phase 0 diag, Polaris 11 Boot Camp fix, USB rEFInd)
+├── scripts/            # Deploy-USB.ps1 (clean/dev), telemetry collectors, Boot Camp fix & rEFInd configs
 ├── tools/acpica/       # Intel ACPICA 20260408 Windows tools (acpidump, iasl, acpixtract)
 └── reference/          # Primary upstream reference code (Linux apple-gmux/polaris10_smumgr, t2-gmux-uefi, apple_set_os)
 ```

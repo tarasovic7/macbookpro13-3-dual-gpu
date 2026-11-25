@@ -2085,6 +2085,65 @@ static void LogGpuPrefs(EFI_RUNTIME_SERVICES *RT, LOG_BUF *L) {
     log_nl(L);
 }
 
+static BOOLEAN EnsureGpuPrefsForMode(EFI_BOOT_SERVICES *BS, EFI_RUNTIME_SERVICES *RT,
+                                     SIMPLE_TEXT_OUTPUT_INTERFACE *ConOut,
+                                     SIMPLE_INPUT_INTERFACE *ConIn, UINT32 Mode) {
+    if (Mode == M2_MODE_INTEL_ONLY) {
+        return TRUE;
+    }
+
+    GPU_PREFS prefs;
+    GpuPrefsRead(RT, &prefs);
+    if (!prefs.Known) {
+        return TRUE;
+    }
+
+    BOOLEAN need_switch = FALSE;
+    BOOLEAN to_igpu = FALSE;
+    if (Mode == M2_MODE_HYBRID) {
+        if (!GpuPrefsIsIGpu(&prefs)) {
+            need_switch = TRUE;
+            to_igpu = TRUE;
+        }
+    } else if (Mode == M2_MODE_AMD_DUAL || Mode == M2_MODE_NORMAL) {
+        if (prefs.Present) {
+            need_switch = TRUE;
+            to_igpu = FALSE;
+        }
+    }
+
+    if (!need_switch) {
+        return TRUE;
+    }
+
+    ConOut->ClearScreen(ConOut);
+    ConPrintA(ConOut,
+        "========================================================================\n"
+        "  MacBookPro13,3 — Automatic Apple NVRAM gpu-power-prefs Switch\n"
+        "========================================================================\n\n");
+    ConPrintA(ConOut, to_igpu
+        ? "  Hybrid Mode requires NVRAM gpu-power-prefs = iGPU (01 00 00 00).\n"
+          "  Writing & cold-rebooting in 1.5s so Apple EFI boots Intel HD 530...\n\n"
+        : "  AMD Display / Boot Camp Default requires NVRAM gpu-power-prefs = dGPU.\n"
+          "  Clearing & cold-rebooting in 1.5s so Apple EFI boots Radeon Pro 455...\n\n");
+
+    EFI_STATUS pst = GpuPrefsApply(RT, to_igpu);
+    if (!EFI_ERROR(pst)) {
+        ConPrintA(ConOut, "  Verified OK! Cold rebooting now...\n");
+        BS->Stall(1500000);
+        RT->ResetSystem(EfiResetCold, EFI_SUCCESS, 0, NULL);
+    }
+
+    ConPrintA(ConOut, "  ERROR: NVRAM update failed: 0x");
+    ConPrintHex(ConOut, pst, 16);
+    ConPrintA(ConOut, "\n  Press any key to return to menu...\n");
+    FlushKeys(ConIn);
+    EFI_INPUT_KEY k;
+    mem_zero(&k, sizeof(k));
+    ReadKeyWait(BS, ConIn, &k);
+    return FALSE;
+}
+
 /* ---- Mode Runner ---- */
 
 static void ExecuteM2Mode(EFI_BOOT_SERVICES *BS, EFI_SYSTEM_TABLE *ST,
@@ -2095,6 +2154,10 @@ static void ExecuteM2Mode(EFI_BOOT_SERVICES *BS, EFI_SYSTEM_TABLE *ST,
     BOOLEAN want_rail_off      = (Mode == M2_MODE_INTEL_ONLY);
     BOOLEAN want_setos         = (Mode != M2_MODE_NORMAL);
     UINT32  flags              = 0u;
+
+    if (!EnsureGpuPrefsForMode(BS, ST->RuntimeServices, ConOut, ConIn, Mode)) {
+        return;
+    }
 
     L->Len = 0;
     L->Truncated = FALSE;
@@ -2218,10 +2281,11 @@ static UINT32 ParseAutoMode(EFI_BOOT_SERVICES *BS, EFI_HANDLE ImageHandle) {
     if (contains_ci16(opts, nchars, "mode=2") || contains_ci16(opts, nchars, "igpu")) {
         return M2_MODE_INTEL_ONLY;
     }
-    if (contains_ci16(opts, nchars, "mode=3") || contains_ci16(opts, nchars, "amd-dual")) {
+    if (contains_ci16(opts, nchars, "mode=3") || contains_ci16(opts, nchars, "amd-dual") || contains_ci16(opts, nchars, "expert")) {
         return M2_MODE_AMD_DUAL;
     }
-    if (contains_ci16(opts, nchars, "mode=4") || contains_ci16(opts, nchars, "normal")) {
+    if (contains_ci16(opts, nchars, "mode=4") || contains_ci16(opts, nchars, "normal") ||
+        contains_ci16(opts, nchars, "amd-only") || contains_ci16(opts, nchars, "bootcamp")) {
         return M2_MODE_NORMAL;
     }
     return 0u;
@@ -2280,10 +2344,10 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
         }
 
         ConPrintA(ConOut,
-            "  [1] Hybrid Mode 5     (Intel Display + AMD On + VFCT + 3-Reg + SSDT)\n"
-            "  [2] Intel-Only Mode 4 (Intel Display + AMD Rail OFF + SSDT, ~9.3W)\n"
-            "  [3] Dual-GPU AMD Disp (AMD Display + Intel Headless + 3-Reg FB)\n"
-            "  [4] Normal Boot Camp  (No SetOS, No GMUX, No SSDT + M2HY X-Ray)\n");
+            "  [1] Hybrid [Recommended] (Intel Default + AMD On-Demand, auto iGPU)\n"
+            "  [2] Intel Only           (Battery Saver ~9.3W, AMD Rail OFF)\n"
+            "  [3] AMD Display + Intel  ([Experts Only] AMD Panel + Intel Helper)\n"
+            "  [4] Boot Camp Default    (AMD Only, auto dGPU NVRAM)\n");
         if (is_igpu) {
             ConPrintA(ConOut, "  [S] Switch gpu-power-prefs -> dGPU (delete) + Cold Reboot\n");
         } else {
