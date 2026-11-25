@@ -1,0 +1,126 @@
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+Opened log file 'C:\Temp\HackDiag\kd_a1a2.txt'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.015 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.016 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29680.1004 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Temp\HackDiag\WATCHDOG-20261125-1333.dmp]
+Mini Kernel Dump File: Only registers and stack trace are available
+
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+Symbol search path is: C:\Temp\HackDiag\symbols
+Executable search path is: 
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'
+Windows 10 Kernel Version 26300 MP (8 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Kernel base = 0xfffff803`d4200000 PsLoadedModuleList = 0xfffff803`d50f56a0
+Debug session time: Wed Nov 25 13:33:19.263 2026 (UTC + 1:00)
+System Uptime: 0 days 0:00:27.340
+Loading Kernel Symbols
+...............................................................
+................................................................
+...................................................
+Loading User Symbols
+PEB is paged out (Peb.Ldr = 000000d0`5adea018).  Type ".hh dbgerr001" for details
+Mini Kernel Dump does not contain unloaded driver list
+ReadVirtual() failed in GetXStateConfiguration() first read attempt (error == 0.)
+For analysis of this file, run !analyze -v
+2: kd> ln 0xFFFFF803664BA274; ln 0xFFFFF803664CE032; u 0xFFFFF803664CE000 0xFFFFF803664CE050; u 0xFFFFF803664BA250 0xFFFFF803664BA290; q
+Browse module
+Set bu breakpoint
+
+(fffff803`664b9e20)   dxgkrnl!DpMapMemory+0x454   |  (fffff803`664ba3d0)   dxgkrnl!DxgMiniportQueryMonitorInterfaceCB
+Browse module
+Set bu breakpoint
+
+(fffff803`664cdf70)   dxgkrnl!DpiDxgkDdiStartDevice+0xc2   |  (fffff803`664ce07c)   dxgkrnl!DpiGetDriverFullPath
+dxgkrnl!DpiDxgkDdiStartDevice+0x90:
+fffff803`664ce000 d2ff            sar     bh,cl
+fffff803`664ce002 01418b          add     dword ptr [rcx-75h],eax
+fffff803`664ce005 06              ???
+fffff803`664ce006 418b17          mov     edx,dword ptr [r15]
+fffff803`664ce009 741b            je      dxgkrnl!DpiDxgkDdiStartDevice+0xb6 (fffff803`664ce026)
+fffff803`664ce00b 89742430        mov     dword ptr [rsp+30h],esi
+fffff803`664ce00f 4c8bcb          mov     r9,rbx
+fffff803`664ce012 89442428        mov     dword ptr [rsp+28h],eax
+fffff803`664ce016 89542420        mov     dword ptr [rsp+20h],edx
+fffff803`664ce01a 488d15cfc9c8ff  lea     rdx,[dxgkrnl!EventExitDdiStartDevice (fffff803`6615a9f0)]
+fffff803`664ce021 e8f2b1beff      call    dxgkrnl!McTemplateK0pqqq_EtwWriteTransfer (fffff803`660b9218)
+fffff803`664ce026 48ff15fbb1d4ff  call    qword ptr [dxgkrnl!_imp_WdLogNewEntry5_WdTrace (fffff803`66219228)]
+fffff803`664ce02d 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`664ce032 488b5c2460      mov     rbx,qword ptr [rsp+60h]
+fffff803`664ce037 48896818        mov     qword ptr [rax+18h],rbp
+fffff803`664ce03b 8b0f            mov     ecx,dword ptr [rdi]
+fffff803`664ce03d 488b6c2468      mov     rbp,qword ptr [rsp+68h]
+fffff803`664ce042 48894820        mov     qword ptr [rax+20h],rcx
+fffff803`664ce046 418b0f          mov     ecx,dword ptr [r15]
+fffff803`664ce049 48894828        mov     qword ptr [rax+28h],rcx
+fffff803`664ce04d 418b0e          mov     ecx,dword ptr [r14]
+fffff803`664ce050 48897038        mov     qword ptr [rax+38h],rsi
+dxgkrnl!DpMapMemory+0x430:
+fffff803`664ba250 084889          or      byte ptr [rax-77h],cl
+fffff803`664ba253 3048ff          xor     byte ptr [rax-1],cl
+fffff803`664ba256 150debd5ff      adc     eax,0FFD5EB0Dh
+fffff803`664ba25b 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`664ba260 488bd6          mov     rdx,rsi
+fffff803`664ba263 b904000000      mov     ecx,4
+fffff803`664ba268 48ff15e1efd5ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry1 (fffff803`66219250)]
+fffff803`664ba26f 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`664ba274 c7056202d4ff44080000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],844h
+fffff803`664ba27e 83ff00          cmp     edi,0
+fffff803`664ba281 0f8d1a010000    jge     dxgkrnl!DpMapMemory+0x581 (fffff803`664ba3a1)
+fffff803`664ba287 488364242000    and     qword ptr [rsp+20h],0
+fffff803`664ba28d 498d9df0090000  lea     rbx,[r13+9F0h]
+quit:
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'

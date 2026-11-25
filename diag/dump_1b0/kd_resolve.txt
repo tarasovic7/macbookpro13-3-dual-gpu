@@ -1,0 +1,196 @@
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Windows\System32\DriverStore\FileRepository\u0407052.inf_amd64_d7f7ab2f0f2cb84d\B406619
+OK                                             C:\Windows\System32\drivers
+Opened log file 'C:\Temp\HackDiag\kd_resolve.txt'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.063 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29680.1004 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Temp\HackDiag\WATCHDOG-20261125-1333.dmp]
+Mini Kernel Dump File: Only registers and stack trace are available
+
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Windows\System32\DriverStore\FileRepository\u0407052.inf_amd64_d7f7ab2f0f2cb84d\B406619
+OK                                             C:\Windows\System32\drivers
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+Symbol search path is: C:\Temp\HackDiag\symbols
+Executable search path is: C:\Windows\System32\DriverStore\FileRepository\u0407052.inf_amd64_d7f7ab2f0f2cb84d\B406619;C:\Windows\System32\drivers
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'
+Windows 10 Kernel Version 26300 MP (8 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Kernel base = 0xfffff803`d4200000 PsLoadedModuleList = 0xfffff803`d50f56a0
+Debug session time: Wed Nov 25 13:33:19.263 2026 (UTC + 1:00)
+System Uptime: 0 days 0:00:27.340
+Loading Kernel Symbols
+...............................................................
+................................................................
+...................................................
+Loading User Symbols
+PEB is paged out (Peb.Ldr = 000000d0`5adea018).  Type ".hh dbgerr001" for details
+Mini Kernel Dump does not contain unloaded driver list
+ReadVirtual() failed in GetXStateConfiguration() first read attempt (error == 0.)
+For analysis of this file, run !analyze -v
+2: kd> .echo === DXGKRNL_CALLERS ===; ln 0xFFFFF803662F3236; ln 0xFFFFF803662FBAE6; ln 0xFFFFF8036645AD10; ln 0xFFFFF803662E66F6; ln 0xFFFFF803662EC298; ln 0xFFFFF8036645B238; ln 0xFFFFF803663FA18F; ln 0xFFFFF803663FA139; lma 0xFFFFF8036A73B3FA; ln 0xFFFFF8036A73B3FA; ln 0xFFFFF8036A73CB82; .echo === AMDKMDAG_INFO ===; lmvm amdkmdag; .echo === DISASM_AROUND_DXGKRNL_2F3236 ===; u 0xFFFFF803662F3200 0xFFFFF803662F3250; .echo === DISASM_AROUND_DXGKRNL_2E66F6 ===; u 0xFFFFF803662E66C0 0xFFFFF803662E6710; .echo === DISASM_AROUND_DXGKRNL_2EC298 ===; u 0xFFFFF803662EC260 0xFFFFF803662EC2B0; .echo === DISASM_AROUND_AMDKMDAG_ARG4 ===; u 0xFFFFF8036E154650 0xFFFFF8036E1546B0; q
+=== DXGKRNL_CALLERS ===
+Browse module
+Set bu breakpoint
+
+(fffff803`662f2728)   dxgkrnl!DpiFdoStartAdapter+0xb0e   |  (fffff803`662f46e0)   dxgkrnl!DpiFdoStartAdapterThread
+Browse module
+Set bu breakpoint
+
+(fffff803`662fba58)   dxgkrnl!DpiFeatureStartDevice+0x8e   |  (fffff803`662fbba8)   dxgkrnl!DpiQueryFeatureDriverInterface
+Browse module
+Set bu breakpoint
+
+(fffff803`6645aad0)   dxgkrnl!DpEvalAcpiMethod+0x240   |  (fffff803`6645afc8)   dxgkrnl!DpiAcpiEvalAcpiMethodEx
+Browse module
+Set bu breakpoint
+
+(fffff803`662e6100)   dxgkrnl!DpQueryServices+0x5f6   |  (fffff803`662e67c0)   dxgkrnl!DpiControlEtwLogging
+Browse module
+Set bu breakpoint
+
+(fffff803`662ec164)   dxgkrnl!DpiFdoCreateSysMmAdapter+0x134   |  (fffff803`662ec5c4)   dxgkrnl!DpiFdoDestroyRelatedObjects
+Browse module
+Set bu breakpoint
+
+(fffff803`6645afc8)   dxgkrnl!DpiAcpiEvalAcpiMethodEx+0x270   |  (fffff803`6645b2d0)   dxgkrnl!DxgkCreateAllocation
+Browse module
+Set bu breakpoint
+
+(fffff803`663f9470)   dxgkrnl!DpiAddDevice+0xd1f   |  (fffff803`663fb77c)   dxgkrnl!DpiQueryBusInterface
+Browse module
+Set bu breakpoint
+
+(fffff803`663f9470)   dxgkrnl!DpiAddDevice+0xcc9   |  (fffff803`663fb77c)   dxgkrnl!DpiQueryBusInterface
+Browse full module list
+start             end                 module name
+fffff803`6a730000 fffff803`6a74a000   BasicDisplay   (deferred)             
+Mini Kernel Dump does not contain unloaded driver list
+Browse module
+Set bu breakpoint
+
+Unable to load image BasicDisplay.sys, Win32 error 0n2
+*** WARNING: Unable to verify timestamp for BasicDisplay.sys
+Browse module
+Set bu breakpoint
+
+=== AMDKMDAG_INFO ===
+Browse full module list
+start             end                 module name
+fffff803`6ca60000 fffff803`72f66000   amdkmdag   (deferred)             
+    Image path: amdkmdag.sys
+    Image name: amdkmdag.sys
+    Browse all global symbols  functions  data  Symbol Reload
+    Timestamp:        Thu Jan 11 08:52:21 2024 (659F9E35)
+    CheckSum:         064B2204
+    ImageSize:        06506000
+    Mapping Form:     Loaded
+    Translations:     0000.04b0 0000.04e4 0409.04b0 0409.04e4
+    Information from resource tables:
+Mini Kernel Dump does not contain unloaded driver list
+=== DISASM_AROUND_DXGKRNL_2F3236 ===
+dxgkrnl!DpiFdoStartAdapter+0xad8:
+fffff803`662f3200 440000          add     byte ptr [rax],r8b
+fffff803`662f3203 48213d2691f0ff  and     qword ptr [dxgkrnl!DpGlobals+0x430 (fffff803`661fc330)],rdi
+fffff803`662f320a 48213d1791f0ff  and     qword ptr [dxgkrnl!DpGlobals+0x428 (fffff803`661fc328)],rdi
+fffff803`662f3211 4585f6          test    r14d,r14d
+fffff803`662f3214 0f8933010000    jns     dxgkrnl!DpiFdoStartAdapter+0xc25 (fffff803`662f334d)
+fffff803`662f321a 498b942498000000 mov     rdx,qword ptr [r12+98h]
+fffff803`662f3222 4d8bc6          mov     r8,r14
+fffff803`662f3225 b902000000      mov     ecx,2
+fffff803`662f322a 48ff15ef5ff2ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry2 (fffff803`66219220)]
+fffff803`662f3231 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662f3236 c705a072f0ffa53c0000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],3CA5h
+fffff803`662f3240 4181fe09001ec0  cmp     r14d,0C01E0009h
+fffff803`662f3247 0f85aa000000    jne     dxgkrnl!DpiFdoStartAdapter+0xbcf (fffff803`662f32f7)
+fffff803`662f324d 498bcd          mov     rcx,r13
+fffff803`662f3250 897c2474        mov     dword ptr [rsp+74h],edi
+=== DISASM_AROUND_DXGKRNL_2E66F6 ===
+dxgkrnl!DpQueryServices+0x5c0:
+fffff803`662e66c0 1f              ???
+fffff803`662e66c1 440000          add     byte ptr [rax],r8b
+fffff803`662e66c4 c705123ef1ffd6080000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],8D6h
+fffff803`662e66ce e9c8000000      jmp     dxgkrnl!DpQueryServices+0x69b (fffff803`662e679b)
+fffff803`662e66d3 4839bea8020000  cmp     qword ptr [rsi+2A8h],rdi
+fffff803`662e66da 7529            jne     dxgkrnl!DpQueryServices+0x605 (fffff803`662e6705)
+fffff803`662e66dc 48c7c2010000c0  mov     rdx,0FFFFFFFFC0000001h
+fffff803`662e66e3 8bfa            mov     edi,edx
+fffff803`662e66e5 b903000000      mov     ecx,3
+fffff803`662e66ea 48ff155f2bf3ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry1 (fffff803`66219250)]
+fffff803`662e66f1 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662e66f6 c705e03df1ffe0080000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],8E0h
+fffff803`662e6700 e996000000      jmp     dxgkrnl!DpQueryServices+0x69b (fffff803`662e679b)
+fffff803`662e6705 488b4e18        mov     rcx,qword ptr [rsi+18h]
+fffff803`662e6709 488b05482bf3ff  mov     rax,qword ptr [dxgkrnl!_imp_WdpInterfaceReferenceNop (fffff803`66219258)]
+fffff803`662e6710 48894310        mov     qword ptr [rbx+10h],rax
+=== DISASM_AROUND_DXGKRNL_2EC298 ===
+dxgkrnl!DpiFdoCreateSysMmAdapter+0xfc:
+fffff803`662ec260 b84c897dcc      mov     eax,0CC7D894Ch
+fffff803`662ec265 44897dd4        mov     dword ptr [rbp-2Ch],r15d
+fffff803`662ec269 0f114598        movups  xmmword ptr [rbp-68h],xmm0
+fffff803`662ec26d 4c897db0        mov     qword ptr [rbp-50h],r15
+fffff803`662ec271 c745c810000000  mov     dword ptr [rbp-38h],10h
+fffff803`662ec278 e853bae4ff      call    dxgkrnl!guard_dispatch_icall (fffff803`66137cd0)
+fffff803`662ec27d 4863f8          movsxd  rdi,eax
+fffff803`662ec280 85c0            test    eax,eax
+fffff803`662ec282 7923            jns     dxgkrnl!DpiFdoCreateSysMmAdapter+0x143 (fffff803`662ec2a7)
+fffff803`662ec284 488bd7          mov     rdx,rdi
+fffff803`662ec287 b903000000      mov     ecx,3
+fffff803`662ec28c 48ff15bdcff2ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry1 (fffff803`66219250)]
+fffff803`662ec293 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662ec298 c7053ee2f0ffe9240000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],24E9h
+fffff803`662ec2a2 e9c4000000      jmp     dxgkrnl!DpiFdoCreateSysMmAdapter+0x207 (fffff803`662ec36b)
+fffff803`662ec2a7 8b5598          mov     edx,dword ptr [rbp-68h]
+fffff803`662ec2aa 85d2            test    edx,edx
+fffff803`662ec2ac 0f84b9000000    je      dxgkrnl!DpiFdoCreateSysMmAdapter+0x207 (fffff803`662ec36b)
+=== DISASM_AROUND_AMDKMDAG_ARG4 ===
+*** WARNING: Unable to verify timestamp for amdkmdag.sys
+amdkmdag+0x16f4650:
+fffff803`6e154650 ??              ???
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^ Memory access error in '.echo === DXGKRNL_CALLERS ===; ln 0xFFFFF803662F3236; ln 0xFFFFF803662FBAE6; ln 0xFFFFF8036645AD10; ln 0xFFFFF803662E66F6; ln 0xFFFFF803662EC298; ln 0xFFFFF8036645B238; ln 0xFFFFF803663FA18F; ln 0xFFFFF803663FA139; lma 0xFFFFF8036A73B3FA; ln 0xFFFFF8036A73B3FA; ln 0xFFFFF8036A73CB82; .echo === AMDKMDAG_INFO ===; lmvm amdkmdag; .echo === DISASM_AROUND_DXGKRNL_2F3236 ===; u 0xFFFFF803662F3200 0xFFFFF803662F3250; .echo === DISASM_AROUND_DXGKRNL_2E66F6 ===; u 0xFFFFF803662E66C0 0xFFFFF803662E6710; .echo === DISASM_AROUND_DXGKRNL_2EC298 ===; u 0xFFFFF803662EC260 0xFFFFF803662EC2B0; .echo === DISASM_AROUND_AMDKMDAG_ARG4 ===; u 0xFFFFF8036E154650 0xFFFFF8036E1546B0; q'

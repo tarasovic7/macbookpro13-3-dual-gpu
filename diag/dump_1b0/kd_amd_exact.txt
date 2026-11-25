@@ -1,0 +1,390 @@
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+Opened log file 'C:\Temp\HackDiag\kd_amd_exact.txt'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.438 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29680.1004 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Temp\HackDiag\WATCHDOG-20261125-1333.dmp]
+Mini Kernel Dump File: Only registers and stack trace are available
+
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+Symbol search path is: C:\Temp\HackDiag\symbols
+Executable search path is: C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'
+Windows 10 Kernel Version 26300 MP (8 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Kernel base = 0xfffff803`d4200000 PsLoadedModuleList = 0xfffff803`d50f56a0
+Debug session time: Wed Nov 25 13:33:19.263 2026 (UTC + 1:00)
+System Uptime: 0 days 0:00:27.340
+Loading Kernel Symbols
+...............................................................
+................................................................
+...................................................
+Loading User Symbols
+PEB is paged out (Peb.Ldr = 000000d0`5adea018).  Type ".hh dbgerr001" for details
+Mini Kernel Dump does not contain unloaded driver list
+ReadVirtual() failed in GetXStateConfiguration() first read attempt (error == 0.)
+For analysis of this file, run !analyze -v
+2: kd> .reload /f amdkmdag.sys; .echo === DISASM_900C1009_0x6E1552C4 ===; u 0xFFFFF8036E1551C0 0xFFFFF8036E155380; .echo === DISASM_900E560C_0x6CCAEEDC ===; u 0xFFFFF8036CCAECC0 0xFFFFF8036CCAEF60; .echo === SEARCH_900C0203_AND_0E1D ===; s -d 0xFFFFF8036CA60000 L0x6500000 0x900C0203; s -d 0xFFFFF8036CA60000 L0x6500000 0x900C0E1D; .echo === SEARCH_STRINGS_NEAR_900E560C ===; da 0xFFFFF8036D5DB0B8; q
+
+************* Symbol Loading Error Summary **************
+Module name            Error
+amdkmdag               The system cannot find the file specified
+
+You can troubleshoot most symbol related issues by turning on symbol loading diagnostics (!sym noisy) and repeating the command that caused symbols to be loaded.
+You should also verify that your symbol search path (.sympath) is correct.
+=== DISASM_900C1009_0x6E1552C4 ===
+amdkmdag+0x16f51c0:
+fffff803`6e1551c0 051affba84      add     eax,84BAFF1Ah
+fffff803`6e1551c5 0000            add     byte ptr [rax],al
+fffff803`6e1551c7 004889          add     byte ptr [rax-77h],cl
+fffff803`6e1551ca 442430          and     al,30h
+fffff803`6e1551cd c744242803000000 mov     dword ptr [rsp+28h],3
+fffff803`6e1551d5 4c89642420      mov     qword ptr [rsp+20h],r12
+fffff803`6e1551da e8c93cb8fe      call    amdkmdag+0x278ea8 (fffff803`6ccd8ea8)
+fffff803`6e1551df 8b45d7          mov     eax,dword ptr [rbp-29h]
+fffff803`6e1551e2 488d55d7        lea     rdx,[rbp-29h]
+fffff803`6e1551e6 448ac3          mov     r8b,bl
+fffff803`6e1551e9 498bce          mov     rcx,r14
+fffff803`6e1551ec 3d8f000000      cmp     eax,8Fh
+fffff803`6e1551f1 0f833b020000    jae     amdkmdag+0x16f5432 (fffff803`6e155432)
+fffff803`6e1551f7 e8202d0200      call    amdkmdag+0x1717f1c (fffff803`6e177f1c)
+fffff803`6e1551fc 3bc3            cmp     eax,ebx
+fffff803`6e1551fe 0f8524020000    jne     amdkmdag+0x16f5428 (fffff803`6e155428)
+fffff803`6e155204 488d054d051aff  lea     rax,[amdkmdag+0x895758 (fffff803`6d2f5758)]
+fffff803`6e15520b ba94000000      mov     edx,94h
+fffff803`6e155210 e936020000      jmp     amdkmdag+0x16f544b (fffff803`6e15544b)
+fffff803`6e155215 488d05f4041aff  lea     rax,[amdkmdag+0x895710 (fffff803`6d2f5710)]
+fffff803`6e15521c ba88000000      mov     edx,88h
+fffff803`6e155221 4889442440      mov     qword ptr [rsp+40h],rax
+fffff803`6e155226 488d050b5606ff  lea     rax,[amdkmdag+0x75a838 (fffff803`6d1ba838)]
+fffff803`6e15522d 4889442438      mov     qword ptr [rsp+38h],rax
+fffff803`6e155232 488d05ff041aff  lea     rax,[amdkmdag+0x895738 (fffff803`6d2f5738)]
+fffff803`6e155239 4889442430      mov     qword ptr [rsp+30h],rax
+fffff803`6e15523e 895c2428        mov     dword ptr [rsp+28h],ebx
+fffff803`6e155242 4c89642420      mov     qword ptr [rsp+20h],r12
+fffff803`6e155247 e85c3cb8fe      call    amdkmdag+0x278ea8 (fffff803`6ccd8ea8)
+fffff803`6e15524c 4d85ff          test    r15,r15
+fffff803`6e15524f 740a            je      amdkmdag+0x16f525b (fffff803`6e15525b)
+fffff803`6e155251 4539a6b4050000  cmp     dword ptr [r14+5B4h],r12d
+fffff803`6e155258 7401            je      amdkmdag+0x16f525b (fffff803`6e15525b)
+fffff803`6e15525a cc              int     3
+fffff803`6e15525b 488d0dd6041aff  lea     rcx,[amdkmdag+0x895738 (fffff803`6d2f5738)]
+fffff803`6e155262 418adc          mov     bl,r12b
+fffff803`6e155265 4c3927          cmp     qword ptr [rdi],r12
+fffff803`6e155268 754c            jne     amdkmdag+0x16f52b6 (fffff803`6e1552b6)
+fffff803`6e15526a 488d058f071aff  lea     rax,[amdkmdag+0x895a00 (fffff803`6d2f5a00)]
+fffff803`6e155271 4d8bcf          mov     r9,r15
+fffff803`6e155274 4889442440      mov     qword ptr [rsp+40h],rax
+fffff803`6e155279 4c8bc6          mov     r8,rsi
+fffff803`6e15527c 488d059d071aff  lea     rax,[amdkmdag+0x895a20 (fffff803`6d2f5a20)]
+fffff803`6e155283 bac2010000      mov     edx,1C2h
+fffff803`6e155288 4889442438      mov     qword ptr [rsp+38h],rax
+fffff803`6e15528d 48894c2430      mov     qword ptr [rsp+30h],rcx
+fffff803`6e155292 488bce          mov     rcx,rsi
+fffff803`6e155295 c744242801000000 mov     dword ptr [rsp+28h],1
+fffff803`6e15529d 4c89642420      mov     qword ptr [rsp+20h],r12
+fffff803`6e1552a2 e8013cb8fe      call    amdkmdag+0x278ea8 (fffff803`6ccd8ea8)
+fffff803`6e1552a7 4d85ff          test    r15,r15
+fffff803`6e1552aa 740a            je      amdkmdag+0x16f52b6 (fffff803`6e1552b6)
+fffff803`6e1552ac 4539a6b4050000  cmp     dword ptr [r14+5B4h],r12d
+fffff803`6e1552b3 7401            je      amdkmdag+0x16f52b6 (fffff803`6e1552b6)
+fffff803`6e1552b5 cc              int     3
+fffff803`6e1552b6 498b5508        mov     rdx,qword ptr [r13+8]
+fffff803`6e1552ba 4c8bcf          mov     r9,rdi
+fffff803`6e1552bd 4c89642430      mov     qword ptr [rsp+30h],r12
+fffff803`6e1552c2 41b809100c90    mov     r8d,900C1009h
+fffff803`6e1552c8 4c89642428      mov     qword ptr [rsp+28h],r12
+fffff803`6e1552cd 33c9            xor     ecx,ecx
+fffff803`6e1552cf c744242008000000 mov     dword ptr [rsp+20h],8
+fffff803`6e1552d7 e8083bb8fe      call    amdkmdag+0x278de4 (fffff803`6ccd8de4)
+fffff803`6e1552dc 498b8e50100000  mov     rcx,qword ptr [r14+1050h]
+fffff803`6e1552e3 4885c9          test    rcx,rcx
+fffff803`6e1552e6 741b            je      amdkmdag+0x16f5303 (fffff803`6e155303)
+fffff803`6e1552e8 e8371f0300      call    amdkmdag+0x1727224 (fffff803`6e187224)
+fffff803`6e1552ed 498b9650100000  mov     rdx,qword ptr [r14+1050h]
+fffff803`6e1552f4 498bcf          mov     rcx,r15
+fffff803`6e1552f7 e83c5bb8fe      call    amdkmdag+0x27ae38 (fffff803`6ccdae38)
+fffff803`6e1552fc 4d89a650100000  mov     qword ptr [r14+1050h],r12
+fffff803`6e155303 498b8e58100000  mov     rcx,qword ptr [r14+1058h]
+fffff803`6e15530a 4885c9          test    rcx,rcx
+fffff803`6e15530d 741b            je      amdkmdag+0x16f532a (fffff803`6e15532a)
+fffff803`6e15530f e8d80a0300      call    amdkmdag+0x1725dec (fffff803`6e185dec)
+fffff803`6e155314 498b9658100000  mov     rdx,qword ptr [r14+1058h]
+fffff803`6e15531b 498bcf          mov     rcx,r15
+fffff803`6e15531e e8155bb8fe      call    amdkmdag+0x27ae38 (fffff803`6ccdae38)
+fffff803`6e155323 4d89a658100000  mov     qword ptr [r14+1058h],r12
+fffff803`6e15532a 498bce          mov     rcx,r14
+fffff803`6e15532d e896720100      call    amdkmdag+0x170c5c8 (fffff803`6e16c5c8)
+fffff803`6e155332 498b8e78100000  mov     rcx,qword ptr [r14+1078h]
+fffff803`6e155339 4885c9          test    rcx,rcx
+fffff803`6e15533c 741b            je      amdkmdag+0x16f5359 (fffff803`6e155359)
+fffff803`6e15533e e8ad5c0300      call    amdkmdag+0x172aff0 (fffff803`6e18aff0)
+fffff803`6e155343 498b9678100000  mov     rdx,qword ptr [r14+1078h]
+fffff803`6e15534a 498bcf          mov     rcx,r15
+fffff803`6e15534d e8e65ab8fe      call    amdkmdag+0x27ae38 (fffff803`6ccdae38)
+fffff803`6e155352 4d89a678100000  mov     qword ptr [r14+1078h],r12
+fffff803`6e155359 498b8e80100000  mov     rcx,qword ptr [r14+1080h]
+fffff803`6e155360 4885c9          test    rcx,rcx
+fffff803`6e155363 741b            je      amdkmdag+0x16f5380 (fffff803`6e155380)
+fffff803`6e155365 e8d2650300      call    amdkmdag+0x172b93c (fffff803`6e18b93c)
+fffff803`6e15536a 498b9680100000  mov     rdx,qword ptr [r14+1080h]
+fffff803`6e155371 498bcf          mov     rcx,r15
+fffff803`6e155374 e8bf5ab8fe      call    amdkmdag+0x27ae38 (fffff803`6ccdae38)
+fffff803`6e155379 4d89a680100000  mov     qword ptr [r14+1080h],r12
+fffff803`6e155380 498b8e60100000  mov     rcx,qword ptr [r14+1060h]
+=== DISASM_900E560C_0x6CCAEEDC ===
+amdkmdag+0x24ecc0:
+fffff803`6ccaecc0 8033c2          xor     byte ptr [rbx],0C2h
+fffff803`6ccaecc3 488d542420      lea     rdx,[rsp+20h]
+fffff803`6ccaecc8 8944242c        mov     dword ptr [rsp+2Ch],eax
+fffff803`6ccaeccc 0f11442430      movups  xmmword ptr [rsp+30h],xmm0
+fffff803`6ccaecd1 488b01          mov     rax,qword ptr [rcx]
+fffff803`6ccaecd4 488b8098000000  mov     rax,qword ptr [rax+98h]
+fffff803`6ccaecdb ffd0            call    rax
+fffff803`6ccaecdd 0f1f00          nop     dword ptr [rax]
+fffff803`6ccaece0 488b4c2448      mov     rcx,qword ptr [rsp+48h]
+fffff803`6ccaece5 4833cc          xor     rcx,rsp
+fffff803`6ccaece8 e833ed4f00      call    amdkmdag+0x74da20 (fffff803`6d1ada20)
+fffff803`6ccaeced 4883c458        add     rsp,58h
+fffff803`6ccaecf1 c3              ret
+fffff803`6ccaecf2 cc              int     3
+fffff803`6ccaecf3 cc              int     3
+fffff803`6ccaecf4 cc              int     3
+fffff803`6ccaecf5 cc              int     3
+fffff803`6ccaecf6 cc              int     3
+fffff803`6ccaecf7 cc              int     3
+fffff803`6ccaecf8 cc              int     3
+fffff803`6ccaecf9 cc              int     3
+fffff803`6ccaecfa cc              int     3
+fffff803`6ccaecfb cc              int     3
+fffff803`6ccaecfc cc              int     3
+fffff803`6ccaecfd cc              int     3
+fffff803`6ccaecfe cc              int     3
+fffff803`6ccaecff cc              int     3
+fffff803`6ccaed00 4053            push    rbx
+fffff803`6ccaed02 4881ec90000000  sub     rsp,90h
+fffff803`6ccaed09 488bd9          mov     rbx,rcx
+fffff803`6ccaed0c 488d542420      lea     rdx,[rsp+20h]
+fffff803`6ccaed11 488b4908        mov     rcx,qword ptr [rcx+8]
+fffff803`6ccaed15 e8c6a6e4ff      call    amdkmdag+0x993e0 (fffff803`6caf93e0)
+fffff803`6ccaed1a 488d542420      lea     rdx,[rsp+20h]
+fffff803`6ccaed1f 488bcb          mov     rcx,rbx
+fffff803`6ccaed22 e829180000      call    amdkmdag+0x250550 (fffff803`6ccb0550)
+fffff803`6ccaed27 4881c490000000  add     rsp,90h
+fffff803`6ccaed2e 5b              pop     rbx
+fffff803`6ccaed2f c3              ret
+fffff803`6ccaed30 cc              int     3
+fffff803`6ccaed31 cc              int     3
+fffff803`6ccaed32 cc              int     3
+fffff803`6ccaed33 cc              int     3
+fffff803`6ccaed34 cc              int     3
+fffff803`6ccaed35 cc              int     3
+fffff803`6ccaed36 cc              int     3
+fffff803`6ccaed37 cc              int     3
+fffff803`6ccaed38 cc              int     3
+fffff803`6ccaed39 cc              int     3
+fffff803`6ccaed3a cc              int     3
+fffff803`6ccaed3b cc              int     3
+fffff803`6ccaed3c cc              int     3
+fffff803`6ccaed3d cc              int     3
+fffff803`6ccaed3e cc              int     3
+fffff803`6ccaed3f cc              int     3
+fffff803`6ccaed40 48895c2418      mov     qword ptr [rsp+18h],rbx
+fffff803`6ccaed45 48897c2420      mov     qword ptr [rsp+20h],rdi
+fffff803`6ccaed4a 55              push    rbp
+fffff803`6ccaed4b 488d6c24d0      lea     rbp,[rsp-30h]
+fffff803`6ccaed50 4881ec30010000  sub     rsp,130h
+fffff803`6ccaed57 488b05728ff300  mov     rax,qword ptr [amdkmdag+0x1187cd0 (fffff803`6dbe7cd0)]
+fffff803`6ccaed5e 4833c4          xor     rax,rsp
+fffff803`6ccaed61 48894528        mov     qword ptr [rbp+28h],rax
+fffff803`6ccaed65 0fb6fa          movzx   edi,dl
+fffff803`6ccaed68 488bd9          mov     rbx,rcx
+fffff803`6ccaed6b 84d2            test    dl,dl
+fffff803`6ccaed6d 0f8438010000    je      amdkmdag+0x24eeab (fffff803`6ccaeeab)
+fffff803`6ccaed73 e868080000      call    amdkmdag+0x24f5e0 (fffff803`6ccaf5e0)
+fffff803`6ccaed78 4885db          test    rbx,rbx
+fffff803`6ccaed7b 0f842a010000    je      amdkmdag+0x24eeab (fffff803`6ccaeeab)
+fffff803`6ccaed81 488b4b08        mov     rcx,qword ptr [rbx+8]
+fffff803`6ccaed85 4885c9          test    rcx,rcx
+fffff803`6ccaed88 0f841d010000    je      amdkmdag+0x24eeab (fffff803`6ccaeeab)
+fffff803`6ccaed8e 33c0            xor     eax,eax
+fffff803`6ccaed90 0f57c0          xorps   xmm0,xmm0
+fffff803`6ccaed93 8945f8          mov     dword ptr [rbp-8],eax
+fffff803`6ccaed96 4889442430      mov     qword ptr [rsp+30h],rax
+fffff803`6ccaed9b 0f1145d8        movups  xmmword ptr [rbp-28h],xmm0
+fffff803`6ccaed9f 0f1145e8        movups  xmmword ptr [rbp-18h],xmm0
+fffff803`6ccaeda3 488b01          mov     rax,qword ptr [rcx]
+fffff803`6ccaeda6 488b80b0050000  mov     rax,qword ptr [rax+5B0h]
+fffff803`6ccaedad ffd0            call    rax
+fffff803`6ccaedaf 0f1f00          nop     dword ptr [rax]
+fffff803`6ccaedb2 0fb6c8          movzx   ecx,al
+fffff803`6ccaedb5 488b442430      mov     rax,qword ptr [rsp+30h]
+fffff803`6ccaedba 4833c8          xor     rcx,rax
+fffff803`6ccaedbd 83e101          and     ecx,1
+fffff803`6ccaedc0 4833c1          xor     rax,rcx
+fffff803`6ccaedc3 488b4b08        mov     rcx,qword ptr [rbx+8]
+fffff803`6ccaedc7 4889442430      mov     qword ptr [rsp+30h],rax
+fffff803`6ccaedcc 488b01          mov     rax,qword ptr [rcx]
+fffff803`6ccaedcf 488b8000060000  mov     rax,qword ptr [rax+600h]
+fffff803`6ccaedd6 ffd0            call    rax
+fffff803`6ccaedd8 0f1f00          nop     dword ptr [rax]
+fffff803`6ccaeddb 0fb6c8          movzx   ecx,al
+fffff803`6ccaedde 488b442430      mov     rax,qword ptr [rsp+30h]
+fffff803`6ccaede3 4803c9          add     rcx,rcx
+fffff803`6ccaede6 4833c8          xor     rcx,rax
+fffff803`6ccaede9 83e102          and     ecx,2
+fffff803`6ccaedec 4833c1          xor     rax,rcx
+fffff803`6ccaedef 488b4b08        mov     rcx,qword ptr [rbx+8]
+fffff803`6ccaedf3 4889442430      mov     qword ptr [rsp+30h],rax
+fffff803`6ccaedf8 488b01          mov     rax,qword ptr [rcx]
+fffff803`6ccaedfb 488b80f0050000  mov     rax,qword ptr [rax+5F0h]
+fffff803`6ccaee02 ffd0            call    rax
+fffff803`6ccaee04 0f1f00          nop     dword ptr [rax]
+fffff803`6ccaee07 0fb6c8          movzx   ecx,al
+fffff803`6ccaee0a 488d55d8        lea     rdx,[rbp-28h]
+fffff803`6ccaee0e 488b442430      mov     rax,qword ptr [rsp+30h]
+fffff803`6ccaee13 4533c0          xor     r8d,r8d
+fffff803`6ccaee16 48c1e102        shl     rcx,2
+fffff803`6ccaee1a 4833c8          xor     rcx,rax
+fffff803`6ccaee1d c745dc67000000  mov     dword ptr [rbp-24h],67h
+fffff803`6ccaee24 83e104          and     ecx,4
+fffff803`6ccaee27 c745e002021c80  mov     dword ptr [rbp-20h],801C0202h
+fffff803`6ccaee2e 4833c1          xor     rax,rcx
+fffff803`6ccaee31 c745f808000000  mov     dword ptr [rbp-8],8
+fffff803`6ccaee38 488b4b08        mov     rcx,qword ptr [rbx+8]
+fffff803`6ccaee3c 4889442430      mov     qword ptr [rsp+30h],rax
+fffff803`6ccaee41 488d442430      lea     rax,[rsp+30h]
+fffff803`6ccaee46 488945f0        mov     qword ptr [rbp-10h],rax
+fffff803`6ccaee4a 488b01          mov     rax,qword ptr [rcx]
+fffff803`6ccaee4d 488b8098000000  mov     rax,qword ptr [rax+98h]
+fffff803`6ccaee54 ffd0            call    rax
+fffff803`6ccaee56 0f1f00          nop     dword ptr [rax]
+fffff803`6ccaee59 33c0            xor     eax,eax
+fffff803`6ccaee5b c7442428cd010000 mov     dword ptr [rsp+28h],1CDh
+fffff803`6ccaee63 0f57c0          xorps   xmm0,xmm0
+fffff803`6ccaee66 894520          mov     dword ptr [rbp+20h],eax
+fffff803`6ccaee69 41b950c30000    mov     r9d,0C350h
+fffff803`6ccaee6f c744242047022c90 mov     dword ptr [rsp+20h],902C0247h
+fffff803`6ccaee77 488d5500        lea     rdx,[rbp]
+fffff803`6ccaee7b 448d4008        lea     r8d,[rax+8]
+fffff803`6ccaee7f 488d4c2430      lea     rcx,[rsp+30h]
+fffff803`6ccaee84 0f114500        movups  xmmword ptr [rbp],xmm0
+fffff803`6ccaee88 0f114510        movups  xmmword ptr [rbp+10h],xmm0
+fffff803`6ccaee8c e84fbee9ff      call    amdkmdag+0xeace0 (fffff803`6cb4ace0)
+fffff803`6ccaee91 488b4b08        mov     rcx,qword ptr [rbx+8]
+fffff803`6ccaee95 488d5500        lea     rdx,[rbp]
+fffff803`6ccaee99 4533c0          xor     r8d,r8d
+fffff803`6ccaee9c 488b01          mov     rax,qword ptr [rcx]
+fffff803`6ccaee9f 488b8098000000  mov     rax,qword ptr [rax+98h]
+fffff803`6ccaeea6 ffd0            call    rax
+fffff803`6ccaeea8 0f1f00          nop     dword ptr [rax]
+fffff803`6ccaeeab 488b4b08        mov     rcx,qword ptr [rbx+8]
+fffff803`6ccaeeaf 488d542440      lea     rdx,[rsp+40h]
+fffff803`6ccaeeb4 e827a5e4ff      call    amdkmdag+0x993e0 (fffff803`6caf93e0)
+fffff803`6ccaeeb9 0f57c0          xorps   xmm0,xmm0
+fffff803`6ccaeebc c745d010000000  mov     dword ptr [rbp-30h],10h
+fffff803`6ccaeec3 0f1145b0        movups  xmmword ptr [rbp-50h],xmm0
+fffff803`6ccaeec7 8b45bc          mov     eax,dword ptr [rbp-44h]
+fffff803`6ccaeeca 8d4f03          lea     ecx,[rdi+3]
+fffff803`6ccaeecd 83e080          and     eax,0FFFFFF80h
+fffff803`6ccaeed0 c745b467000000  mov     dword ptr [rbp-4Ch],67h
+fffff803`6ccaeed7 0bc8            or      ecx,eax
+fffff803`6ccaeed9 c745b80c560e90  mov     dword ptr [rbp-48h],900E560Ch
+fffff803`6ccaeee0 894dbc          mov     dword ptr [rbp-44h],ecx
+fffff803`6ccaeee3 488d8300010000  lea     rax,[rbx+100h]
+fffff803`6ccaeeea 488b4b08        mov     rcx,qword ptr [rbx+8]
+fffff803`6ccaeeee 488d55b0        lea     rdx,[rbp-50h]
+fffff803`6ccaeef2 0f1145c0        movups  xmmword ptr [rbp-40h],xmm0
+fffff803`6ccaeef6 488945c8        mov     qword ptr [rbp-38h],rax
+fffff803`6ccaeefa 4533c0          xor     r8d,r8d
+fffff803`6ccaeefd 488b01          mov     rax,qword ptr [rcx]
+fffff803`6ccaef00 488b8098000000  mov     rax,qword ptr [rax+98h]
+fffff803`6ccaef07 ffd0            call    rax
+fffff803`6ccaef09 0f1f00          nop     dword ptr [rax]
+fffff803`6ccaef0c 400fb6d7        movzx   edx,dil
+fffff803`6ccaef10 488d4c2440      lea     rcx,[rsp+40h]
+fffff803`6ccaef15 e8b6160000      call    amdkmdag+0x2505d0 (fffff803`6ccb05d0)
+fffff803`6ccaef1a 488b4d28        mov     rcx,qword ptr [rbp+28h]
+fffff803`6ccaef1e 4833cc          xor     rcx,rsp
+fffff803`6ccaef21 e8faea4f00      call    amdkmdag+0x74da20 (fffff803`6d1ada20)
+fffff803`6ccaef26 4c8d9c2430010000 lea     r11,[rsp+130h]
+fffff803`6ccaef2e 498b5b20        mov     rbx,qword ptr [r11+20h]
+fffff803`6ccaef32 498b7b28        mov     rdi,qword ptr [r11+28h]
+fffff803`6ccaef36 498be3          mov     rsp,r11
+fffff803`6ccaef39 5d              pop     rbp
+fffff803`6ccaef3a c3              ret
+fffff803`6ccaef3b cc              int     3
+fffff803`6ccaef3c cc              int     3
+fffff803`6ccaef3d cc              int     3
+fffff803`6ccaef3e cc              int     3
+fffff803`6ccaef3f cc              int     3
+fffff803`6ccaef40 cc              int     3
+fffff803`6ccaef41 cc              int     3
+fffff803`6ccaef42 cc              int     3
+fffff803`6ccaef43 cc              int     3
+fffff803`6ccaef44 cc              int     3
+fffff803`6ccaef45 cc              int     3
+fffff803`6ccaef46 cc              int     3
+fffff803`6ccaef47 cc              int     3
+fffff803`6ccaef48 cc              int     3
+fffff803`6ccaef49 cc              int     3
+fffff803`6ccaef4a cc              int     3
+fffff803`6ccaef4b cc              int     3
+fffff803`6ccaef4c cc              int     3
+fffff803`6ccaef4d cc              int     3
+fffff803`6ccaef4e cc              int     3
+fffff803`6ccaef4f cc              int     3
+fffff803`6ccaef50 4053            push    rbx
+fffff803`6ccaef52 4881ec90000000  sub     rsp,90h
+fffff803`6ccaef59 488bd9          mov     rbx,rcx
+fffff803`6ccaef5c 488d542420      lea     rdx,[rsp+20h]
+=== SEARCH_900C0203_AND_0E1D ===
+                                                                                                                                                                                                                                                                               ^ Range error in '.reload /f amdkmdag.sys; .echo === DISASM_900C1009_0x6E1552C4 ===; u 0xFFFFF8036E1551C0 0xFFFFF8036E155380; .echo === DISASM_900E560C_0x6CCAEEDC ===; u 0xFFFFF8036CCAECC0 0xFFFFF8036CCAEF60; .echo === SEARCH_900C0203_AND_0E1D ===; s -d 0xFFFFF8036CA60000 l0x6500000 0x900C0203; s -d 0xFFFFF8036CA60000 L0x6500000 0x900C0E1D; .echo === SEARCH_STRINGS_NEAR_900E560C ===; da 0xFFFFF8036D5DB0B8; q'

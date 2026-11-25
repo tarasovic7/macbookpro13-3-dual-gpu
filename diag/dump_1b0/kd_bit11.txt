@@ -1,0 +1,361 @@
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+Opened log file 'C:\Temp\HackDiag\kd_bit11.txt'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.047 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29680.1004 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Temp\HackDiag\WATCHDOG-20261125-1333.dmp]
+Mini Kernel Dump File: Only registers and stack trace are available
+
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+Symbol search path is: C:\Temp\HackDiag\symbols
+Executable search path is: C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'
+Windows 10 Kernel Version 26300 MP (8 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Kernel base = 0xfffff803`d4200000 PsLoadedModuleList = 0xfffff803`d50f56a0
+Debug session time: Wed Nov 25 13:33:19.263 2026 (UTC + 1:00)
+System Uptime: 0 days 0:00:27.340
+Loading Kernel Symbols
+...............................................................
+................................................................
+...................................................
+Loading User Symbols
+PEB is paged out (Peb.Ldr = 000000d0`5adea018).  Type ".hh dbgerr001" for details
+Mini Kernel Dump does not contain unloaded driver list
+ReadVirtual() failed in GetXStateConfiguration() first read attempt (error == 0.)
+For analysis of this file, run !analyze -v
+2: kd> .reload /f amdkmdag.sys; .echo === BITSCAN ===; .echo --- 0xFFFFF8036E170515 ---; u 0xFFFFF8036E170515 L4; .echo --- 0xFFFFF8036E170646 ---; u 0xFFFFF8036E170646 L4; .echo --- 0xFFFFF8036E173800 ---; u 0xFFFFF8036E173800 L4; .echo --- 0xFFFFF8036E1739E6 ---; u 0xFFFFF8036E1739E6 L4; .echo --- 0xFFFFF8036E176A50 ---; u 0xFFFFF8036E176A50 L4; .echo --- 0xFFFFF8036E176CC5 ---; u 0xFFFFF8036E176CC5 L4; .echo --- 0xFFFFF8036E177F34 ---; u 0xFFFFF8036E177F34 L4; .echo --- 0xFFFFF8036E17827C ---; u 0xFFFFF8036E17827C L4; .echo --- 0xFFFFF8036E178328 ---; u 0xFFFFF8036E178328 L4; .echo --- 0xFFFFF8036E179330 ---; u 0xFFFFF8036E179330 L4; .echo --- 0xFFFFF8036E179A0D ---; u 0xFFFFF8036E179A0D L4; .echo --- 0xFFFFF8036E17D690 ---; u 0xFFFFF8036E17D690 L4; .echo --- 0xFFFFF8036E17DD42 ---; u 0xFFFFF8036E17DD42 L4; .echo --- 0xFFFFF8036E17DD68 ---; u 0xFFFFF8036E17DD68 L4; .echo --- 0xFFFFF8036E17DD96 ---; u 0xFFFFF8036E17DD96 L4; .echo --- 0xFFFFF8036E17DE50 ---; u 0xFFFFF8036E17DE50 L4; .echo --- 0xFFFFF8036E17DE6F ---; u 0xFFFFF8036E17DE6F L4; .echo --- 0xFFFFF8036E17DE8E ---; u 0xFFFFF8036E17DE8E L4; .echo --- 0xFFFFF8036E17DEA6 ---; u 0xFFFFF8036E17DEA6 L4; .echo --- 0xFFFFF8036E17DEBF ---; u 0xFFFFF8036E17DEBF L4; .echo --- 0xFFFFF8036E17DED4 ---; u 0xFFFFF8036E17DED4 L4; .echo --- 0xFFFFF8036E17DEEA ---; u 0xFFFFF8036E17DEEA L4; .echo --- 0xFFFFF8036E16C3A7 ---; u 0xFFFFF8036E16C3A7 L4; .echo --- 0xFFFFF8036E16C59B ---; u 0xFFFFF8036E16C59B L4; .echo --- 0xFFFFF8036E184D1B ---; u 0xFFFFF8036E184D1B L4; .echo --- 0xFFFFF8036E184DAE ---; u 0xFFFFF8036E184DAE L4; .echo --- 0xFFFFF8036E184DCB ---; u 0xFFFFF8036E184DCB L4; .echo --- 0xFFFFF8036E184DF4 ---; u 0xFFFFF8036E184DF4 L4; .echo --- 0xFFFFF8036E184E11 ---; u 0xFFFFF8036E184E11 L4; .echo --- 0xFFFFF8036E184E2E ---; u 0xFFFFF8036E184E2E L4; .echo --- 0xFFFFF8036E184E4B ---; u 0xFFFFF8036E184E4B L4; .echo --- 0xFFFFF8036E184E74 ---; u 0xFFFFF8036E184E74 L4; .echo --- 0xFFFFF8036E184ECB ---; u 0xFFFFF8036E184ECB L4; .echo --- 0xFFFFF8036E184F40 ---; u 0xFFFFF8036E184F40 L4; .echo --- 0xFFFFF8036E186A97 ---; u 0xFFFFF8036E186A97 L4; .echo --- 0xFFFFF8036E186EB6 ---; u 0xFFFFF8036E186EB6 L4; .echo --- 0xFFFFF8036E189237 ---; u 0xFFFFF8036E189237 L4; .echo --- 0xFFFFF8036E18A6E4 ---; u 0xFFFFF8036E18A6E4 L4; .echo --- 0xFFFFF8036E18AA66 ---; u 0xFFFFF8036E18AA66 L4; .echo --- 0xFFFFF8036E1AC247 ---; u 0xFFFFF8036E1AC247 L4; .echo --- 0xFFFFF8036E1AE21E ---; u 0xFFFFF8036E1AE21E L4; .echo --- 0xFFFFF8036E1AE9E7 ---; u 0xFFFFF8036E1AE9E7 L4; .echo --- 0xFFFFF8036E1BBFA3 ---; u 0xFFFFF8036E1BBFA3 L4; .echo --- 0xFFFFF8036E1BD9A8 ---; u 0xFFFFF8036E1BD9A8 L4; q
+
+************* Symbol Loading Error Summary **************
+Module name            Error
+amdkmdag               The system cannot find the file specified
+
+You can troubleshoot most symbol related issues by turning on symbol loading diagnostics (!sym noisy) and repeating the command that caused symbols to be loaded.
+You should also verify that your symbol search path (.sympath) is correct.
+=== BITSCAN ===
+--- 0xFFFFF8036E170515 ---
+amdkmdag+0x1710515:
+fffff803`6e170515 204883          and     byte ptr [rax-7Dh],cl
+fffff803`6e170518 893b            mov     dword ptr [rbx],edi
+fffff803`6e17051a 0900            or      dword ptr [rax],eax
+fffff803`6e17051c 00044c          add     byte ptr [rsp+rcx*2],al
+--- 0xFFFFF8036E170646 ---
+amdkmdag+0x1710646:
+fffff803`6e170646 99              cdq
+fffff803`6e170647 4883a73b090000fb and     qword ptr [rdi+93Bh],0FFFFFFFFFFFFFFFBh
+fffff803`6e17064f b801000000      mov     eax,1
+fffff803`6e170654 488b5c2430      mov     rbx,qword ptr [rsp+30h]
+--- 0xFFFFF8036E173800 ---
+amdkmdag+0x1713800:
+fffff803`6e173800 f20100          xacquire add dword ptr [rax],eax
+fffff803`6e173803 004883          add     byte ptr [rax-7Dh],cl
+fffff803`6e173806 893b            mov     dword ptr [rbx],edi
+fffff803`6e173808 0900            or      dword ptr [rax],eax
+--- 0xFFFFF8036E1739E6 ---
+amdkmdag+0x17139e6:
+fffff803`6e1739e6 44ca4883        retf    8348h
+fffff803`6e1739ea a33b090000fd898b10 mov   dword ptr [108B89FD0000093Bh],eax
+fffff803`6e1739f3 0200            add     al,byte ptr [rax]
+fffff803`6e1739f5 004c8d5c        add     byte ptr [rbp+rcx*4+5Ch],cl
+--- 0xFFFFF8036E176A50 ---
+amdkmdag+0x1716a50:
+fffff803`6e176a50 50              push    rax
+fffff803`6e176a51 4883893b09000008 or      qword ptr [rcx+93Bh],8
+fffff803`6e176a59 4533f6          xor     r14d,r14d
+fffff803`6e176a5c 488bf2          mov     rsi,rdx
+--- 0xFFFFF8036E176CC5 ---
+amdkmdag+0x1716cc5:
+fffff803`6e176cc5 eb0a            jmp     amdkmdag+0x1716cd1 (fffff803`6e176cd1)
+fffff803`6e176cc7 4883a33b090000f7 and     qword ptr [rbx+93Bh],0FFFFFFFFFFFFFFF7h
+fffff803`6e176ccf 8bc7            mov     eax,edi
+fffff803`6e176cd1 488b5c2460      mov     rbx,qword ptr [rsp+60h]
+--- 0xFFFFF8036E177F34 ---
+amdkmdag+0x1717f34:
+fffff803`6e177f34 50              push    rax
+fffff803`6e177f35 4883894309000010 or      qword ptr [rcx+943h],10h
+fffff803`6e177f3d 4c8d7108        lea     r14,[rcx+8]
+fffff803`6e177f41 418ae8          mov     bpl,r8b
+--- 0xFFFFF8036E17827C ---
+amdkmdag+0x171827c:
+fffff803`6e17827c 014883          add     dword ptr [rax-7Dh],ecx
+fffff803`6e17827f a7              cmps    dword ptr [rsi],dword ptr [rdi]
+fffff803`6e178280 430900          or      dword ptr [r8],eax
+fffff803`6e178283 00ef            add     bh,ch
+--- 0xFFFFF8036E178328 ---
+amdkmdag+0x1718328:
+fffff803`6e178328 0b480f          or      ecx,dword ptr [rax+0Fh]
+fffff803`6e17832b baa93b0900      mov     edx,93BA9h
+fffff803`6e178330 000b            add     byte ptr [rbx],cl
+fffff803`6e178332 4883c420        add     rsp,20h
+--- 0xFFFFF8036E179330 ---
+amdkmdag+0x1719330:
+fffff803`6e179330 c4              ???
+fffff803`6e179331 9c              pushfq
+fffff803`6e179332 18ff            sbb     bh,bh
+fffff803`6e179334 ba3b090000      mov     edx,93Bh
+--- 0xFFFFF8036E179A0D ---
+amdkmdag+0x1719a0d:
+fffff803`6e179a0d 492153c8        and     qword ptr [r11-38h],rdx
+fffff803`6e179a11 ba3b090000      mov     edx,93Bh
+fffff803`6e179a16 e88df4b5fe      call    amdkmdag+0x278ea8 (fffff803`6ccd8ea8)
+fffff803`6e179a1b 488b03          mov     rax,qword ptr [rbx]
+--- 0xFFFFF8036E17D690 ---
+amdkmdag+0x171d690:
+fffff803`6e17d690 6d              ins     dword ptr [rdi],dx
+fffff803`6e17d691 4883894309000040 or      qword ptr [rcx+943h],40h
+fffff803`6e17d699 4c8d6108        lea     r12,[rcx+8]
+fffff803`6e17d69d 4885d2          test    rdx,rdx
+--- 0xFFFFF8036E17DD42 ---
+amdkmdag+0x171dd42:
+fffff803`6e17dd42 0e              ???
+fffff803`6e17dd43 480fbaaf430900000c bts   qword ptr [rdi+943h],0Ch
+fffff803`6e17dd4c e9a1010000      jmp     amdkmdag+0x171def2 (fffff803`6e17def2)
+fffff803`6e17dd51 488b45e8        mov     rax,qword ptr [rbp-18h]
+--- 0xFFFFF8036E17DD68 ---
+amdkmdag+0x171dd68:
+fffff803`6e17dd68 480fbaaf430900000d bts   qword ptr [rdi+943h],0Dh
+fffff803`6e17dd71 e97c010000      jmp     amdkmdag+0x171def2 (fffff803`6e17def2)
+fffff803`6e17dd76 488b4d50        mov     rcx,qword ptr [rbp+50h]
+fffff803`6e17dd7a 488b8308190000  mov     rax,qword ptr [rbx+1908h]
+--- 0xFFFFF8036E17DD96 ---
+amdkmdag+0x171dd96:
+fffff803`6e17dd96 0e              ???
+fffff803`6e17dd97 480fbaaf430900000e bts   qword ptr [rdi+943h],0Eh
+fffff803`6e17dda0 e94d010000      jmp     amdkmdag+0x171def2 (fffff803`6e17def2)
+fffff803`6e17dda5 8b87b8100000    mov     eax,dword ptr [rdi+10B8h]
+--- 0xFFFFF8036E17DE50 ---
+amdkmdag+0x171de50:
+fffff803`6e17de50 0e              ???
+fffff803`6e17de51 480fbaaf4309000010 bts   qword ptr [rdi+943h],10h
+fffff803`6e17de5a e993000000      jmp     amdkmdag+0x171def2 (fffff803`6e17def2)
+fffff803`6e17de5f 498bc6          mov     rax,r14
+--- 0xFFFFF8036E17DE6F ---
+amdkmdag+0x171de6f:
+fffff803`6e17de6f 094c09af        or      dword ptr [rcx+rcx-51h],ecx
+fffff803`6e17de73 430900          or      dword ptr [r8],eax
+fffff803`6e17de76 00eb            add     bl,ch
+fffff803`6e17de78 7980            jns     amdkmdag+0x171ddfa (fffff803`6e17ddfa)
+--- 0xFFFFF8036E17DE8E ---
+amdkmdag+0x171de8e:
+fffff803`6e17de8e 7409            je      amdkmdag+0x171de99 (fffff803`6e17de99)
+fffff803`6e17de90 4c09bf43090000  or      qword ptr [rdi+943h],r15
+fffff803`6e17de97 eb59            jmp     amdkmdag+0x171def2 (fffff803`6e17def2)
+fffff803`6e17de99 488bcb          mov     rcx,rbx
+--- 0xFFFFF8036E17DEA6 ---
+amdkmdag+0x171dea6:
+fffff803`6e17dea6 0b480f          or      ecx,dword ptr [rax+0Fh]
+fffff803`6e17dea9 baaf430900      mov     edx,943AFh
+fffff803`6e17deae 0013            add     byte ptr [rbx],dl
+fffff803`6e17deb0 eb40            jmp     amdkmdag+0x171def2 (fffff803`6e17def2)
+--- 0xFFFFF8036E17DEBF ---
+amdkmdag+0x171debf:
+fffff803`6e17debf 0b480f          or      ecx,dword ptr [rax+0Fh]
+fffff803`6e17dec2 baaf430900      mov     edx,943AFh
+fffff803`6e17dec7 0014eb          add     byte ptr [rbx+rbp*8],dl
+fffff803`6e17deca 27              ???
+--- 0xFFFFF8036E17DED4 ---
+amdkmdag+0x171ded4:
+fffff803`6e17ded4 c8488b87        enter   8B48h,87h
+fffff803`6e17ded8 430900          or      dword ptr [r8],eax
+fffff803`6e17dedb 003b            add     byte ptr [rbx],bh
+fffff803`6e17dedd ce              ???
+--- 0xFFFFF8036E17DEEA ---
+amdkmdag+0x171deea:
+fffff803`6e17deea bf48898743      mov     edi,43878948h
+fffff803`6e17deef 0900            or      dword ptr [rax],eax
+fffff803`6e17def1 008bc1e90af8    add     byte ptr [rbx-7F5163Fh],cl
+fffff803`6e17def7 ff              ???
+--- 0xFFFFF8036E16C3A7 ---
+amdkmdag+0x170c3a7:
+fffff803`6e16c3a7 480fbaaf4309000008 bts   qword ptr [rdi+943h],8
+fffff803`6e16c3b0 4889b790100000  mov     qword ptr [rdi+1090h],rsi
+fffff803`6e16c3b7 e8b817b7fe      call    amdkmdag+0x27db74 (fffff803`6ccddb74)
+fffff803`6e16c3bc 448b785c        mov     r15d,dword ptr [rax+5Ch]
+--- 0xFFFFF8036E16C59B ---
+amdkmdag+0x170c59b:
+fffff803`6e16c59b 480fbab74309000008 btr   qword ptr [rdi+943h],8
+fffff803`6e16c5a4 418bc4          mov     eax,r12d
+fffff803`6e16c5a7 4c8d5c2450      lea     r11,[rsp+50h]
+fffff803`6e16c5ac 498b5b38        mov     rbx,qword ptr [r11+38h]
+--- 0xFFFFF8036E184D1B ---
+amdkmdag+0x1724d1b:
+fffff803`6e184d1b 480fbaa94309000009 bts   qword ptr [rcx+943h],9
+fffff803`6e184d24 0f57c0          xorps   xmm0,xmm0
+fffff803`6e184d27 488bf9          mov     rdi,rcx
+fffff803`6e184d2a 33c0            xor     eax,eax
+--- 0xFFFFF8036E184DAE ---
+amdkmdag+0x1724dae:
+fffff803`6e184dae 480fbaaf4309000017 bts   qword ptr [rdi+943h],17h
+fffff803`6e184db7 e91e010000      jmp     amdkmdag+0x1724eda (fffff803`6e184eda)
+fffff803`6e184dbc 488bce          mov     rcx,rsi
+fffff803`6e184dbf e824faffff      call    amdkmdag+0x17247e8 (fffff803`6e1847e8)
+--- 0xFFFFF8036E184DCB ---
+amdkmdag+0x1724dcb:
+fffff803`6e184dcb 480fbaaf4309000018 bts   qword ptr [rdi+943h],18h
+fffff803`6e184dd4 e901010000      jmp     amdkmdag+0x1724eda (fffff803`6e184eda)
+fffff803`6e184dd9 488b8610060000  mov     rax,qword ptr [rsi+610h]
+fffff803`6e184de0 4885c0          test    rax,rax
+--- 0xFFFFF8036E184DF4 ---
+amdkmdag+0x1724df4:
+fffff803`6e184df4 480fbaaf4309000019 bts   qword ptr [rdi+943h],19h
+fffff803`6e184dfd e9d8000000      jmp     amdkmdag+0x1724eda (fffff803`6e184eda)
+fffff803`6e184e02 488bce          mov     rcx,rsi
+fffff803`6e184e05 e8a6f8ffff      call    amdkmdag+0x17246b0 (fffff803`6e1846b0)
+--- 0xFFFFF8036E184E11 ---
+amdkmdag+0x1724e11:
+fffff803`6e184e11 480fbaaf430900001a bts   qword ptr [rdi+943h],1Ah
+fffff803`6e184e1a e9bb000000      jmp     amdkmdag+0x1724eda (fffff803`6e184eda)
+fffff803`6e184e1f 488bce          mov     rcx,rsi
+fffff803`6e184e22 e879fcffff      call    amdkmdag+0x1724aa0 (fffff803`6e184aa0)
+--- 0xFFFFF8036E184E2E ---
+amdkmdag+0x1724e2e:
+fffff803`6e184e2e 480fbaaf430900001b bts   qword ptr [rdi+943h],1Bh
+fffff803`6e184e37 e99e000000      jmp     amdkmdag+0x1724eda (fffff803`6e184eda)
+fffff803`6e184e3c 488bce          mov     rcx,rsi
+fffff803`6e184e3f e8f8faffff      call    amdkmdag+0x172493c (fffff803`6e18493c)
+--- 0xFFFFF8036E184E4B ---
+amdkmdag+0x1724e4b:
+fffff803`6e184e4b 480fbaaf430900001c bts   qword ptr [rdi+943h],1Ch
+fffff803`6e184e54 e981000000      jmp     amdkmdag+0x1724eda (fffff803`6e184eda)
+fffff803`6e184e59 488b8618060000  mov     rax,qword ptr [rsi+618h]
+fffff803`6e184e60 4885c0          test    rax,rax
+--- 0xFFFFF8036E184E74 ---
+amdkmdag+0x1724e74:
+fffff803`6e184e74 480fbaaf430900001d bts   qword ptr [rdi+943h],1Dh
+fffff803`6e184e7d eb5b            jmp     amdkmdag+0x1724eda (fffff803`6e184eda)
+fffff803`6e184e7f 488d86e4010000  lea     rax,[rsi+1E4h]
+fffff803`6e184e86 b907000000      mov     ecx,7
+--- 0xFFFFF8036E184ECB ---
+amdkmdag+0x1724ecb:
+fffff803`6e184ecb 80480987        or      byte ptr [rax+9],87h
+fffff803`6e184ecf 430900          or      dword ptr [r8],eax
+fffff803`6e184ed2 00eb            add     bl,ch
+fffff803`6e184ed4 05bb010000      add     eax,1BBh
+--- 0xFFFFF8036E184F40 ---
+amdkmdag+0x1724f40:
+fffff803`6e184f40 09480f          or      dword ptr [rax+0Fh],ecx
+fffff803`6e184f43 bab7430900      mov     edx,943B7h
+fffff803`6e184f48 0009            add     byte ptr [rcx],cl
+fffff803`6e184f4a 488b6c2468      mov     rbp,qword ptr [rsp+68h]
+--- 0xFFFFF8036E186A97 ---
+amdkmdag+0x1726a97:
+fffff803`6e186a97 d7              xlat    byte ptr [rbx]
+fffff803`6e186a98 4c09b643090000  or      qword ptr [rsi+943h],r14
+fffff803`6e186a9f 488bcb          mov     rcx,rbx
+fffff803`6e186aa2 41b888070000    mov     r8d,788h
+--- 0xFFFFF8036E186EB6 ---
+amdkmdag+0x1726eb6:
+fffff803`6e186eb6 480fbab6430900000a btr   qword ptr [rsi+943h],0Ah
+fffff803`6e186ebf 418bc4          mov     eax,r12d
+fffff803`6e186ec2 4881c460010000  add     rsp,160h
+fffff803`6e186ec9 415f            pop     r15
+--- 0xFFFFF8036E189237 ---
+amdkmdag+0x1729237:
+fffff803`6e189237 50              push    rax
+fffff803`6e189238 4883894309000020 or      qword ptr [rcx+943h],20h
+fffff803`6e189240 488d7908        lea     rdi,[rcx+8]
+fffff803`6e189244 418ae8          mov     bpl,r8b
+--- 0xFFFFF8036E18A6E4 ---
+amdkmdag+0x172a6e4:
+fffff803`6e18a6e4 480fbaa83b09000016 bts   qword ptr [rax+93Bh],16h
+fffff803`6e18a6ed 85d2            test    edx,edx
+fffff803`6e18a6ef 0f8470050000    je      amdkmdag+0x172ac65 (fffff803`6e18ac65)
+fffff803`6e18a6f5 83e903          sub     ecx,3
+--- 0xFFFFF8036E18AA66 ---
+amdkmdag+0x172aa66:
+fffff803`6e18aa66 480fbab03b09000016 btr   qword ptr [rax+93Bh],16h
+fffff803`6e18aa6f 8bc7            mov     eax,edi
+fffff803`6e18aa71 4c8d9c24d0000000 lea     r11,[rsp+0D0h]
+fffff803`6e18aa79 498b5b20        mov     rbx,qword ptr [r11+20h]
+--- 0xFFFFF8036E1AC247 ---
+amdkmdag+0x174c247:
+fffff803`6e1ac247 7140            jno     amdkmdag+0x174c289 (fffff803`6e1ac289)
+fffff803`6e1ac249 38b83c090000    cmp     byte ptr [rax+93Ch],bh
+fffff803`6e1ac24f 7441            je      amdkmdag+0x174c292 (fffff803`6e1ac292)
+fffff803`6e1ac251 663bbb840d0000  cmp     di,word ptr [rbx+0D84h]
+--- 0xFFFFF8036E1AE21E ---
+amdkmdag+0x174e21e:
+fffff803`6e1ae21e 16              ???
+fffff803`6e1ae21f ff88863c0900    dec     dword ptr [rax+93C86h]
+fffff803`6e1ae225 00488b          add     byte ptr [rax-75h],cl
+fffff803`6e1ae228 97              xchg    eax,edi
+--- 0xFFFFF8036E1AE9E7 ---
+amdkmdag+0x174e9e7:
+fffff803`6e1ae9e7 204c8d86        and     byte ptr [rbp+rcx*4-7Ah],cl
+fffff803`6e1ae9eb 440900          or      dword ptr [rax],r8d
+fffff803`6e1ae9ee 008886400900    add     byte ptr [rax+94086h],cl
+fffff803`6e1ae9f4 00488d          add     byte ptr [rax-73h],cl
+--- 0xFFFFF8036E1BBFA3 ---
+amdkmdag+0x175bfa3:
+fffff803`6e1bbfa3 1a4038          sbb     al,byte ptr [rax+38h]
+fffff803`6e1bbfa6 af              scas    dword ptr [rdi]
+fffff803`6e1bbfa7 3c09            cmp     al,9
+fffff803`6e1bbfa9 0000            add     byte ptr [rax],al
+--- 0xFFFFF8036E1BD9A8 ---
+amdkmdag+0x175d9a8:
+fffff803`6e1bd9a8 8807            mov     byte ptr [rdi],al
+fffff803`6e1bd9aa 8b8544090000    mov     eax,dword ptr [rbp+944h]
+fffff803`6e1bd9b0 83f8ff          cmp     eax,0FFFFFFFFh
+fffff803`6e1bd9b3 7503            jne     amdkmdag+0x175d9b8 (fffff803`6e1bd9b8)
+quit:
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'

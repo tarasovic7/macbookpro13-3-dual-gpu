@@ -1,0 +1,26 @@
+# Build & UEFI artifacts
+build/
+*.o
+*.so
+*.efi
+*.aml
+*.obj
+*.pdb
+*.lib
+
+# Raw kernel dumps, WER reports & binary driver crash blobs (keep local only!)
+*.dmp
+*.wer
+diag/dump_1b0/*.bin
+
+# Debugger symbol caches & temporary logs
+symbols/
+*.log
+*.tmp
+
+# OS / Editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

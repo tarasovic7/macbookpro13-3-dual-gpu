@@ -1,0 +1,226 @@
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+Opened log file 'C:\Temp\HackDiag\kd_smu_fail.txt'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.032 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29680.1004 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Temp\HackDiag\WATCHDOG-20261125-1333.dmp]
+Mini Kernel Dump File: Only registers and stack trace are available
+
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+Symbol search path is: C:\Temp\HackDiag\symbols
+Executable search path is: C:\Windows\System32\DriverStore\FileRepository\u0412788.inf_amd64_d661dab6e8d53074\B413136
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'
+Windows 10 Kernel Version 26300 MP (8 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Kernel base = 0xfffff803`d4200000 PsLoadedModuleList = 0xfffff803`d50f56a0
+Debug session time: Wed Nov 25 13:33:19.263 2026 (UTC + 1:00)
+System Uptime: 0 days 0:00:27.340
+Loading Kernel Symbols
+...............................................................
+................................................................
+...................................................
+Loading User Symbols
+PEB is paged out (Peb.Ldr = 000000d0`5adea018).  Type ".hh dbgerr001" for details
+Mini Kernel Dump does not contain unloaded driver list
+ReadVirtual() failed in GetXStateConfiguration() first read attempt (error == 0.)
+For analysis of this file, run !analyze -v
+2: kd> .reload /f amdkmdag.sys; .echo === SMU_BIT11 ===; u 0xFFFFF8036E1781C0 0xFFFFF8036E178350; q
+
+************* Symbol Loading Error Summary **************
+Module name            Error
+amdkmdag               The system cannot find the file specified
+
+You can troubleshoot most symbol related issues by turning on symbol loading diagnostics (!sym noisy) and repeating the command that caused symbols to be loaded.
+You should also verify that your symbol search path (.sympath) is correct.
+=== SMU_BIT11 ===
+amdkmdag+0x17181c0:
+fffff803`6e1781c0 4889442438      mov     qword ptr [rsp+38h],rax
+fffff803`6e1781c5 488bcd          mov     rcx,rbp
+fffff803`6e1781c8 4c897c2430      mov     qword ptr [rsp+30h],r15
+fffff803`6e1781cd c744242802000000 mov     dword ptr [rsp+28h],2
+fffff803`6e1781d5 488364242000    and     qword ptr [rsp+20h],0
+fffff803`6e1781db e8c80cb6fe      call    amdkmdag+0x278ea8 (fffff803`6ccd8ea8)
+fffff803`6e1781e0 488b03          mov     rax,qword ptr [rbx]
+fffff803`6e1781e3 4885c0          test    rax,rax
+fffff803`6e1781e6 740a            je      amdkmdag+0x17181f2 (fffff803`6e1781f2)
+fffff803`6e1781e8 83b8b005000000  cmp     dword ptr [rax+5B0h],0
+fffff803`6e1781ef 7401            je      amdkmdag+0x17181f2 (fffff803`6e1781f2)
+fffff803`6e1781f1 cc              int     3
+fffff803`6e1781f2 8b9354020000    mov     edx,dword ptr [rbx+254h]
+fffff803`6e1781f8 41b801000000    mov     r8d,1
+fffff803`6e1781fe 488b0b          mov     rcx,qword ptr [rbx]
+fffff803`6e178201 e80a92ffff      call    amdkmdag+0x1711410 (fffff803`6e171410)
+fffff803`6e178206 48898360020000  mov     qword ptr [rbx+260h],rax
+fffff803`6e17820d 4885c0          test    rax,rax
+fffff803`6e178210 7550            jne     amdkmdag+0x1718262 (fffff803`6e178262)
+fffff803`6e178212 4c8b0b          mov     r9,qword ptr [rbx]
+fffff803`6e178215 488d05a49d18ff  lea     rax,[amdkmdag+0x8a1fc0 (fffff803`6d301fc0)]
+fffff803`6e17821c 4889442440      mov     qword ptr [rsp+40h],rax
+fffff803`6e178221 4c8bc5          mov     r8,rbp
+fffff803`6e178224 488d05dd9d18ff  lea     rax,[amdkmdag+0x8a2008 (fffff803`6d302008)]
+fffff803`6e17822b bab3030000      mov     edx,3B3h
+fffff803`6e178230 4889442438      mov     qword ptr [rsp+38h],rax
+fffff803`6e178235 488bcd          mov     rcx,rbp
+fffff803`6e178238 4c897c2430      mov     qword ptr [rsp+30h],r15
+fffff803`6e17823d c744242802000000 mov     dword ptr [rsp+28h],2
+fffff803`6e178245 488364242000    and     qword ptr [rsp+20h],0
+fffff803`6e17824b e8580cb6fe      call    amdkmdag+0x278ea8 (fffff803`6ccd8ea8)
+fffff803`6e178250 488b03          mov     rax,qword ptr [rbx]
+fffff803`6e178253 4885c0          test    rax,rax
+fffff803`6e178256 740a            je      amdkmdag+0x1718262 (fffff803`6e178262)
+fffff803`6e178258 83b8b005000000  cmp     dword ptr [rax+5B0h],0
+fffff803`6e17825f 7401            je      amdkmdag+0x1718262 (fffff803`6e178262)
+fffff803`6e178261 cc              int     3
+fffff803`6e178262 4883bb5802000000 cmp     qword ptr [rbx+258h],0
+fffff803`6e17826a 7411            je      amdkmdag+0x171827d (fffff803`6e17827d)
+fffff803`6e17826c 4883bb6002000000 cmp     qword ptr [rbx+260h],0
+fffff803`6e178274 7407            je      amdkmdag+0x171827d (fffff803`6e17827d)
+fffff803`6e178276 c6831802000001  mov     byte ptr [rbx+218h],1
+fffff803`6e17827d 4883a743090000ef and     qword ptr [rdi+943h],0FFFFFFFFFFFFFFEFh
+fffff803`6e178285 418bc6          mov     eax,r14d
+fffff803`6e178288 488b5c2460      mov     rbx,qword ptr [rsp+60h]
+fffff803`6e17828d 488b6c2468      mov     rbp,qword ptr [rsp+68h]
+fffff803`6e178292 488b7c2470      mov     rdi,qword ptr [rsp+70h]
+fffff803`6e178297 4c8b742478      mov     r14,qword ptr [rsp+78h]
+fffff803`6e17829c 4883c450        add     rsp,50h
+fffff803`6e1782a0 415f            pop     r15
+fffff803`6e1782a2 c3              ret
+fffff803`6e1782a3 cc              int     3
+fffff803`6e1782a4 cc              int     3
+fffff803`6e1782a5 cc              int     3
+fffff803`6e1782a6 cc              int     3
+fffff803`6e1782a7 cc              int     3
+fffff803`6e1782a8 cc              int     3
+fffff803`6e1782a9 cc              int     3
+fffff803`6e1782aa cc              int     3
+fffff803`6e1782ab cc              int     3
+fffff803`6e1782ac 4883ec28        sub     rsp,28h
+fffff803`6e1782b0 488b8190020000  mov     rax,qword ptr [rcx+290h]
+fffff803`6e1782b7 4885c0          test    rax,rax
+fffff803`6e1782ba 7405            je      amdkmdag+0x17182c1 (fffff803`6e1782c1)
+fffff803`6e1782bc ffd0            call    rax
+fffff803`6e1782be 0f1f00          nop     dword ptr [rax]
+fffff803`6e1782c1 b801000000      mov     eax,1
+fffff803`6e1782c6 4883c428        add     rsp,28h
+fffff803`6e1782ca c3              ret
+fffff803`6e1782cb cc              int     3
+fffff803`6e1782cc cc              int     3
+fffff803`6e1782cd cc              int     3
+fffff803`6e1782ce cc              int     3
+fffff803`6e1782cf cc              int     3
+fffff803`6e1782d0 cc              int     3
+fffff803`6e1782d1 cc              int     3
+fffff803`6e1782d2 cc              int     3
+fffff803`6e1782d3 cc              int     3
+fffff803`6e1782d4 4883ec28        sub     rsp,28h
+fffff803`6e1782d8 488b8198020000  mov     rax,qword ptr [rcx+298h]
+fffff803`6e1782df 4885c0          test    rax,rax
+fffff803`6e1782e2 7405            je      amdkmdag+0x17182e9 (fffff803`6e1782e9)
+fffff803`6e1782e4 ffd0            call    rax
+fffff803`6e1782e6 0f1f00          nop     dword ptr [rax]
+fffff803`6e1782e9 b801000000      mov     eax,1
+fffff803`6e1782ee 4883c428        add     rsp,28h
+fffff803`6e1782f2 c3              ret
+fffff803`6e1782f3 cc              int     3
+fffff803`6e1782f4 cc              int     3
+fffff803`6e1782f5 cc              int     3
+fffff803`6e1782f6 cc              int     3
+fffff803`6e1782f7 cc              int     3
+fffff803`6e1782f8 cc              int     3
+fffff803`6e1782f9 cc              int     3
+fffff803`6e1782fa cc              int     3
+fffff803`6e1782fb cc              int     3
+fffff803`6e1782fc 4053            push    rbx
+fffff803`6e1782fe 4883ec20        sub     rsp,20h
+fffff803`6e178302 488bd9          mov     rbx,rcx
+fffff803`6e178305 b801000000      mov     eax,1
+fffff803`6e17830a 488b8980020000  mov     rcx,qword ptr [rcx+280h]
+fffff803`6e178311 4885c9          test    rcx,rcx
+fffff803`6e178314 741c            je      amdkmdag+0x1718332 (fffff803`6e178332)
+fffff803`6e178316 488bc1          mov     rax,rcx
+fffff803`6e178319 488bcb          mov     rcx,rbx
+fffff803`6e17831c ffd0            call    rax
+fffff803`6e17831e 0f1f00          nop     dword ptr [rax]
+fffff803`6e178321 83f801          cmp     eax,1
+fffff803`6e178324 740c            je      amdkmdag+0x1718332 (fffff803`6e178332)
+fffff803`6e178326 488b0b          mov     rcx,qword ptr [rbx]
+fffff803`6e178329 480fbaa93b0900000b bts   qword ptr [rcx+93Bh],0Bh
+fffff803`6e178332 4883c420        add     rsp,20h
+fffff803`6e178336 5b              pop     rbx
+fffff803`6e178337 c3              ret
+fffff803`6e178338 cc              int     3
+fffff803`6e178339 cc              int     3
+fffff803`6e17833a cc              int     3
+fffff803`6e17833b cc              int     3
+fffff803`6e17833c cc              int     3
+fffff803`6e17833d cc              int     3
+fffff803`6e17833e cc              int     3
+fffff803`6e17833f cc              int     3
+fffff803`6e178340 488b81e0020000  mov     rax,qword ptr [rcx+2E0h]
+fffff803`6e178347 4885c0          test    rax,rax
+fffff803`6e17834a 7405            je      amdkmdag+0x1718351 (fffff803`6e178351)
+fffff803`6e17834c 48ffe0          jmp     rax
+fffff803`6e17834f cc              int     3
+fffff803`6e178350 cc              int     3
+quit:
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'

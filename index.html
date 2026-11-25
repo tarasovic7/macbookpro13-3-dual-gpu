@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MacBookPro13,3 Dual-GPU Hack — Checkpoint &amp; Technická Dokumentácia</title>
+<style>
+  :root {
+    --bg: #0b0f17;
+    --bg-elev: #111827;
+    --bg-card: #151e2e;
+    --bg-code: #0d1320;
+    --border: #24324a;
+    --border-strong: #344869;
+    --text: #e6edf7;
+    --text-muted: #93a4bd;
+    --text-dim: #6c7f9b;
+    --accent: #38bdf8;
+    --accent-soft: rgba(56, 189, 248, 0.14);
+    --green: #34d399;
+    --green-soft: rgba(52, 211, 153, 0.14);
+    --amber: #fbbf24;
+    --amber-soft: rgba(251, 191, 36, 0.14);
+    --red: #f87171;
+    --red-soft: rgba(248, 113, 113, 0.14);
+    --purple: #a78bfa;
+    --purple-soft: rgba(167, 139, 250, 0.14);
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    font-size: 14.5px;
+    display: flex;
+    min-height: 100vh;
+  }
+  /* Sidebar */
+  aside.sidebar {
+    width: 278px;
+    flex-shrink: 0;
+    background: var(--bg-elev);
+    border-right: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 20px 16px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .brand {
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 3px 8px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .brand h1 {
+    font-size: 17px;
+    margin: 0 0 4px;
+    line-height: 1.3;
+    color: #fff;
+  }
+  .brand .sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+  }
+  .search-box {
+    position: relative;
+  }
+  .search-box input {
+    width: 100%;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+  }
+  .search-box input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-soft);
+  }
+  nav.toc {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  nav.toc .toc-group {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--text-dim);
+    margin: 12px 8px 4px;
+    font-weight: 700;
+  }
+  nav.toc a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 7px;
+    font-size: 13px;
+    transition: background .15s, color .15s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav.toc a:hover, nav.toc a.active {
+    background: var(--accent-soft);
+    color: #fff;
+  }
+  .sidebar-footer {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 11.5px;
+    color: var(--text-dim);
+  }
+
+  /* Main content */
+  main {
+    flex: 1;
+    min-width: 0;
+    padding: 28px 36px 80px;
+    max-width: 1220px;
+  }
+  header.hero {
+    background: linear-gradient(135deg, #131e33 0%, #101829 60%, #161d2f 100%);
+    border: 1px solid var(--border-strong);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  header.hero h2 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    color: #fff;
+  }
+  header.hero p {
+    margin: 0;
+    color: var(--text-muted);
+    max-width: 920px;
+  }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 20px 0 28px;
+  }
+  .kpi {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 14px 16px;
+  }
+  .kpi .label {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin-bottom: 6px;
+  }
+  .kpi .value {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--mono);
+  }
+  .kpi .note {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .kpi.ok { border-left: 3px solid var(--green); }
+  .kpi.warn { border-left: 3px solid var(--amber); }
+  .kpi.err { border-left: 3px solid var(--red); }
+  .kpi.info { border-left: 3px solid var(--accent); }
+
+  section.block {
+    margin-bottom: 34px;
+    scroll-margin-top: 18px;
+  }
+  section.block > h2 {
+    font-size: 19px;
+    color: #fff;
+    margin: 0 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section.block h3 {
+    font-size: 15.5px;
+    color: var(--accent);
+    margin: 20px 0 8px;
+  }
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .callout {
+    border-radius: 10px;
+    padding: 13px 16px;
+    margin: 12px 0;
+    border: 1px solid var(--border);
+    font-size: 13.8px;
+  }
+  .callout.green { background: var(--green-soft); border-color: rgba(52,211,153,0.35); }
+  .callout.red { background: var(--red-soft); border-color: rgba(248,113,113,0.35); }
+  .callout.amber { background: var(--amber-soft); border-color: rgba(251,191,36,0.35); }
+  .callout.info { background: var(--accent-soft); border-color: rgba(56,189,248,0.35); }
+  .callout strong.title { display: block; margin-bottom: 4px; color: #fff; }
+
+  /* Badges */
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .b-ok { background: var(--green-soft); color: var(--green); border: 1px solid rgba(52,211,153,0.3); }
+  .b-err { background: var(--red-soft); color: var(--red); border: 1px solid rgba(248,113,113,0.3); }
+  .b-warn { background: var(--amber-soft); color: var(--amber); border: 1px solid rgba(251,191,36,0.3); }
+  .b-info { background: var(--accent-soft); color: var(--accent); border: 1px solid rgba(56,189,248,0.3); }
+  .b-todo { background: var(--purple-soft); color: var(--purple); border: 1px solid rgba(167,139,250,0.3); }
+
+  /* Tables */
+  .tbl-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 10px 0 14px;
+    background: var(--bg-card);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.2px;
+  }
+  th, td {
+    text-align: left;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #1a2538;
+    color: #c8d6eb;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(56, 189, 248, 0.04); }
+
+  /* Code */
+  code {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    background: var(--bg-code);
+    color: #cbd9f0;
+    padding: 1.5px 5px;
+    border-radius: 5px;
+    border: 1px solid #1f2b40;
+  }
+  .code-wrap {
+    position: relative;
+    margin: 10px 0 14px;
+  }
+  pre {
+    margin: 0;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 13px 15px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12.3px;
+    line-height: 1.52;
+    color: #d5e2f7;
+  }
+  pre code { background: none; border: none; padding: 0; font-size: inherit; }
+  button.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #1c2940;
+    color: var(--text-muted);
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    padding: 3px 9px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  button.copy-btn:hover { color: #fff; border-color: var(--accent); }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  details {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 10px 0;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #fff;
+    user-select: none;
+  }
+  details[open] summary { margin-bottom: 10px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 14px;
+  }
+  .arch-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .arch-node {
+    background: var(--bg-code);
+    border: 1px solid var(--border-strong);
+    border-radius: 9px;
+    padding: 11px 13px;
+  }
+  .arch-node .step {
+    font-size: 10.5px;
+    font-family: var(--mono);
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .arch-node .name {
+    font-weight: 700;
+    color: #fff;
+    margin: 2px 0 4px;
+    font-size: 13.5px;
+  }
+  .arch-node .desc { font-size: 12px; color: var(--text-muted); }
+
+  .hidden-by-filter { display: none !important; }
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .filter-pill {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .filter-pill.active, .filter-pill:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  @media (max-width: 960px) {
+    body { flex-direction: column; }
+    aside.sidebar { width: 100%; height: auto; position: static; }
+    main { padding: 18px 16px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="brand">
+    <span class="tag">Checkpoint 2026-11-25</span>
+    <h1>MacBookPro13,3<br>Dual-GPU Hack</h1>
+    <div class="sub">Intel HD 530 + AMD Pro 455<br>Windows 11 26300 Boot Camp</div>
+  </div>
+
+  <div class="search-box">
+    <input id="globalSearch" type="search" placeholder="Filtrovať sekcie a súbory..." aria-label="Filtrovať">
+  </div>
+
+  <nav class="toc">
+    <div class="toc-group">Stav &amp; Diagnostika</div>
+    <a href="#stav">1. Aktuálny stav &amp; Cieľ</a>
+    <a href="#hardver">2. Hardvér &amp; Ovládače</a>
+    <a href="#rootcause">3. Presná príčina Code 43</a>
+    <a href="#acpi">4. Overená ACPI mapa (13,3)</a>
+
+    <div class="toc-group">Špecifikácia rozhraní</div>
+    <a href="#arch">5. Architektúra &amp; 2 cesty</a>
+    <a href="#if-setos">5.1 AppleSetOs &amp; NVRAM</a>
+    <a href="#if-gmux">5.2 Indexed I/O GMUX (0x700)</a>
+    <a href="#if-edp">5.3 Skylake eDP &amp; OpRegion VBT</a>
+    <a href="#if-acpi">5.4 ACPI SSDT Patcher</a>
+    <a href="#if-amd">5.5 AMD Polaris 11 SMU &amp; Registre</a>
+
+    <div class="toc-group">Projekt &amp; Ďalšie kroky</div>
+    <a href="#subory">6. Všetky súbory v projekte</a>
+    <a href="#externe">7. Mimo projektu &amp; Výskum</a>
+    <a href="#roadmap">8. Čo treba dorobiť (Roadmapa)</a>
+  </nav>
+
+  <div class="sidebar-footer">
+    Projekt: <code>mbp133-dual-gpu-hack</code><br>
+    Fáza 0: <span style="color:var(--green)">100 % DOKONČENÁ</span>
+  </div>
+</aside>
+
+<main>
+  <header class="hero">
+    <h2>Projektový Checkpoint: MacBookPro13,3 Windows 11 Dual-GPU Hack</h2>
+    <p>
+      Kompletný technický záznam stavu projektu k <strong>25. 11. 2026</strong>. Obsahuje všetky zmapované hardvérové rozhrania tvojho stroja,
+      dokázanú príčinu zlyhania <code>AMD Radeon Pro 455</code> (<code>BugCheck 0x1B0</code> → <code>polaris10_start_smu</code>),
+      kompletné porovnanie <code>setos</code> vs. <code>normal</code> ACPI/BAR tabuliek, všetky stiahnuté referenčné zdrojáky, nástroje a presný plán,
+      čo je potrebné doprogramovať.
+    </p>
+  </header>
+
+  <div class="kpi-grid">
+    <div class="kpi info">
+      <div class="label">Cieľový stroj</div>
+      <div class="value">MacBookPro13,3</div>
+      <div class="note">Board <code>Mac-A5C67F76ED83108C</code> · Apple T1 (nie T2!) · EFI <code>529.120.1.0.0</code></div>
+    </div>
+    <div class="kpi err">
+      <div class="label">Dokázaný bloker (Code 43)</div>
+      <div class="value">polaris10_start_smu</div>
+      <div class="note"><code>PP_Initialize</code> bitmask <code>0x0801</code> (Bit 11) · ~269 ms SMU7 timeout</div>
+    </div>
+    <div class="kpi ok">
+      <div class="label">ACPI &amp; BAR Diff (setos vs normal)</div>
+      <div class="value">24 / 24 IDENTICAL</div>
+      <div class="note">SHA-256 zhoda DSDT, SSDT1..12, VFCT (60 KB VBIOS), DMAR aj všetkých 4 BARov</div>
+    </div>
+    <div class="kpi ok">
+      <div class="label">Aktuálny stav Windows</div>
+      <div class="value">Normal Boot · OK</div>
+      <div class="note">R.ID <code>25.3.1-R2.5</code> · 2880×1800@60Hz · Jas OK · ~10,6 GB voľnej RAM</div>
+    </div>
+  </div>
+
+  <!-- 1. STAV A CIEL -->
+  <section id="stav" class="block">
+    <h2>1. Aktuálny stav &amp; Cieľ projektu</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>Praktický cieľ</h3>
+        <p>
+          <strong>AMD Radeon Pro 455</strong> má iba <strong>2 GB GDDR5 VRAM</strong> (na desktope s Electron aplikáciami sa zaplní na 85 %).
+          Cieľom je presunúť desktop, <code>Antigravity</code>, <code>Edge WebView2</code>, <code>PowerToys</code> na
+          <strong>Intel HD Graphics 530</strong> (zdieľaná 16 GB RAM), aby 2 GB VRAM AMD ostali voľné výlučne pre
+          <strong>World of Tanks</strong> a <strong>Whisper</strong> — a voliteľne mať aj úsporný režim (<em>Mód 4</em>) s úplne vypnutou AMD pre úsporu ~6 W.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Bezpečný stav &amp; Záchrana</h3>
+        <p>
+          Všetky experimenty bežia <strong>výlučne z USB kľúča <code>D:</code> (<code>REFIND_USB</code>)</strong> bez akéhokoľvek zásahu do interného EFI Windows Boot Managera.
+          Odpojením USB a reštartom máš vždy okamžitý 100 % funkčný Windows 11 s R.ID <code>25.3.1</code>, natívnym rozlíšením <code>2880×1800 @ 60 Hz</code> a funkčným jasom.
+        </p>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <strong class="title">Čo sme už dokázali rozbehať a overiť (Checkpoint hotových vecí)</strong>
+      1) USB rEFInd <code>0.14.2</code> s <code>spoof_osx_version 10.15</code> spoľahlivo odblokuje <code>PCI 00:02.0</code> (Intel HD 530).<br>
+      2) Nainštalovaný finálny WHQL ovládač <strong>Intel <code>31.0.101.2115</code></strong> — Intel HD 530 nabieha v <code>D0</code>, <code>Status: OK</code>, renderuje do systémovej RAM.<br>
+      3) Nainštalovaný <strong>R.ID Polaris-Vega-Navi <code>25.3.1-R2.5</code></strong> (kernel <code>31.0.23013.14001</code>) + náš skript <a href="scripts/Apply-MacBookPro13-3-Fix.ps1">Apply-MacBookPro13-3-Fix.ps1</a> (10 Apple/Polaris 11 registrových kľúčov) — v normálnom boote znížil spotrebu VRAM z 1 747 MB na 1 223 MB pri funkčnom jase.<br>
+      4) <strong>Fáza 0 kompletne dokončená:</strong> máme celý <code>WATCHDOG-20261125-1333.dmp</code> dekódovaný do jednej inštrukcie v <code>amdkmdag.sys</code> aj kompletné dekompilované ACPI tabuľky z oboch bootov.
+    </div>
+  </section>
+
+  <!-- 2. HARDVER A OVLADACE -->
+  <section id="hardver" class="block">
+    <h2>2. Overený hardvérový a softvérový inventár (MacBookPro13,3)</h2>
+    <p>
+      Platforma: <code>Intel Core i7-6920HQ</code> (Skylake 6. gen, <code>CPUID 0x506E3</code>), <code>16 GB RAM</code>,
+      <code>Windows 11 Pro 10.0.26300</code> (x64), <strong>HVCI / VBS zapnuté</strong> (<code>HvciEnabled, HvciStrictMode</code>),
+      Smart App Control <code>Off</code>, Boot Camp <code>6.1.6655</code>.
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Zariadenie</th>
+            <th>PCI BDF / Zbernica</th>
+            <th>Hardware ID</th>
+            <th>ACPI cesta</th>
+            <th>BARy / I/O prostriedky</th>
+            <th>Ovládač &amp; Stav</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Intel HD Graphics 530</strong><br><span class="badge b-ok">OK pri setos</span></td>
+            <td><code>00:02.0</code></td>
+            <td><code>PCI\VEN_8086&amp;DEV_191B&amp;SUBSYS_015F106B&amp;REV_06</code></td>
+            <td><code>\_SB.PCI0.IGPU</code><br>(v <code>DSDT</code>)</td>
+            <td><code>BAR0=0x81000000</code><br><code>BAR2=0xA0000000</code><br>I/O <code>0x5000</code>, IRQ OK</td>
+            <td>Intel <code>31.0.101.2115</code> (<code>igfx</code>, <code>iSKLD_w10_DS</code>) — finálny WHQL pre Skylake (<code>2121+</code> dropol 6. gen!)</td>
+          </tr>
+          <tr>
+            <td><strong>PEG0 Root Port</strong></td>
+            <td><code>00:01.0</code></td>
+            <td><code>PCI\VEN_8086&amp;DEV_1901&amp;SUBSYS_015F106B&amp;REV_07</code></td>
+            <td><code>\_SB.PCI0.PEG0</code></td>
+            <td>Bridge pre <code>Bus 1</code> (<code>0x82600000</code>, <code>0xB0000000</code>, I/O <code>0x4000</code>)</td>
+            <td><code>pci.sys</code> (<code>oem5.inf</code>) — <span class="badge b-ok">OK</span></td>
+          </tr>
+          <tr>
+            <td><strong>AMD Radeon Pro 455</strong><br><em>(Polaris 11 / Baffin, 2 GB GDDR5)</em></td>
+            <td><code>01:00.0</code></td>
+            <td><code>PCI\VEN_1002&amp;DEV_67EF&amp;SUBSYS_0166106B&amp;REV_C7</code></td>
+            <td><code>\_SB.PCI0.PEG0.GFX0</code><br>(v <code>ssdt1.dsl</code>)</td>
+            <td><code>BAR0=0xB0000000</code><br><code>BAR2=0xC0000000</code><br><code>BAR4=0x4000</code><br><code>BAR5=0x82600000</code></td>
+            <td>R.ID <code>25.3.1-R2.5</code> (<code>31.0.23013.14001</code>, <code>amdkmdag.sys</code> / <code>amduw23g</code>, <code>u0412788.inf</code>)<br>Normal: <span class="badge b-ok">OK</span> · SetOs: <span class="badge b-err">Code 43</span></td>
+          </tr>
+          <tr>
+            <td><strong>AMD HDMI/DP Audio</strong></td>
+            <td><code>01:00.1</code></td>
+            <td><code>PCI\VEN_1002&amp;DEV_AAE0&amp;SUBSYS_AAE01002</code></td>
+            <td><code>\_SB.PCI0.PEG0.HDAU</code></td>
+            <td>Func 1 na <code>PEG0</code></td>
+            <td><code>HDAudBus</code> / <code>AtihdWT6</code> — <span class="badge b-ok">OK</span></td>
+          </tr>
+          <tr>
+            <td><strong>LPC Bridge (PCH 100-Series)</strong></td>
+            <td><code>00:1F.0</code></td>
+            <td><code>PCI\VEN_8086&amp;DEV_A151</code> (QMS180)</td>
+            <td><code>\_SB.PCI0.LPCB</code></td>
+            <td>LPC I/O dekódovanie</td>
+            <td><code>msisadrv</code> — <span class="badge b-ok">OK</span></td>
+          </tr>
+          <tr>
+            <td><strong>Apple GMUX</strong><br><em>(Renesas R4F2113 — Pre-T2!)</em></td>
+            <td>LPC / ACPI</td>
+            <td><code>ACPI\APP000B\4&amp;1096773&amp;0</code></td>
+            <td><code>\_SB.PCI0.LPCB.GMUX</code></td>
+            <td><strong>Indexed I/O <code>0x0700–0x07FE</code></strong> (NIE T2 MMIO <code>0xFE0B0200</code>!)</td>
+            <td>Boot Camp <code>oem7.inf</code> (<code>6.1.8100.0</code>, <code>NullDeviceInstall.NT</code>)</td>
+          </tr>
+          <tr>
+            <td><strong>Apple Panel Backlight</strong></td>
+            <td>ACPI</td>
+            <td><code>ACPI\APP0002</code></td>
+            <td><code>\_SB.PNLF</code></td>
+            <td>ACPI</td>
+            <td>Boot Camp <code>oem7.inf</code> (<code>NullDeviceInstall.NT</code>)</td>
+          </tr>
+          <tr>
+            <td><strong>Interný Retina panel</strong></td>
+            <td>eDP (4-lane)</td>
+            <td><code>DISPLAY\APPA030</code> (<code>Color LCD</code>)</td>
+            <td><code>2880×1800 @ 60 Hz</code></td>
+            <td>eDP mux (<code>CBTL06142</code>/<code>HD3SS212</code>) · Externé 4× TB3 natvrdo na AMD!</td>
+            <td><code>monitor.sys</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout amber">
+      <strong class="title">Vyriešené pasce ovládačov (zaznamenané pre budúce čisté inštalácie)</strong>
+      • <strong>Intel 6. gen Skylake:</strong> balíky <code>31.0.101.2121+</code> odstránili podporu pre <code>DEV_191B</code>. Finálny oficiálny WHQL je <code>31.0.101.2115</code> (<code>downloadmirror.intel.com/764512/gfx_win_101.2115.exe</code>).<br>
+      • <strong>R.ID 25.3.1-R2.5:</strong> <code>MSFTParse</code> má explicitný <code>ExcludeID</code> pre <code>DEV_67EF&amp;SUBSYS_0166106B</code> a vetva <code>24.30</code> zahodila Polaris 11 → nutné použiť MultiArch kernel <code>23.30</code> (<code>31.0.23013.14001</code>) + náš <a href="scripts/Apply-MacBookPro13-3-Fix.ps1">Apply-MacBookPro13-3-Fix.ps1</a>. V extrahovanom balíku existuje aj špecializovaný <code>MultiParse\u0412789_macstd_2150.inf</code> s priamou sekciou pre <code>0166106B</code> (vrátane <code>PP_EnableUploadFirmware=1</code>).
+    </div>
+  </section>
+
+  <!-- 3. ROOT CAUSE CODE 43 -->
+  <section id="rootcause" class="block">
+    <h2>3. Forenzný nález Fázy 0: Presná príčina AMD Code 43</h2>
+
+    <div class="callout red">
+      <strong class="title">100 % dokázaný vinník v <code>WATCHDOG-20261125-1333.dmp</code> + <code>amdkmdag.sys</code></strong>
+      Po zavolaní <code>AppleSetOs</code> zlyhá štart AMD ovládača <code>DxgkDdiStartDevice</code> (<code>amdkmdag+0x16F4684</code>) na chybe
+      <strong><code>PP Lib initialization failed</code></strong> s presnou bitmaskou
+      <code>pInstance-&gt;PECI.failFlag.pplib_init_failure.failure_bitmask = 0x0000000000000801</code> (Bit 0 + <strong>Bit 11</strong>).<br>
+      Jediná inštrukcia v celom 105 MB ovládači, ktorá nastavuje Bit 11 (<code>0x800</code>), je <code>amdkmdag+0x1718329</code>
+      vnútri <strong><code>smum_start_smc</code> → <code>[smumgr+0x280]</code> = <code>polaris10_start_smu</code></strong> (štart/handshake Polaris 11 SMU7 mikrokontroléra, ~269 ms timeout)!
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Vyvrátené hypotézy (100 % overené z dumpu &amp; diffu)</h3>
+        <ul>
+          <li><span class="badge b-ok">OK</span> <strong>VBIOS nechýba:</strong> <code>VFCT</code> (<code>60 548 B</code>) je identická v oboch bootoch a <code>amdkmdag</code> v LZNT1 bloku <code>Ev=0x900C0E0D</code> úspešne načítal celých <code>60 416 B</code> ATOMBIOS VBIOS (<code>113-C9801AP-028</code>, <code>55 AA 76 E9</code>).</li>
+          <li><span class="badge b-ok">OK</span> <strong>PCIe / BAR / MSI / D0 sú zdravé:</strong> dekomprimovaný PCI Config Space v čase pádu (<code>Ev=0x900C0E14</code>) má <code>PCI_CMD=0x0407</code> (IO+Mem+BusMaster ON), <code>PMCSR=0x0000</code> (<code>D0</code>), link <code>Gen3 x8</code> (<code>0x1083</code>), <code>MSI=0x0081</code> (<code>0xFEE000D0</code>).</li>
+          <li><span class="badge b-ok">OK</span> <strong>ACPI sa nemení:</strong> všetkých 24 tabuliek (<code>dsdt.dat</code>, <code>ssdt..ssdt12</code>, <code>vfct</code>, <code>dmar</code>, <code>mcfg</code>, <code>xsdt</code>) má <strong>100 % zhodný SHA-256</strong> medzi <code>setos</code> a <code>normal</code> bootom.</li>
+          <li><span class="badge b-ok">OK</span> <strong>BARy sú identické:</strong> <code>0xB0000000</code>, <code>0xC0000000</code>, <code>0x4000</code>, <code>0x82600000</code>.</li>
+          <li><span class="badge b-ok">OK</span> <strong>Ostatné PowerPlay vrstvy prešli:</strong> <code>PECI</code>, <code>SW_BGM</code>, <code>PHM</code>, <code>CWDDEPM</code>, <code>PSM</code>, <code>PEM</code> všetky úspešne vyčistili svoje chybové bity (<code>0x04..0x400</code>).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Presná disassembly miesta zlyhania (<a href="diag/dump_1b0/kd_smu_fail.txt">kd_smu_fail.txt</a>)</h3>
+        <div class="code-wrap">
+          <button class="copy-btn" data-copy>Kopírovať</button>
+          <pre><code>; amdkmdag+0x17182FC  (Linux ekvivalent: smum_start_smc)
+; rcx = smumgr; [rcx+280h] = smumgr_funcs-&gt;start_smu (polaris10_start_smu)
+fffff803`6e1782fc  push rbx
+fffff803`6e17830a  mov  rcx, qword ptr [rcx+280h]
+fffff803`6e17831c  call rax                       ; polaris10_start_smu()
+fffff803`6e178321  cmp  eax, 1                    ; PP_Result_OK == 1?
+fffff803`6e178324  je   ok
+fffff803`6e178326  mov  rcx, qword ptr [rbx]      ; pPECI
+fffff803`6e178329  bts  qword ptr [rcx+93Bh], 0Bh ; failure_bitmask |= 0x800 !!
+
+; Následne v PP_Initialize (amdkmdag+0x16F52B6 -> kd_amd_exact.txt):
+; Assertion: "pInstance-&gt;PECI.failFlag.pplib_init_failure.failure_bitmask != 0"
+; Loguje Ev=0x900C1009 s hodnotou 0x0000000000000801 -&gt; DxgkDdiStartDevice vracia 0xC0000001</code></pre>
+        </div>
+        <p style="font-size:12.8px;color:var(--text-muted);margin:0;">
+          Zhodný open-source kód AMD PowerPlay je uložený lokálne v <a href="reference/linux_apple_gmux/polaris10_smumgr.c">polaris10_smumgr.c</a>:
+          <code>polaris10_start_smu()</code> kontroluje <code>smu7_is_smc_ram_running()</code>; ak nebeží, nahrá SMU7 mikrokód v protected/non-protected režime a čaká na <code>SMU_STATUS.SMU_PASS == 1</code>, potom spustí <code>polaris10_avfs_event_mgr()</code>.
+        </p>
+      </div>
+    </div>
+
+    <details>
+      <summary>Chronologická os z DXGKRNL ring-buffera &amp; AMD ALOG (Seq 79..163, klikni pre detail)</summary>
+      <div class="code-wrap">
+        <pre><code>Seq 79..112  [IGP] Intel HD 530 (igdkmd64) prebieha DpiFdoHandleStartDevice + DISPLAY_MUX_MGR -&gt; ÚSPECH (D0)
+Seq 118..120 [AMD] BasicDisplay + DpiReadPnpRegistryValue
+Seq 121      [AMD] dxgkrnl!DpiFdoCreateSysMmAdapter+0x134   -&gt; 0xC000000D (STATUS_INVALID_PARAMETER, IOMMU/SysMm)
+Seq 122      [AMD] dxgkrnl!DpiFdoConnectInterrupt+0x166     -&gt; P1=0x8 (MSI pripojené)
+Seq 128      [AMD] dxgkrnl!DpQueryServices+0x5f6 (AGP)      -&gt; 0xC0000001 (bežné pre PCIe)
+Seq 129..139 [AMD] DpReadDeviceSpace (0x08,0x02,0x68,0x34)  -&gt; PCI Config Space 100% čitateľný
+Seq 140..160 [AMD] 9x DpEvalAcpiMethod                      -&gt; 0xC0000034 (chýbajúce PC metódy ATPX/ATRM/...)
+Seq 130..161 [AMD] 11x DpMapMemory                          -&gt; BARy a MMIO mapované OK
+t = 27.073 s [AMD] ALOG Ev=0x900C0402 = 3                   -&gt; štart PowerPlay/SMU
+t = 27.342 s [AMD] ALOG Ev=0x900C1009 = 0x0000000000000801  -&gt; (+269 ms!) polaris10_start_smu FAIL (Bit 11)
+t = 27.351 s [AMD] ALOG Ev=0x900C0203 = 0x000102F6 + 0x900C0E1D (0xB4 B) + 0x900C0E14 (PCI cfg) + 0x900C0E0D (64 KB VBIOS)
+Seq 162..163 [AMD] DpiDxgkDdiStartDevice -&gt; 0xC0000001 -&gt; Watchdog LiveDump 0x1B0 -&gt; Code 43 (D3)</code></pre>
+      </div>
+    </details>
+
+    <div class="callout info">
+      <strong class="title">Dve jediné možné príčiny, prečo <code>polaris10_start_smu</code> padne iba pri <code>AppleSetOs</code></strong>
+      1) <strong>Stav SMU7 / hardvéru z Apple EFI <code>ExitBootServices()</code>:</strong> Keď <code>AppleSetOs</code> prepne EFI do macOS handoffu, Apple EFI môže ponechať Polaris 11 SMU7/SMC v inom stave (alebo zastavený/uzamknutý inak než pri Boot Camp handoffe). Overiteľné čítaním <code>BAR5</code> (<code>0x82600000</code>) SMC indirect registrov v malej UEFI sonde.<br>
+      2) <strong>Koexistencia s <code>00:02.0</code> (Intel HD 530 / <code>DMAR</code> IOMMU / <code>igdkmd64</code> pod HVCI):</strong> V <code>normal</code> boote <code>00:02.0</code> neexistuje a <code>igdkmd64</code> neštartuje pred <code>amdkmdag</code>. Ľahko oddeliteľné 10-sekundovým testom so zakázanou Intel HD 530 v Správcovi zariadení pri USB <code>setos</code> boote.
+    </div>
+  </section>
+
+  <!-- 4. OVERENA ACPI MAPA -->
+  <section id="acpi" class="block">
+    <h2>4. Overená ACPI mapa tvojho MacBookPro13,3 (z reálneho dumpu)</h2>
+    <p>
+      Porovnanie <code>diag/acpi_setos</code> a <code>diag/acpi_normal</code> potvrdilo 100 % bitovú zhodu všetkých 24 tabuliek a zároveň
+      odhalilo zásadné rozdiely oproti T2 <code>MacBookPro16,1</code> (<code>t2-gmux-uefi</code>), ktoré by bez nášho dumpu zlyhali:
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Objekt / Metóda</th>
+            <th>T2 <code>MacBookPro16,1</code> (referencia)</th>
+            <th>Tvoj <code>MacBookPro13,3</code> (OVERENÉ!)</th>
+            <th>Lokálny súbor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Intel iGPU &amp; Jas <code>_BCM</code></strong></td>
+            <td>Tabuľka <code>SaSsdt</code>: <code>\_SB.PCI0.IGPU.DD1F._BCM</code></td>
+            <td>Priamo v <strong><code>DSDT</code></strong>! Jas je na <strong><code>\_SB.PCI0.IGPU.DD01._BCM</code></strong> (riadok 3048, volá <code>IGPU.ABCM</code> r. 2982). <code>DD1F</code> (r. 3429) <strong>nemá <code>_BCM</code></strong>!</td>
+            <td><a href="diag/acpi_setos/dsdt.dsl">dsdt.dsl</a></td>
+          </tr>
+          <tr>
+            <td><strong>GMUX Write Helper</strong></td>
+            <td><code>\_SB.PCI0.PEG0.EGP0.EGP1.GFX0.MBWR</code> (MMIO)</td>
+            <td><strong>UŽ EXISTUJE</strong> ako <strong><code>\_SB.PCI0.PEG0.GFX0.SGMX (Port, Len, Val)</code></strong> — kompletný Indexed I/O GMUX (<code>0x7C2..0x7C5</code>, <code>0x7D0</code>, <code>0x7D4</code> + <code>WFRD</code>/<code>WFCD</code>)!</td>
+            <td><a href="diag/acpi_setos/ssdt1.dsl">ssdt1.dsl</a> (r. 206–278)</td>
+          </tr>
+          <tr>
+            <td><strong>GMUX Jas <code>ABCM</code></strong></td>
+            <td><code>\_SB.PCI0.PEG0.EGP0.EGP1.GFX0.ABCM</code></td>
+            <td><strong>UŽ EXISTUJE</strong> na <strong><code>\_SB.PCI0.PEG0.GFX0.ABCM (Arg0)</code></strong>: uloží <code>BRTL</code>, prepočíta <code>(Arg0 * 0x3FF) / 100</code> a zavolá <code>SGMX(0x0774, 4, val)</code>!</td>
+            <td><a href="diag/acpi_setos/ssdt1.dsl">ssdt1.dsl</a> (r. 280–286)</td>
+          </tr>
+          <tr>
+            <td><strong>dGPU Power &amp; PCIe Gen3 WA</strong></td>
+            <td>Vlastný AML kód v <code>SSDT_IGPU.asl</code></td>
+            <td><strong>UŽ EXISTUJÚ</strong> natívne Apple metódy <code>PWRD(Arg0)</code>, <code>PUPD(Arg0, Arg1)</code> (volá <code>SGMX(0x0750, 1, 3)</code>) a <code>GXWA()</code> (Gen1→Gen3 <code>0x0120482B</code>/<code>0x0120C82B</code>)!</td>
+            <td><a href="diag/acpi_setos/ssdt1.dsl">ssdt1.dsl</a> (r. 50–203, 531)</td>
+          </tr>
+          <tr>
+            <td><strong>GMUX ACPI Device</strong></td>
+            <td>MMIO <code>0xFE0B0200</code></td>
+            <td><code>\_SB.PCI0.LPCB.GMUX</code> (<code>APP000B</code>), <code>_CRS</code> I/O <code>0x0700–0x07FF</code>, GPE <code>_L50</code>, <code>GMSP</code>, <code>GMLV</code>.</td>
+            <td><a href="diag/acpi_setos/dsdt.dsl">dsdt.dsl</a> (r. 5567–5627)</td>
+          </tr>
+          <tr>
+            <td><strong>Sleep / Wake</strong></td>
+            <td><code>\_PTS</code> / <code>\_WAK</code></td>
+            <td><code>\_PTS</code> (r. 9407), <code>\_WAK</code> (r. 9475, nastavuje <code>IGPU.CLID</code> a <code>SWAK()</code>).</td>
+            <td><a href="diag/acpi_setos/dsdt.dsl">dsdt.dsl</a> (r. 9407–9531)</td>
+          </tr>
+          <tr>
+            <td><strong>AMD VBIOS tabuľka</strong></td>
+            <td><code>VFCT</code></td>
+            <td><code>vfct.dat</code> (<code>60 548 B</code>): <code>0x55AA</code> ROM na offsete <code>0x68</code> (<code>60 416 B</code>, <code>VEN_1002&amp;DEV_67EF</code>).</td>
+            <td><a href="diag/acpi_normal/vfct.dat">vfct.dat</a></td>
+          </tr>
+          <tr>
+            <td><strong>VT-d IOMMU</strong></td>
+            <td><code>DMAR</code></td>
+            <td>2 jednotky: <code>0xFED90000</code> (vyhradená pre <code>00:02.0</code> Intel HD 530) a <code>0xFED91000</code> (<code>INCLUDE_PCI_ALL</code> vrátane AMD <code>01:00.0</code>).</td>
+            <td><a href="diag/acpi_normal/dmar.dsl">dmar.dsl</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5. ARCHITEKTURA A 5 ROZHRANI -->
+  <section id="arch" class="block">
+    <h2>5. Architektúra hacku &amp; Presná špecifikácia 5 rozhraní</h2>
+
+    <div class="arch-flow">
+      <div class="arch-node">
+        <div class="step">Rozhranie 1 · UEFI</div>
+        <div class="name">AppleSetOs &amp; NVRAM</div>
+        <div class="desc">Odblokuje PCI <code>00:02.0</code> (Intel HD 530) a OpRegion pred <code>ExitBootServices</code>.</div>
+      </div>
+      <div class="arch-node">
+        <div class="step">Rozhranie 2 · Port I/O</div>
+        <div class="name">Indexed I/O GMUX</div>
+        <div class="desc"><code>Renesas R4F2113</code> @ <code>0x7C2/0x7D0/0x7D4</code>: prepnutie eDP muxu, jas, napájanie dGPU <code>0x50</code>.</div>
+      </div>
+      <div class="arch-node">
+        <div class="step">Rozhranie 3 · BAR0 + RAM</div>
+        <div class="name">Skylake eDP &amp; VBT</div>
+        <div class="desc"><code>DDI_A_4_LANES</code> + AUX-A DPCD/EDID + VBT do <code>OpRegion+0x400</code> (PSR OFF, BL NONE).</div>
+      </div>
+      <div class="arch-node">
+        <div class="step">Rozhranie 4 · ACPI</div>
+        <div class="name">SSDT Patcher</div>
+        <div class="desc">In-memory rename <code>_BCM→XBCM</code> (<code>DSDT</code>) + <code>_WAK→XWAK</code> + <code>SSDT_IGPU_MBP133.aml</code>.</div>
+      </div>
+      <div class="arch-node">
+        <div class="step">Rozhranie 5 · AMD WDDM</div>
+        <div class="name">Polaris 11 SMU7 Fix</div>
+        <div class="desc">Oprava <code>polaris10_start_smu</code> (Bit <code>0x800</code>) + 10 Boot Camp registrov pre WoT/Whisper.</div>
+      </div>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Cieľová cesta</th><th>Primárny displej</th><th>Sekundárna GPU</th><th>Čo vyžaduje</th><th>Výhody / Obmedzenia</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Cesta A: AMD Primary + Intel Headless</strong></td>
+            <td>AMD Radeon Pro 455 (bez zásahu do GMUX)</td>
+            <td>Intel HD 530 (WDDM render-only)</td>
+            <td>Rozhranie 1 + <strong>Rozhranie 5 (SMU7 fix)</strong></td>
+            <td>Natívny jas, spánok S3, všetky 4× TB3 porty; nulová práca s GMUX/VBT.</td>
+          </tr>
+          <tr>
+            <td><strong>Cesta B — Mód 4: Intel-Only</strong></td>
+            <td>Intel HD 530 (GMUX → IGD)</td>
+            <td>AMD vypnutá (<code>gmux 0x50</code> = OFF)</td>
+            <td>Rozhrania 1 + 2 + 3 + 4 (<strong>nepotrebuje SMU7 fix!</strong>)</td>
+            <td>Úspora ~6 W (17,2 W → 11,1 W), ticho; bez WoT a bez externých TB3 monitorov.</td>
+          </tr>
+          <tr>
+            <td><strong>Cesta B — Mód 5: Plný Hybrid</strong></td>
+            <td>Intel HD 530 (GMUX → IGD)</td>
+            <td>AMD zapnutá pre WoT / Whisper / TB3</td>
+            <td><strong>Všetkých 5 rozhraní</strong> (Mód 4 bez vypnutia <code>0x50</code> + SMU7 fix)</td>
+            <td>100 % voľná 2 GB AMD VRAM, desktop na Intel, 3D/Compute na AMD.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5.1 -->
+    <h3 id="if-setos">5.1 Rozhranie 1: <code>EFI_APPLE_SET_OS_PROTOCOL</code> &amp; NVRAM <code>gpu-power-prefs</code></h3>
+    <div class="code-wrap">
+      <button class="copy-btn" data-copy>Kopírovať</button>
+      <pre><code>// GUID: {0xc5c5da95, 0x7d5c, 0x45e6, {0xb2, 0xf1, 0x3f, 0xd5, 0x2b, 0xb1, 0x00, 0x77}}
+typedef struct {
+    UINT64 Version;
+    EFI_STATUS (EFIAPI *SetOsVersion)(IN CHAR8 *Version); // "Mac OS X 10.15" (alebo "10.9")
+    EFI_STATUS (EFIAPI *SetOsVendor)(IN CHAR8 *Vendor);   // "Apple Inc."
+} EFI_APPLE_SET_OS_PROTOCOL;
+
+// Apple NVRAM gpu-power-prefs (len ak treba; pri vývoji NEZAPISOVAŤ, testovať len z USB!):
+// Vendor GUID: {0xFA4CE28D, 0xB62F, 0x4C99, {0x9C, 0xC3, 0x68, 0x15, 0x68, 0x6E, 0x30, 0xF9}}
+// Attrs: 0x07 (NV|BS|RT), Data (4B LE): 01 00 00 00 = IGD, 00 00 00 00 (alebo zmazať) = DIS</code></pre>
+    </div>
+
+    <!-- 5.2 -->
+    <h3 id="if-gmux">5.2 Rozhranie 2: Pre-T2 Retina Indexed I/O GMUX (<code>Renesas R4F2113</code> @ <code>0x0700–0x07FE</code>)</h3>
+    <p>
+      Hlavný hardvérový rozdiel oproti <code>t2-gmux-uefi</code> (ktorý používa MMIO <code>0xFE0B0200</code>).
+      Zdrojový protokol overený z Linuxu (<a href="reference/linux_apple_gmux/apple-gmux.c">apple-gmux.c</a>) aj z tvojho vlastného <a href="diag/acpi_setos/ssdt1.dsl">ssdt1.dsl</a> (<code>SGMX</code>):
+    </p>
+    <div class="code-wrap">
+      <button class="copy-btn" data-copy>Kopírovať</button>
+      <pre><code>// Fyzické porty (báza 0x0700):
+//   0x07C2..0x07C5 = GMUX_PORT_VALUE (8-bit inb/outb, 32-bit inl/outl little-endian)
+//   0x07CC/CD/CE   = Detekčný probe: outb(0xAA, 0x7CC); outb(0x55, 0x7CD); outb(0x00, 0x7CE);
+//                    is_indexed = ((inb(0x7CC) | (inb(0x7CD) &lt;&lt; 8)) == 0x55AA);
+//   0x07D0         = GMUX_PORT_READ  (zápis logického portu pre čítanie + ack read)
+//   0x07D4         = GMUX_PORT_WRITE (status bit 0: 0=ready, 1=complete + zápis portu pre write)
+
+static BOOLEAN GmuxWaitReady(EFI_BOOT_SERVICES *BS) {
+    for (UINTN i = 0; i &lt; 200; i++) {
+        if ((IoRead8(0x7D4) &amp; 0x01) == 0) return TRUE;
+        (VOID)IoRead8(0x7D0);
+        BS-&gt;Stall(100);
+    }
+    return FALSE;
+}
+static BOOLEAN GmuxWaitComplete(EFI_BOOT_SERVICES *BS) {
+    for (UINTN i = 0; i &lt; 200; i++) {
+        if ((IoRead8(0x7D4) &amp; 0x01) != 0) { (VOID)IoRead8(0x7D0); return TRUE; }
+        BS-&gt;Stall(100);
+    }
+    return FALSE;
+}
+BOOLEAN GmuxIdxRead8(EFI_BOOT_SERVICES *BS, UINT8 Port, UINT8 *Out) {
+    if (!GmuxWaitReady(BS)) return FALSE;
+    IoWrite8(0x7D0, Port);
+    if (!GmuxWaitComplete(BS)) return FALSE;
+    *Out = IoRead8(0x7C2);
+    return TRUE;
+}
+BOOLEAN GmuxIdxWrite8(EFI_BOOT_SERVICES *BS, UINT8 Port, UINT8 Val) {
+    IoWrite8(0x7C2, Val);
+    if (!GmuxWaitReady(BS)) return FALSE;
+    IoWrite8(0x7D4, Port);
+    return GmuxWaitComplete(BS);
+}</code></pre>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Logický port</th><th>Názov</th><th>Šírka</th><th>Hodnoty &amp; Význam</th></tr></thead>
+        <tbody>
+          <tr><td><code>0x04</code></td><td><code>VERSION</code></td><td>32-bit</td><td>Verzia GMUX firmvéru (major/minor/release)</td></tr>
+          <tr><td><code>0x10</code></td><td><code>SWITCH_DISPLAY</code></td><td>8-bit</td><td>Zápis: <code>0x02</code> = IGD, <code>0x03</code> = DIS · Čítanie bit 0: <code>0</code> = IGD, <code>1</code> = DIS (overiť pred vypnutím <code>0x50</code>!)</td></tr>
+          <tr><td><code>0x14</code></td><td><code>INTERRUPT_ENABLE</code></td><td>8-bit</td><td><code>0xFF</code> povoliť, <code>0x00</code> zakázať (uložiť pred prepnutím, obnoviť po ňom)</td></tr>
+          <tr><td><code>0x16</code></td><td><code>INTERRUPT_STATUS</code></td><td>8-bit</td><td>Bit 0 = DISPLAY, <strong>Bit 2 (<code>0x04</code>) = POWER</strong>, Bit 3 = HOTPLUG (zápis spätne vymaže bity)</td></tr>
+          <tr><td><code>0x28</code></td><td><code>SWITCH_DDC</code></td><td>8-bit</td><td><code>0x01</code> = IGD, <code>0x02</code> = DIS</td></tr>
+          <tr><td><code>0x40</code></td><td><code>SWITCH_EXTERNAL</code></td><td>8-bit</td><td><code>0x02</code> = IGD, <strong><code>0x03</code> = DIS</strong> (Thunderbolt Mac MUSÍ nechať <code>0x03</code>!)</td></tr>
+          <tr><td><code>0x50</code></td><td><code>DISCRETE_POWER</code></td><td>8-bit</td><td>ON: zapíš <code>1</code> potom <code>3</code> · OFF: zapíš <code>1</code> potom <code>0</code> → čakať na bit <code>0x04</code> v <code>0x16</code> (max 250 ms)</td></tr>
+          <tr><td><code>0x70</code> / <code>0x74</code></td><td><code>MAX_BRIGHTNESS</code> / <code>BRIGHTNESS</code></td><td>32-bit</td><td>24-bit PWM maska <code>0x00FFFFFF</code> (v <code>ssdt1.dsl</code> škála <code>0..0x3FF</code> pre TI LP8545/8)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5.3 -->
+    <h3 id="if-edp">5.3 Rozhranie 3: Intel Skylake <code>HD 530</code> (<code>DEV_191B</code>) BAR0 eDP &amp; OpRegion VBT</h3>
+    <p>
+      <strong>Overená kompatibilita:</strong> Všetky display BAR0 registre v <a href="reference/t2_gmux_uefi/lib/int_edp.c">lib/int_edp.c</a> a
+      <a href="reference/t2_gmux_uefi/lib/int_opregion.c">lib/int_opregion.c</a> sú identické pre celú rodinu <strong>Intel Gen 9 (Skylake <code>DEV_191B</code>) aj Gen 9.5 (CFL/WHL)</strong>!
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Register / Oblasť</th><th>Offset</th><th>Kľúčové bity / Pravidlá</th></tr></thead>
+        <tbody>
+          <tr><td><code>PCI_CMD</code></td><td>PCI <code>0x04</code></td><td>Bit 1 (<code>0x02</code>) Memory Space Enable pred čítaním BAR0 (<code>0x81000000</code>)</td></tr>
+          <tr><td><code>PCI_ASLS</code></td><td>PCI <code>0xFC</code></td><td>Fyzická adresa Intel OpRegion (<code>"IntelGraphicsMem"</code>); skontrolovať <code>ASLE.rvda/rvds</code> (+<code>0x182</code>/+<code>0x18A</code>)</td></tr>
+          <tr><td><code>OpRegion Mailbox 4</code></td><td><code>ASLS + 0x400</code></td><td>Max <code>0x1800</code> (6 KB) pre <code>$VBT</code>; zapísať 18 B DTD z EDID <code>APPA030</code> do BDB 40/41, opraviť checksum <code>v[26]</code>; <strong>PSR = OFF</strong>, <strong>Backlight = NONE</strong></td></tr>
+          <tr><td><code>DDI_BUF_CTL_A</code></td><td>BAR0 <code>0x64000</code></td><td><strong>Bit 4 (<code>1u &lt;&lt; 4</code>) = <code>DDI_A_4_LANES</code></strong> — NUTNÉ zapnúť, inak Intel zamkne eDP na 2 linky a 2880×1800 nenabehne!</td></tr>
+          <tr><td><code>DP_AUX_CH_CTL_A</code> / <code>DATA</code></td><td>BAR0 <code>0x64010</code> / <code>+4..+14</code></td><td>Čítanie DPCD (<code>0x000..0x00F</code>, <code>0x070</code>, <code>0x700</code>) a I2C-over-AUX EDID (<code>0x50</code>) po prepnutí GMUX</td></tr>
+          <tr><td><code>PWR_WELL_CTL2</code></td><td>BAR0 <code>0x45404</code></td><td><code>PW_PW1_REQ</code> (bit 29) / <code>STATE</code> (28), <code>PW_DDI_AE_REQ</code> (bit 3) / <code>STATE</code> (2)</td></tr>
+          <tr><td><code>PP_STATUS</code> / <code>PP_CONTROL</code></td><td>BAR0 <code>0xC7200</code> / <code>0xC7204</code></td><td><code>PP_UNLOCK (0xABCD0000) | PP_FORCE_VDD (1 &lt;&lt; 3)</code> dočasne počas AUX-A probe, potom obnoviť!</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 5.4 -->
+    <h3 id="if-acpi">5.4 Rozhranie 4: ACPI SSDT Patcher + Návrh <code>SSDT_IGPU_MBP133.asl</code></h3>
+    <p>
+      In-memory patchovanie v UEFI (<a href="reference/t2_gmux_uefi/lib/int_acpi.c">lib/int_acpi.c</a>) je <strong>100 % kompatibilné s HVCI / VBS</strong>
+      (beží pred <code>ExitBootServices</code>, nevyžaduje Test Signing). Pre <code>MacBookPro13,3</code> stačí upraviť <code>int_acpi.c</code> tak,
+      aby hľadal a premenoval <code>_BCM → XBCM</code> v <strong><code>DSDT</code></strong> (v rozsahu <code>IGPU.DD01</code>, nie <code>SaSsdt</code>) a priložiť tento mimoriadne čistý SSDT využívajúci už existujúce Apple metódy:
+    </p>
+    <div class="code-wrap">
+      <button class="copy-btn" data-copy>Kopírovať</button>
+      <pre><code>// Návrh SSDT_IGPU_MBP133.asl (pre Mód 5 / Mód 4 na MacBookPro13,3)
+// Loader v UEFI premenuje v DSDT: IGPU.DD01._BCM -&gt; XBCM a \_WAK -&gt; XWAK
+DefinitionBlock ("", "SSDT", 2, "MBP133", "IGPUBRT", 0x00001000)
+{
+    External (_SB_.PCI0.IGPU.DD01, DeviceObj)
+    External (_SB_.PCI0.IGPU.DD01.XBCM, MethodObj)   // 1 Arg (premenované _BCM v DSDT!)
+    External (_SB_.PCI0.PEG0.GFX0.ABCM, MethodObj)   // 1 Arg (už existuje v ssdt1.dsl!)
+    External (_SB_.PCI0.PEG0.GFX0.SGMX, MethodObj)   // 3 Args (už existuje v ssdt1.dsl!)
+    External (BRTL, FieldUnitObj)
+    External (XWAK, MethodObj)                       // 1 Arg (premenované _WAK v DSDT)
+
+    Scope (\_SB.PCI0.IGPU.DD01)
+    {
+        Method (_BCM, 1, NotSerialized)
+        {
+            XBCM (Arg0)
+            If (CondRefOf (\_SB.PCI0.PEG0.GFX0.ABCM))
+            {
+                \_SB.PCI0.PEG0.GFX0.ABCM (Arg0)
+            }
+        }
+    }
+
+    Method (_WAK, 1, NotSerialized)
+    {
+        Local0 = XWAK (Arg0)
+        If (CondRefOf (\_SB.PCI0.PEG0.GFX0.SGMX))
+        {
+            \_SB.PCI0.PEG0.GFX0.SGMX (0x0728, One, One)   // DDC -&gt; IGD
+            \_SB.PCI0.PEG0.GFX0.SGMX (0x0710, One, 0x02)  // Panel -&gt; IGD
+            \_SB.PCI0.PEG0.GFX0.SGMX (0x0740, One, 0x03)  // External -&gt; DIS
+            Sleep (0x0A)
+            If (CondRefOf (\_SB.PCI0.PEG0.GFX0.ABCM))
+            {
+                \_SB.PCI0.PEG0.GFX0.ABCM (BRTL)           // Obnoviť jas po prebudení
+            }
+        }
+        Return (Local0)
+    }
+}</code></pre>
+    </div>
+
+    <!-- 5.5 -->
+    <h3 id="if-amd">5.5 Rozhranie 5: AMD Polaris 11 SMU7 &amp; Overené Boot Camp registre</h3>
+    <p>
+      10 overených DWORD kľúčov pod <code>HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\000x</code>
+      (zapisuje <a href="scripts/Apply-MacBookPro13-3-Fix.ps1">Apply-MacBookPro13-3-Fix.ps1</a>):
+    </p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Kľúč (DWORD)</th><th>Hodnota</th><th>Funkcia</th></tr></thead>
+        <tbody>
+          <tr><td><code>DalFeatureBacklightControl</code> / <code>PP_VariBrightFeatureEnable</code> / <code>KMD_EnableBrightnessInterface2</code></td><td><code>0</code></td><td>Prenecháva PWM jas Apple ACPI/GMUX a zapína klasické Boot Camp WMI rozhranie</td></tr>
+          <tr><td><code>PP_Apple_Bootcamp_Enable</code></td><td><code>1</code></td><td>Aktivuje Apple Boot Camp profil v AMD KMD</td></tr>
+          <tr><td><code>DalDPSkipPowerOff</code> / <code>DalPSRFeatureEnable</code></td><td><code>1</code> / <code>0</code></td><td>Stabilita eDP linky <code>APPA030</code> a zákaz PSR</td></tr>
+          <tr><td><code>EnableUlps</code> / <code>PP_DisableFFC</code> / <code>PP_DisableVoltageIsland</code> / <code>DisableSAMUPowerGating</code></td><td><code>0</code> / <code>1</code> / <code>1</code> / <code>1</code></td><td>Polaris 11 stabilizačné flagy z Apple Boot Camp <code>oem1.inf</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 6. VSETKY SUBORY V PROJEKTE -->
+  <section id="subory" class="block">
+    <h2>6. Kompletný katalóg súborov v tomto projekte (<code>mbp133-dual-gpu-hack\</code>)</h2>
+    <p>Všetky zozbierané dáta, dumpy, dekompilované ACPI tabuľky, nástroje, skripty a referenčné zdrojové kódy na jednom mieste (~5,5 MB):</p>
+
+    <div class="filter-bar" id="catFilters">
+      <button class="filter-pill active" data-cat="all">Všetko</button>
+      <button class="filter-pill" data-cat="docs">Dokumentácia</button>
+      <button class="filter-pill" data-cat="diag-acpi">Diag: ACPI</button>
+      <button class="filter-pill" data-cat="diag-dump">Diag: Dump &amp; KD</button>
+      <button class="filter-pill" data-cat="scripts">Skripty &amp; USB</button>
+      <button class="filter-pill" data-cat="tools">Nástroje (ACPICA)</button>
+      <button class="filter-pill" data-cat="ref">Referenčné zdrojáky</button>
+    </div>
+
+    <div class="tbl-wrap">
+      <table id="filesTable">
+        <thead>
+          <tr><th>Kategória</th><th>Súbor (klikateľný relatívny odkaz)</th><th>Účel / Obsah</th></tr>
+        </thead>
+        <tbody>
+          <tr data-cat="docs">
+            <td><span class="badge b-info">docs</span></td>
+            <td><a href="index.html">index.html</a></td>
+            <td>Tento hlavný interaktívny HTML checkpoint a technická dokumentácia</td>
+          </tr>
+          <tr data-cat="docs">
+            <td><span class="badge b-info">docs</span></td>
+            <td><a href="docs/macbookpro13_3_windows_dual_gpu_spec.md">docs/macbookpro13_3_windows_dual_gpu_spec.md</a></td>
+            <td>Detailná Markdown špecifikácia s Mermaid diagramom a výsledkami Fázy 0</td>
+          </tr>
+
+          <!-- ACPI -->
+          <tr data-cat="diag-acpi">
+            <td><span class="badge b-ok">diag/acpi</span></td>
+            <td><a href="diag/acpi_setos/dsdt.dsl">diag/acpi_setos/dsdt.dsl</a> · <a href="diag/acpi_normal/dsdt.dsl">acpi_normal/dsdt.dsl</a></td>
+            <td>Dekompilovaná hlavná <code>DSDT</code> (300 KB): <code>IGPU</code>, <code>DD01._BCM</code>, <code>GMUX (APP000B)</code>, <code>_PTS</code>, <code>_WAK</code>, <code>OSDW</code></td>
+          </tr>
+          <tr data-cat="diag-acpi">
+            <td><span class="badge b-ok">diag/acpi</span></td>
+            <td><a href="diag/acpi_setos/ssdt1.dsl">diag/acpi_setos/ssdt1.dsl</a> · <a href="diag/acpi_normal/ssdt1.dsl">acpi_normal/ssdt1.dsl</a></td>
+            <td><code>PEG0GFX0</code> SSDT: hotové Apple Indexed I/O GMUX metódy <code>SGMX</code>, <code>WFRD</code>, <code>WFCD</code>, <code>ABCM</code>, <code>PWRD</code>, <code>PUPD</code>, <code>GXWA</code></td>
+          </tr>
+          <tr data-cat="diag-acpi">
+            <td><span class="badge b-ok">diag/acpi</span></td>
+            <td><a href="diag/acpi_normal/dmar.dsl">diag/acpi_normal/dmar.dsl</a></td>
+            <td>Dekódovaná Intel VT-d IOMMU tabuľka (<code>0xFED90000</code> pre <code>00:02.0</code>, <code>0xFED91000</code> pre zvyšok PCI)</td>
+          </tr>
+          <tr data-cat="diag-acpi">
+            <td><span class="badge b-ok">diag/acpi</span></td>
+            <td><code>diag/acpi_setos/*.dat, *.dsl</code> &amp; <code>diag/acpi_normal/*.dat, *.dsl</code></td>
+            <td>Kompletná sada 24 surových <code>.dat</code> tabuliek (vrátane <code>vfct.dat</code> 60 KB AMD VBIOS, <code>ssdt6.dsl</code> TbtPEG12) pre oba boot režimy — 100 % SHA-256 zhoda</td>
+          </tr>
+          <tr data-cat="diag-acpi">
+            <td><span class="badge b-ok">diag/pci</span></td>
+            <td><a href="diag/pci_state_setos.txt">diag/pci_state_setos.txt</a> · <a href="diag/pci_state_normal.txt">diag/pci_state_normal.txt</a></td>
+            <td>PnP stav, <code>PowerData</code> (D0/D3), driver stack a ACPI mená všetkých GPU/GMUX zariadení v oboch bootoch</td>
+          </tr>
+
+          <!-- DUMP & KD -->
+          <tr data-cat="diag-dump">
+            <td><span class="badge b-warn">local only</span></td>
+            <td><a href="diag/dump_1b0/WATCHDOG-20261125-1333.dmp">diag/dump_1b0/WATCHDOG-20261125-1333.dmp</a> (330 KB)</td>
+            <td>Surový Windows LiveKernelDump <code>BugCheck 0x1B0</code> (<code>P1=0x2</code>, <code>P2=0xC0000001</code>, <code>P4=amdkmdag+0x16F4684</code>) — <em>ignorované v <code>.gitignore</code></em></td>
+          </tr>
+          <tr data-cat="diag-dump">
+            <td><span class="badge b-warn">local only</span></td>
+            <td><a href="diag/dump_1b0/Report_1b0.wer">diag/dump_1b0/Report_1b0.wer</a></td>
+            <td>Windows Error Reporting metadáta pre <code>Kernel_1b0</code> — <em>ignorované v <code>.gitignore</code></em></td>
+          </tr>
+          <tr data-cat="diag-dump">
+            <td><span class="badge b-warn">local only</span></td>
+            <td><a href="diag/dump_1b0/dxg_blob.bin">diag/dump_1b0/dxg_blob.bin</a> · <a href="diag/dump_1b0/amd_dbg_blob.bin">amd_dbg_blob.bin</a></td>
+            <td>Extrahovaný 68 KB DXGKRNL sekundárny blob (<code>{270A33FD-...}</code>) a 59 KB AMD <code>CollectDbgInfo</code> — <em>ignorované v <code>.gitignore</code></em></td>
+          </tr>
+          <tr data-cat="diag-dump">
+            <td><span class="badge b-err">diag/kd</span></td>
+            <td><a href="diag/dump_1b0/kd_smu_fail.txt">diag/dump_1b0/kd_smu_fail.txt</a></td>
+            <td><strong>Kľúčový dôkaz:</strong> disassembly <code>amdkmdag+0x17182FC</code> (<code>smum_start_smc</code> → <code>polaris10_start_smu</code> nastavujúci Bit 11 = <code>0x800</code>)</td>
+          </tr>
+          <tr data-cat="diag-dump">
+            <td><span class="badge b-err">diag/kd</span></td>
+            <td><a href="diag/dump_1b0/kd_pplc.txt">kd_pplc.txt</a> · <a href="diag/dump_1b0/kd_pp_800.txt">kd_pp_800.txt</a> · <a href="diag/dump_1b0/kd_bit11.txt">kd_bit11.txt</a></td>
+            <td>Disassembly <code>PP_Initialize</code> (<code>PAGEPPLC</code>) a kompletné mapovanie bitov <code>failure_bitmask</code> (Bit 0..29)</td>
+          </tr>
+          <tr data-cat="diag-dump">
+            <td><span class="badge b-err">diag/kd</span></td>
+            <td><a href="diag/dump_1b0/kd_fast.txt">kd_fast.txt</a> · <a href="diag/dump_1b0/kd_resolve.txt">kd_resolve.txt</a> · <a href="diag/dump_1b0/kd_dpq.txt">kd_dpq.txt</a> · <a href="diag/dump_1b0/kd_a1a2.txt">kd_a1a2.txt</a> · <a href="diag/dump_1b0/kd_rips.txt">kd_rips.txt</a></td>
+            <td>Stack trace, moduly, <code>.enumtag</code> dump, symbolové preklady všetkých 127 DXGKRNL ring-buffer udalostí</td>
+          </tr>
+          <tr data-cat="diag-dump">
+            <td><span class="badge b-err">diag/kd</span></td>
+            <td><a href="diag/dump_1b0/kd_amd_start.txt">kd_amd_start.txt</a> · <a href="diag/dump_1b0/kd_amd_exact.txt">kd_amd_exact.txt</a> · <a href="diag/dump_1b0/kd_1b0_report.txt">kd_1b0_report.txt</a></td>
+            <td>Disassembly <code>DxgkDdiStartDevice</code>, eventov <code>0x900C1009</code> / <code>0x900E560C</code> a <code>!analyze -v</code> report</td>
+          </tr>
+
+          <!-- SCRIPTS -->
+          <tr data-cat="scripts">
+            <td><span class="badge b-warn">scripts</span></td>
+            <td><a href="scripts/Apply-MacBookPro13-3-Fix.ps1">scripts/Apply-MacBookPro13-3-Fix.ps1</a></td>
+            <td>Overený skript zapisujúci 10 Apple jasových + Polaris 11 registrových kľúčov a povoľujúci <code>DISPLAY\APPA030</code></td>
+          </tr>
+          <tr data-cat="scripts">
+            <td><span class="badge b-warn">scripts</span></td>
+            <td><a href="scripts/Run-Phase0-Diag.ps1">scripts/Run-Phase0-Diag.ps1</a></td>
+            <td>Automatizovaná Fáza 0 diagnostika (opravená na <code>kd.exe</code>, autodetekcia <code>setos</code>/<code>normal</code>, <code>acpidump</code> + <code>iasl</code>)</td>
+          </tr>
+          <tr data-cat="scripts">
+            <td><span class="badge b-warn">scripts</span></td>
+            <td><a href="scripts/usb_refind/refind.conf">scripts/usb_refind/refind.conf</a> · <a href="scripts/usb_refind/prepare_usb.ps1">prepare_usb.ps1</a></td>
+            <td>Záloha konfigurácie USB <code>D:</code> rEFInd <code>0.14.2</code> (<code>use_nvram false</code>, <code>spoof_osx_version 10.15</code>) a skript prípravy GPT/FAT32 USB</td>
+          </tr>
+
+          <!-- TOOLS -->
+          <tr data-cat="tools">
+            <td><span class="badge b-info">tools</span></td>
+            <td><code>tools/acpica/acpidump.exe</code> · <code>iasl.exe</code> · <code>acpixtract.exe</code> (+ 4 ďalšie)</td>
+            <td>Oficiálne predkompilované Intel ACPICA Windows binárky (verzia <code>20260408</code>) na dump, dekompiláciu a kompiláciu <code>.asl → .aml</code></td>
+          </tr>
+
+          <!-- REFERENCE -->
+          <tr data-cat="ref">
+            <td><span class="badge b-todo">reference</span></td>
+            <td><a href="reference/linux_apple_gmux/apple-gmux.c">reference/linux_apple_gmux/apple-gmux.c</a> · <a href="reference/linux_apple_gmux/apple-gmux.h">apple-gmux.h</a></td>
+            <td>Linux kernel driver pre tvoj <code>Renesas R4F2113</code> Indexed I/O GMUX (<code>0x7C2/0x7D0/0x7D4</code>, power rail <code>0x50</code>, jas <code>0x70/0x74</code>)</td>
+          </tr>
+          <tr data-cat="ref">
+            <td><span class="badge b-todo">reference</span></td>
+            <td><a href="reference/linux_apple_gmux/polaris10_smumgr.c">reference/linux_apple_gmux/polaris10_smumgr.c</a></td>
+            <td>Linux <code>amdgpu</code> PowerPlay zdroják pre <code>polaris10_start_smu()</code> — presná logika, ktorá zlyhala s bitom <code>0x800</code>!</td>
+          </tr>
+          <tr data-cat="ref">
+            <td><span class="badge b-todo">reference</span></td>
+            <td><a href="reference/t2_gmux_uefi/README.md">t2_gmux_uefi/README.md</a> · <a href="reference/t2_gmux_uefi/TECHNICAL.md">TECHNICAL.md</a> · <a href="reference/t2_gmux_uefi/ACPI_PATCH_GUIDE_MODE5.md">ACPI_PATCH_GUIDE_MODE5.md</a></td>
+            <td>Kompletná technická dokumentácia projektu <code>Osaul4ik/t2-gmux-uefi</code> (Mód 4 / Mód 5 architektúra)</td>
+          </tr>
+          <tr data-cat="ref">
+            <td><span class="badge b-todo">reference</span></td>
+            <td><a href="reference/t2_gmux_uefi/bootx64.c">bootx64.c</a> · <a href="reference/t2_gmux_uefi/Makefile">Makefile</a> · <a href="reference/t2_gmux_uefi/include/int_acpi.h">int_acpi.h</a> · <a href="reference/t2_gmux_uefi/include/int_edp.h">int_edp.h</a> · <a href="reference/t2_gmux_uefi/include/int_vbt.h">int_vbt.h</a></td>
+            <td>Hlavný UEFI loader (MinGW + <code>gnu-efi</code>) + hlavičky pre eDP, VBT a ACPI patcher</td>
+          </tr>
+          <tr data-cat="ref">
+            <td><span class="badge b-todo">reference</span></td>
+            <td><a href="reference/t2_gmux_uefi/lib/int_edp.c">lib/int_edp.c</a> · <a href="reference/t2_gmux_uefi/lib/int_opregion.c">lib/int_opregion.c</a> · <a href="reference/t2_gmux_uefi/lib/int_acpi.c">lib/int_acpi.c</a></td>
+            <td><strong>90 % priamo znovupoužiteľné pre Skylake:</strong> Gen9/9.5 AUX-A probe, <code>DDI_A_4_LANES</code>, OpRegion+0x400 VBT + EDID substitúcia, in-memory XSDT/RSDP patcher</td>
+          </tr>
+          <tr data-cat="ref">
+            <td><span class="badge b-todo">reference</span></td>
+            <td><a href="reference/t2_gmux_uefi/tools/SSDT_IGPU.asl">tools/SSDT_IGPU.asl</a> · <a href="reference/t2_gmux_uefi/tools/SSDT_IGPU_BRT.asl">tools/SSDT_IGPU_BRT.asl</a></td>
+            <td>Referenčné SSDT pre Mód 4 a Mód 5 (predloha na prepis pre <code>13,3</code> <code>DSDT/DD01._BCM</code> a <code>PEG0.GFX0.SGMX</code>)</td>
+          </tr>
+          <tr data-cat="ref">
+            <td><span class="badge b-todo">reference</span></td>
+            <td><a href="reference/apple_set_os/apple_set_os.c">apple_set_os/apple_set_os.c</a> · <a href="reference/apple_set_os/gpu-switch">apple_set_os/gpu-switch</a></td>
+            <td>Minimálna referenčná implementácia <code>EFI_APPLE_SET_OS_PROTOCOL</code> a NVRAM <code>gpu-power-prefs</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 7. MIMO PROJEKTU A VYSKUM -->
+  <section id="externe" class="block">
+    <h2>7. Súbory mimo projektu &amp; Výsledky online výskumu</h2>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Kde sa nachádzajú ostatné lokálne dáta</h3>
+        <ul>
+          <li><strong>USB kľúč <code>D:\</code> (<code>REFIND_USB</code>):</strong> SanDisk 3.2 Gen1 (GPT/FAT32), <code>D:\EFI\BOOT\BOOTX64.EFI</code> (rEFInd <code>0.14.2</code>), <code>refind.conf</code>, <code>icons\</code>. Slúži na bezpečné testovanie bez zásahu do interného ESP.</li>
+          <li><strong>Microsoft WinDbg <code>1.2611.4001.0</code>:</strong> nainštalovaný cez <code>winget</code> (<code>C:\Program Files\WindowsApps\Microsoft.WinDbg_...\amd64\kd.exe</code>).</li>
+          <li><strong><code>C:\Temp\HackDiag\</code>:</strong> pôvodná pracovná zložka + lokálna cache MS symbolov <code>symbols\</code> (~100 MB, <code>dxgkrnl.pdb</code>, <code>ntkrnlmp.pdb</code>, <code>watchdog.pdb</code>).</li>
+          <li><strong><code>C:\Temp\RID-Polaris\</code> (~6 GB):</strong> stiahnutý a rozbalený R.ID <code>25.3.1-R2.5</code> (vrátane <code>MultiParse\u0412789_macstd_2150.inf</code>). <em>Bezpečne zmazateľné, ak potrebuješ uvoľniť miesto na disku.</em></li>
+          <li><strong>SD karta <code>E:\</code> (<code>MBP_DRIVERS</code>):</strong> ovládače pre starší <code>MacBookPro11,5</code> + <code>E:\Tools\7Zip\7z.exe</code> + <code>E:\Apps\VCRedist\</code>.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Kľúčové online zdroje &amp; komunitné nálezy</h3>
+        <ul>
+          <li><a href="https://github.com/Osaul4ik/t2-gmux-uefi" target="_blank">Osaul4ik/t2-gmux-uefi</a> — kompletný funkčný UEFI loader pre T2 MacBooky (Mód 4 a 5); základ nášho portu.</li>
+          <li><a href="https://github.com/torvalds/linux/blob/master/drivers/platform/x86/apple-gmux.c" target="_blank">torvalds/linux: apple-gmux.c</a> &amp; <a href="https://github.com/torvalds/linux/blob/master/drivers/gpu/drm/amd/pm/powerplay/smumgr/polaris10_smumgr.c" target="_blank">polaris10_smumgr.c</a> — protokoly pre <code>R4F2113</code> GMUX a Polaris 11 SMU7.</li>
+          <li><a href="https://github.com/0xbb/apple_set_os.efi/issues/25" target="_blank">0xbb/apple_set_os.efi #25</a> &amp; <a href="https://github.com/aa15032261/apple_set_os-loader/issues/4" target="_blank">apple_set_os-loader #4</a> — potvrdený rovnaký Polaris <code>Code 43</code> po <code>AppleSetOs</code> na MacBookPro13,3/14,3.</li>
+          <li><a href="https://github.com/Dunedan/mbp-2016-linux/issues/6" target="_blank">Dunedan/mbp-2016-linux #6</a> — reálne merania spotreby presne na <code>MacBookPro13,3</code>: dGPU only <strong>17,2 W</strong> · iGPU + dGPU napájaná <strong>16,2 W</strong> · iGPU + dGPU odpojená cez <code>gmux 0x50</code> <strong>11,1 W</strong> (~6 W úspora).</li>
+          <li><a href="https://github.com/acpica/acpica/releases/tag/20260408" target="_blank">Intel ACPICA 20260408</a> — zdroj predkompilovaných nástrojov v <code>tools/acpica/</code>.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. ROADMAPA -->
+  <section id="roadmap" class="block">
+    <h2>8. Čo je potrebné dorobiť — Roadmapa &amp; Matrica modulov</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr><th>Modul / Krok</th><th>Stav</th><th>Základ</th><th>Čo presne doprogramovať / overiť</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Fáza 0: Forenzika dumpu &amp; ACPI/BAR diff</strong></td>
+            <td><span class="badge b-ok">HOTOVO 100 %</span></td>
+            <td><code>kd.exe</code>, ACPICA</td>
+            <td>Vyriešené: <code>polaris10_start_smu</code> (Bit <code>0x800</code>), 24/24 ACPI identické, nájdené <code>DD01._BCM</code> a <code>PEG0.GFX0.SGMX/ABCM</code>.</td>
+          </tr>
+          <tr>
+            <td><strong>Míľnik 1A: Izolácia <code>polaris10_start_smu</code></strong><br><em>(Cieľ: obe GPU pre WoT + Whisper)</em></td>
+            <td><span class="badge b-todo">TREBA DOROBIŤ</span></td>
+            <td><code>polaris10_smumgr.c</code> + mini UEFI sonda</td>
+            <td>
+              1) 10 s test v <code>setos</code> boote so zakázanou <code>Intel HD 530</code> (oddelí EFI/SMU vs. koexistenciu <code>igdkmd64</code>/<code>DMAR</code>).<br>
+              2) Mini UEFI sonda čítajúca Polaris 11 <code>BAR5</code> (<code>0x82600000</code>) <code>SMC_IND</code> registre (<code>ixSMC_SYSCON_CLOCK_CNTL_0</code>, <code>ixFIRMWARE_FLAGS</code>, <code>ixSMU_STATUS</code>) s vs. bez <code>AppleSetOs</code>.<br>
+              3) Implementovať nájdený fix (SMU/PCIe reset v UEFI, alebo <code>PP_EnableUploadFirmware</code>/DMAR/registry patch).
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Míľnik 1B: Port <code>gmux_indexed.c</code> + Mód 4</strong><br><em>(Cieľ: Intel-Only displej + -6 W batéria)</em></td>
+            <td><span class="badge b-todo">TREBA DOROBIŤ</span></td>
+            <td><code>t2-gmux-uefi</code> + <code>apple-gmux.c</code></td>
+            <td>
+              1) Napísať <code>gmux_indexed.c</code> (<code>Detect</code>, <code>Read8</code>, <code>Write8</code>, <code>SwitchToIGD</code>, <code>SetDiscretePower</code> na portoch <code>0x7C2/0x7D0/0x7D4</code>).<br>
+              2) Upraviť <code>lib/int_acpi.c</code>: hľadať a premenovať <code>DD01._BCM → XBCM</code> v <strong><code>DSDT</code></strong> (namiesto <code>SaSsdt</code>).<br>
+              3) Skompilovať <code>SSDT_IGPU_MBP133.aml</code> cez <code>tools/acpica/iasl.exe</code> (volá existujúce <code>SGMX</code>/<code>ABCM</code>).<br>
+              4) Overiť VBT (<code>vbt_base.c</code> vs. Skylake VBT) s <code>DDI_A_4_LANES</code> na USB kľúči <code>D:</code> (build cez MinGW + <code>gnu-efi</code>).
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Míľnik 2: Plný Hybrid (Mód 5)</strong></td>
+            <td><span class="badge b-warn">PO 1A + 1B</span></td>
+            <td>Spojenie 1A + 1B</td>
+            <td>Intel HD 530 primárny displej (GMUX na IGD + jas + S3 wake) + AMD Polaris 11 aktívna (SMU7 fix) → vo Windows Graphics nastaviť <code>Antigravity/Edge</code> na Intel a <code>WorldOfTanks.exe/Whisper</code> na AMD.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+(function() {
+  // Copy buttons
+  document.querySelectorAll('button.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const code = btn.parentElement.querySelector('pre').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const old = btn.textContent;
+        btn.textContent = 'Skopírované!';
+        setTimeout(() => btn.textContent = old, 1400);
+      });
+    });
+  });
+
+  // Category filter pills on files table
+  const pills = document.querySelectorAll('#catFilters .filter-pill');
+  const rows = document.querySelectorAll('#filesTable tbody tr');
+  let activeCat = 'all';
+  function applyFilters() {
+    const q = (document.getElementById('globalSearch').value || '').trim().toLowerCase();
+    rows.forEach(tr => {
+      const catOk = activeCat === 'all' || tr.dataset.cat === activeCat;
+      const textOk = !q || tr.innerText.toLowerCase().includes(q);
+      tr.classList.toggle('hidden-by-filter', !(catOk && textOk));
+    });
+    document.querySelectorAll('main section.block').forEach(sec => {
+      if (!q) { sec.classList.remove('hidden-by-filter'); return; }
+      sec.classList.toggle('hidden-by-filter', !sec.innerText.toLowerCase().includes(q));
+    });
+  }
+  pills.forEach(p => {
+    p.addEventListener('click', () => {
+      pills.forEach(x => x.classList.remove('active'));
+      p.classList.add('active');
+      activeCat = p.dataset.cat;
+      applyFilters();
+    });
+  });
+  document.getElementById('globalSearch').addEventListener('input', applyFilters);
+
+  // Active TOC highlighting
+  const tocLinks = Array.from(document.querySelectorAll('nav.toc a'));
+  const targets = tocLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  window.addEventListener('scroll', () => {
+    let cur = targets[0];
+    for (const t of targets) {
+      if (t.getBoundingClientRect().top <= 110) cur = t;
+    }
+    tocLinks.forEach(a => a.classList.toggle('active', cur && a.getAttribute('href') === '#' + cur.id));
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>

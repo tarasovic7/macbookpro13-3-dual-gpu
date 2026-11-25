@@ -1,0 +1,238 @@
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+Opened log file 'C:\Temp\HackDiag\kd_dpq.txt'
+
+************* Preparing the environment for Debugger Extensions Gallery repositories **************
+   ExtensionRepository : Implicit
+   UseExperimentalFeatureForNugetShare : true
+   AllowNugetExeUpdate : true
+   NonInteractiveNuget : true
+   AllowNugetMSCredentialProviderInstall : true
+   AllowParallelInitializationOfLocalRepositories : true
+
+   -- Configuring repositories
+      ----> Repository : LocalInstalled, Enabled: true
+      ----> Repository : UserExtensions, Enabled: true
+
+>>>>>>>>>>>>> Preparing the environment for Debugger Extensions Gallery repositories completed, duration 0.000 seconds
+
+************* Waiting for Debugger Extensions Gallery to Initialize **************
+
+>>>>>>>>>>>>> Waiting for Debugger Extensions Gallery to Initialize completed, duration 0.031 seconds
+   ----> Repository : UserExtensions, Enabled: true, Packages count: 0
+   ----> Repository : LocalInstalled, Enabled: true, Packages count: 46
+
+Microsoft (R) Windows Debugger Version 10.0.29680.1004 AMD64
+Copyright (c) Microsoft Corporation. All rights reserved.
+
+
+Loading Dump File [C:\Temp\HackDiag\WATCHDOG-20261125-1333.dmp]
+Mini Kernel Dump File: Only registers and stack trace are available
+
+
+************* Path validation summary **************
+Response                         Time (ms)     Location
+OK                                             C:\Temp\HackDiag\symbols
+Symbol search path is: C:\Temp\HackDiag\symbols
+Executable search path is: 
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script successfully loaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'
+Windows 10 Kernel Version 26300 MP (8 procs) Free x64
+Product: WinNt, suite: TerminalServer SingleUserTS
+Kernel base = 0xfffff803`d4200000 PsLoadedModuleList = 0xfffff803`d50f56a0
+Debug session time: Wed Nov 25 13:33:19.263 2026 (UTC + 1:00)
+System Uptime: 0 days 0:00:27.340
+Loading Kernel Symbols
+...............................................................
+................................................................
+...................................................
+Loading User Symbols
+PEB is paged out (Peb.Ldr = 000000d0`5adea018).  Type ".hh dbgerr001" for details
+Mini Kernel Dump does not contain unloaded driver list
+ReadVirtual() failed in GetXStateConfiguration() first read attempt (error == 0.)
+For analysis of this file, run !analyze -v
+2: kd> .echo === DPQUERYSERVICES_HEAD ===; u dxgkrnl!DpQueryServices dxgkrnl!DpQueryServices+0x140; .echo === DPQUERYSERVICES_580 ===; u dxgkrnl!DpQueryServices+0x540 dxgkrnl!DpQueryServices+0x620; .echo === STARTADAPTER_A80 ===; u dxgkrnl!DpiFdoStartAdapter+0xa60 dxgkrnl!DpiFdoStartAdapter+0xb20; q
+=== DPQUERYSERVICES_HEAD ===
+dxgkrnl!DpQueryServices:
+fffff803`662e6100 48895c2408      mov     qword ptr [rsp+8],rbx
+fffff803`662e6105 48896c2410      mov     qword ptr [rsp+10h],rbp
+fffff803`662e610a 4889742418      mov     qword ptr [rsp+18h],rsi
+fffff803`662e610f 57              push    rdi
+fffff803`662e6110 4156            push    r14
+fffff803`662e6112 4157            push    r15
+fffff803`662e6114 4883ec20        sub     rsp,20h
+fffff803`662e6118 33ff            xor     edi,edi
+fffff803`662e611a 4c63f2          movsxd  r14,edx
+fffff803`662e611d 498bd8          mov     rbx,r8
+fffff803`662e6120 488be9          mov     rbp,rcx
+fffff803`662e6123 4885c9          test    rcx,rcx
+fffff803`662e6126 0f8448060000    je      dxgkrnl!DpQueryServices+0x674 (fffff803`662e6774)
+fffff803`662e612c 4885db          test    rbx,rbx
+fffff803`662e612f 0f843f060000    je      dxgkrnl!DpQueryServices+0x674 (fffff803`662e6774)
+fffff803`662e6135 488b7140        mov     rsi,qword ptr [rcx+40h]
+fffff803`662e6139 4885f6          test    rsi,rsi
+fffff803`662e613c 0f8409060000    je      dxgkrnl!DpQueryServices+0x64b (fffff803`662e674b)
+fffff803`662e6142 817e1044707274  cmp     dword ptr [rsi+10h],74727044h
+fffff803`662e6149 0f85fc050000    jne     dxgkrnl!DpQueryServices+0x64b (fffff803`662e674b)
+fffff803`662e614f 8b4614          mov     eax,dword ptr [rsi+14h]
+fffff803`662e6152 448d7f01        lea     r15d,[rdi+1]
+fffff803`662e6156 83e802          sub     eax,2
+fffff803`662e6159 413bc7          cmp     eax,r15d
+fffff803`662e615c 0f87e9050000    ja      dxgkrnl!DpQueryServices+0x64b (fffff803`662e674b)
+fffff803`662e6162 48ff158f2af3ff  call    qword ptr [dxgkrnl!_imp_KeGetCurrentIrql (fffff803`66218bf8)]
+fffff803`662e6169 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662e616e 84c0            test    al,al
+fffff803`662e6170 7466            je      dxgkrnl!DpQueryServices+0xd8 (fffff803`662e61d8)
+fffff803`662e6172 488b4540        mov     rax,qword ptr [rbp+40h]
+fffff803`662e6176 bf0d0000c0      mov     edi,0C000000Dh
+fffff803`662e617b 4c8b4028        mov     r8,qword ptr [rax+28h]
+fffff803`662e617f 4181781c03200000 cmp     dword ptr [r8+1Ch],2003h
+fffff803`662e6187 7228            jb      dxgkrnl!DpQueryServices+0xb1 (fffff803`662e61b1)
+fffff803`662e6189 ba13010000      mov     edx,113h
+fffff803`662e618e 458d4714        lea     r8d,[r15+14h]
+fffff803`662e6192 33c9            xor     ecx,ecx
+fffff803`662e6194 49c7c10d0000c0  mov     r9,0FFFFFFFFC000000Dh
+fffff803`662e619b 48ff159630f3ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry3 (fffff803`66219238)]
+fffff803`662e61a2 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662e61a7 c7052f43f1ffb5080000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],8B5h
+fffff803`662e61b1 48c7c20d0000c0  mov     rdx,0FFFFFFFFC000000Dh
+fffff803`662e61b8 b902000000      mov     ecx,2
+fffff803`662e61bd 48ff158c30f3ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry1 (fffff803`66219250)]
+fffff803`662e61c4 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662e61c9 c7050d43f1ffbb080000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],8BBh
+fffff803`662e61d3 e9c3050000      jmp     dxgkrnl!DpQueryServices+0x69b (fffff803`662e679b)
+fffff803`662e61d8 418bce          mov     ecx,r14d
+fffff803`662e61db 4585f6          test    r14d,r14d
+fffff803`662e61de 0f848f040000    je      dxgkrnl!DpQueryServices+0x573 (fffff803`662e6673)
+fffff803`662e61e4 412bcf          sub     ecx,r15d
+fffff803`662e61e7 0f84eb030000    je      dxgkrnl!DpQueryServices+0x4d8 (fffff803`662e65d8)
+fffff803`662e61ed 412bcf          sub     ecx,r15d
+fffff803`662e61f0 0f8451030000    je      dxgkrnl!DpQueryServices+0x447 (fffff803`662e6547)
+fffff803`662e61f6 412bcf          sub     ecx,r15d
+fffff803`662e61f9 0f8499020000    je      dxgkrnl!DpQueryServices+0x398 (fffff803`662e6498)
+fffff803`662e61ff 412bcf          sub     ecx,r15d
+fffff803`662e6202 0f84dc010000    je      dxgkrnl!DpQueryServices+0x2e4 (fffff803`662e63e4)
+fffff803`662e6208 412bcf          sub     ecx,r15d
+fffff803`662e620b 0f8449010000    je      dxgkrnl!DpQueryServices+0x25a (fffff803`662e635a)
+fffff803`662e6211 412bcf          sub     ecx,r15d
+fffff803`662e6214 0f8486000000    je      dxgkrnl!DpQueryServices+0x1a0 (fffff803`662e62a0)
+fffff803`662e621a 413bcf          cmp     ecx,r15d
+fffff803`662e621d 7428            je      dxgkrnl!DpQueryServices+0x147 (fffff803`662e6247)
+fffff803`662e621f bf0d0000c0      mov     edi,0C000000Dh
+fffff803`662e6224 498bd6          mov     rdx,r14
+fffff803`662e6227 b903000000      mov     ecx,3
+fffff803`662e622c 48ff151d30f3ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry1 (fffff803`66219250)]
+fffff803`662e6233 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662e6238 c7059e42f1ff1a0a0000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],0A1Ah
+=== DPQUERYSERVICES_580 ===
+dxgkrnl!DpQueryServices+0x540:
+fffff803`662e6640 894310          mov     dword ptr [rbx+10h],eax
+fffff803`662e6643 48894318        mov     qword ptr [rbx+18h],rax
+fffff803`662e6647 488d05b2a80100  lea     rax,[dxgkrnl!DpiDbgReportCreate (fffff803`66300f00)]
+fffff803`662e664e 48894320        mov     qword ptr [rbx+20h],rax
+fffff803`662e6652 488d05e7a80100  lea     rax,[dxgkrnl!DpiDbgReportSecondaryData (fffff803`66300f40)]
+fffff803`662e6659 48894328        mov     qword ptr [rbx+28h],rax
+fffff803`662e665d 488d057ca80100  lea     rax,[dxgkrnl!DpiDbgReportComplete (fffff803`66300ee0)]
+fffff803`662e6664 48897b08        mov     qword ptr [rbx+8],rdi
+fffff803`662e6668 33c9            xor     ecx,ecx
+fffff803`662e666a 48894330        mov     qword ptr [rbx+30h],rax
+fffff803`662e666e e9ca000000      jmp     dxgkrnl!DpQueryServices+0x63d (fffff803`662e673d)
+fffff803`662e6673 0fb74302        movzx   eax,word ptr [rbx+2]
+fffff803`662e6677 66413bc7        cmp     ax,r15w
+fffff803`662e667b 7427            je      dxgkrnl!DpQueryServices+0x5a4 (fffff803`662e66a4)
+fffff803`662e667d bf0d0000c0      mov     edi,0C000000Dh
+fffff803`662e6682 8bd0            mov     edx,eax
+fffff803`662e6684 b903000000      mov     ecx,3
+fffff803`662e6689 48ff15c02bf3ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry1 (fffff803`66219250)]
+fffff803`662e6690 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662e6695 c705413ef1ffcc080000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],8CCh
+fffff803`662e669f e9f7000000      jmp     dxgkrnl!DpQueryServices+0x69b (fffff803`662e679b)
+fffff803`662e66a4 0fb703          movzx   eax,word ptr [rbx]
+fffff803`662e66a7 83f838          cmp     eax,38h
+fffff803`662e66aa 7427            je      dxgkrnl!DpQueryServices+0x5d3 (fffff803`662e66d3)
+fffff803`662e66ac bf0d0000c0      mov     edi,0C000000Dh
+fffff803`662e66b1 8bd0            mov     edx,eax
+fffff803`662e66b3 b903000000      mov     ecx,3
+fffff803`662e66b8 48ff15912bf3ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry1 (fffff803`66219250)]
+fffff803`662e66bf 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662e66c4 c705123ef1ffd6080000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],8D6h
+fffff803`662e66ce e9c8000000      jmp     dxgkrnl!DpQueryServices+0x69b (fffff803`662e679b)
+fffff803`662e66d3 4839bea8020000  cmp     qword ptr [rsi+2A8h],rdi
+fffff803`662e66da 7529            jne     dxgkrnl!DpQueryServices+0x605 (fffff803`662e6705)
+fffff803`662e66dc 48c7c2010000c0  mov     rdx,0FFFFFFFFC0000001h
+fffff803`662e66e3 8bfa            mov     edi,edx
+fffff803`662e66e5 b903000000      mov     ecx,3
+fffff803`662e66ea 48ff155f2bf3ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry1 (fffff803`66219250)]
+fffff803`662e66f1 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662e66f6 c705e03df1ffe0080000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],8E0h
+fffff803`662e6700 e996000000      jmp     dxgkrnl!DpQueryServices+0x69b (fffff803`662e679b)
+fffff803`662e6705 488b4e18        mov     rcx,qword ptr [rsi+18h]
+fffff803`662e6709 488b05482bf3ff  mov     rax,qword ptr [dxgkrnl!_imp_WdpInterfaceReferenceNop (fffff803`66219258)]
+fffff803`662e6710 48894310        mov     qword ptr [rbx+10h],rax
+fffff803`662e6714 48894318        mov     qword ptr [rbx+18h],rax
+fffff803`662e6718 488d0551a70100  lea     rax,[dxgkrnl!DpiAgpSetAgpCommand (fffff803`66300e70)]
+fffff803`662e671f 48894330        mov     qword ptr [rbx+30h],rax
+=== STARTADAPTER_A80 ===
+dxgkrnl!DpiFdoStartAdapter+0xa60:
+fffff803`662f3188 2802            sub     byte ptr [rdx],al
+fffff803`662f318a 0000            add     byte ptr [rax],al
+fffff803`662f318c 488d054d83dfff  lea     rax,[dxgkrnl!DxgkPinFrameBufferForSave2CB (fffff803`660eb4e0)]
+fffff803`662f3193 48898330020000  mov     qword ptr [rbx+230h],rax
+fffff803`662f319a 488d05dfb3f9ff  lea     rax,[dxgkrnl!DxgkDisconnectDoorbellCB (fffff803`6628e580)]
+fffff803`662f31a1 48898338020000  mov     qword ptr [rbx+238h],rax
+fffff803`662f31a8 f30f7f455c      movdqu  xmmword ptr [rbp+5Ch],xmm0
+fffff803`662f31ad 498b87880a0000  mov     rax,qword ptr [r15+0A88h]
+fffff803`662f31b4 4889456c        mov     qword ptr [rbp+6Ch],rax
+fffff803`662f31b8 65488b042588010000 mov   rax,qword ptr gs:[188h]
+fffff803`662f31c1 4889056091f0ff  mov     qword ptr [dxgkrnl!DpGlobals+0x428 (fffff803`661fc328)],rax
+fffff803`662f31c8 498d87900a0000  lea     rax,[r15+0A90h]
+fffff803`662f31cf 4889442428      mov     qword ptr [rsp+28h],rax
+fffff803`662f31d4 48894c2420      mov     qword ptr [rsp+20h],rcx
+fffff803`662f31d9 498bcc          mov     rcx,r12
+fffff803`662f31dc 4c892d4d91f0ff  mov     qword ptr [dxgkrnl!DpGlobals+0x430 (fffff803`661fc330)],r13
+fffff803`662f31e3 498b5730        mov     rdx,qword ptr [r15+30h]
+fffff803`662f31e7 e884ad1d00      call    dxgkrnl!DpiDxgkDdiStartDevice (fffff803`664cdf70)
+fffff803`662f31ec 4c63f0          movsxd  r14,eax
+fffff803`662f31ef ba44707274      mov     edx,74727044h
+fffff803`662f31f4 488bcb          mov     rcx,rbx
+fffff803`662f31f7 48ff15f24ef2ff  call    qword ptr [dxgkrnl!_imp_ExFreePoolWithTag (fffff803`662180f0)]
+fffff803`662f31fe 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662f3203 48213d2691f0ff  and     qword ptr [dxgkrnl!DpGlobals+0x430 (fffff803`661fc330)],rdi
+fffff803`662f320a 48213d1791f0ff  and     qword ptr [dxgkrnl!DpGlobals+0x428 (fffff803`661fc328)],rdi
+fffff803`662f3211 4585f6          test    r14d,r14d
+fffff803`662f3214 0f8933010000    jns     dxgkrnl!DpiFdoStartAdapter+0xc25 (fffff803`662f334d)
+fffff803`662f321a 498b942498000000 mov     rdx,qword ptr [r12+98h]
+fffff803`662f3222 4d8bc6          mov     r8,r14
+fffff803`662f3225 b902000000      mov     ecx,2
+fffff803`662f322a 48ff15ef5ff2ff  call    qword ptr [dxgkrnl!_imp_WdLogSingleEntry2 (fffff803`66219220)]
+fffff803`662f3231 0f1f440000      nop     dword ptr [rax+rax]
+fffff803`662f3236 c705a072f0ffa53c0000 mov dword ptr [dxgkrnl!WdLogGlobalForLineNumber (fffff803`661fa4e0)],3CA5h
+fffff803`662f3240 4181fe09001ec0  cmp     r14d,0C01E0009h
+fffff803`662f3247 0f85aa000000    jne     dxgkrnl!DpiFdoStartAdapter+0xbcf (fffff803`662f32f7)
+quit:
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\atlmfc.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\concurrency.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\cpp_rest.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Kernel.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\ObjectiveC.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\stl.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Usb4Kd.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Data.Json.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Geolocation.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Devices.Sensors.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\Windows.Media.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\windows.natvis'
+NatVis script unloaded from 'C:\Program Files\WindowsApps\Microsoft.WinDbg_1.2611.4001.0_x64__8wekyb3d8bbwe\amd64\Visualizers\winrt.natvis'
