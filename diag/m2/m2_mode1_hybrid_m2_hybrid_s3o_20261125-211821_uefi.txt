@@ -1,0 +1,41 @@
+MBP133_M2_HYBRID_V1
+MODE=1 (Hybrid Mode 5: Intel Display + AMD On + 3-Reg FB)
+  [NVRAM gpu-power-prefs] iGPU (sz=4 bytes=01 00 00 00)
+  [GMUX BEFORE]
+    VERSION(0x04)=0x04001D00
+    Port 0x10(DISPLAY)=0x02
+    Port 0x14(IRQ_EN)=0x00
+    Port 0x16(IRQ_ST)=0x05
+    Port 0x28(DDC)=0x01
+    Port 0x40(EXT)=0x01
+    Port 0x50(DGPU_PWR)=0x03
+    MAX_BRIGHTNESS=0x000003FF
+    BRIGHTNESS=0x000000FE
+  [AppleSetOs] Locate=0x0000000000000000 count=1
+    handle[0] Ver=3 Vendor=0x0000000000000000 Version=0x0000000000000000
+  GMUX switch attempt 1: w=(1,1,1) rb=0x02
+  GMUX dGPU rail LEFT ON (Hybrid Mode)
+  GMUX IRQ status cleared, mask restored=1
+  [GMUX AFTER]
+    VERSION(0x04)=0x04001D00
+    Port 0x10(DISPLAY)=0x02
+    Port 0x14(IRQ_EN)=0x00
+    Port 0x16(IRQ_ST)=0x01
+    Port 0x28(DDC)=0x01
+    Port 0x40(EXT)=0x01
+    Port 0x50(DGPU_PWR)=0x03
+    MAX_BRIGHTNESS=0x000003FF
+    BRIGHTNESS=0x000000FE
+  [eDP Probe] PWR_WELL_CTL2=0x50000005 PP_STATUS=0x80000008 PP_CONTROL=0x00000007
+    DPCD[0..15]: rev=0x11 max_rate=0x0A max_lanes=4
+  [DDI_BUF_CTL_A] before=0x80000017 after=0x80000017 [4_LANES OK]
+  [OpRegion/VBT] ASLS=0x7AF97018
+    size=8192 rvda=0x0000000000000000 rvds=0
+    VBT sig="$VBT SKYLAKE        " vbt_sz=3826
+  [VBT BDB43] before(p0,p2)=0x4A,0x4A -> after=0x00 esz=6 sum8=0 OK save=0x0000000000000000
+  [ACPI] Loaded SSDT_HYBRID_MBP133.aml (453 B)
+  [VFCT] Patched dev_sup 0x068A->0x0688 dp 5->4 conn 5->4 enc 5->4 vb_csum=0x32 vfct_csum=0x62 sum8=0,0
+  [PEG0GFX0] Renamed _DOD->XDOD @0x04B9 csum=0xB3
+  [ACPI] Installed M2HY@0x7AFFDE18 + SSDT@0x7AFFDC18 XSDT entries=24 (old RSDP synced)
+  [EBS Hook] Installed + BS CRC32 updated
+PRE_EBS_FLAGS=0x000019D8 LOG_BYTES=1722 TRUNCATED=0

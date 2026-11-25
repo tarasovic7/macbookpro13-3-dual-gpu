@@ -8,11 +8,14 @@ build/
 *.pdb
 *.lib
 
-# Raw kernel dumps, WER reports & binary driver crash blobs (keep local only!)
+# Raw kernel dumps, WER reports, ETW traces & binary driver crash blobs (keep local only!)
 *.dmp
+*.etl
 *.wer
 diag/dump_1b0/*.bin
 diag/m1a2/*.bin
+diag/m2/*.bin
+diag/m2/*.csv
 diag/m1b/uefi/*.bin
 
 # Debugger symbol caches & temporary logs

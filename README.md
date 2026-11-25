@@ -20,11 +20,12 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 
 ```text
 ├── index.html          # Main offline interactive checkpoint & technical documentation
-├── docs/               # Engineering specification, M1A, M1A-2 & M1B runbooks & verified findings
+├── docs/               # Engineering specification, M1A, M1A-2, M1B & M2 runbooks & verified findings
 ├── uefi/
 │   ├── m1a_probe/      # Milestone 1A read-only UEFI telemetry probe (PCI/BAR5/SMU7/GMUX/IOMMU)
 │   ├── m1a2_ebs/       # Milestone 1A-2 ExitBootServices() X-Ray hook & 3-register Dual-GPU Fix
-│   └── m1b_igpu/       # Milestone 1B Intel-Only UEFI loader + SSDT_IGPU_MBP133 ACPI bridge
+│   ├── m1b_igpu/       # Milestone 1B Intel-Only UEFI loader + SSDT_IGPU_MBP133 ACPI bridge
+│   └── m2_hybrid/      # Milestone 2 Unified 4-mode Hybrid loader (VFCT/DOD patch + SSDT_HYBRID_MBP133)
 ├── diag/
 │   ├── acpi_setos/     # 24 raw .dat + decompiled .dsl ACPI tables from AppleSetOs boot
 │   ├── acpi_normal/    # 24 raw .dat + decompiled .dsl + dmar.dsl from normal boot
@@ -32,13 +33,14 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 │   ├── m1a/            # Milestone 1A UEFI probe logs, Windows snapshots & diff analysis
 │   ├── m1a2/           # Milestone 1A-2 ExitBootServices() X-Ray reports & Dual-GPU verification logs
 │   ├── m1b/            # Milestone 1B Intel-Only UEFI logs, Windows snapshots & battery power
+│   ├── m2/             # Milestone 2 Hybrid Mode 5 verification logs (including post-S3 wake)
 │   └── pci_state_*.txt # PnP / D-state / driver stack snapshots for both boot modes
 ├── scripts/            # PowerShell helpers (Phase 0 diag, Polaris 11 Boot Camp fix, USB rEFInd)
 ├── tools/acpica/       # Intel ACPICA 20260408 Windows tools (acpidump, iasl, acpixtract)
 └── reference/          # Primary upstream reference code (Linux apple-gmux/polaris10_smumgr, t2-gmux-uefi, apple_set_os)
 ```
 
-## Next Milestones
+## Milestones
 
 1. **Milestone 1A (UEFI Telemetry & `igdkmd64.sys` Isolation — Completed):**
    - UEFI probe (`uefi/m1a_probe/mbp133_m1a_probe.c`), Windows collector/isolator (`scripts/Run-M1A-Collect.ps1`), diff analyzer (`scripts/Parse-M1A-Probe.py`), runbook ([`docs/MILESTONE_1A_RUNBOOK.md`](docs/MILESTONE_1A_RUNBOOK.md)), raw analysis ([`diag/m1a/M1A_ANALYSIS.md`](diag/m1a/M1A_ANALYSIS.md)), and **verified findings** ([`docs/MILESTONE_1A_FINDINGS.md`](docs/MILESTONE_1A_FINDINGS.md)):
@@ -49,4 +51,6 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 3. **Milestone 1A-2 (Completed & Verified on Hardware — Dual-GPU `Code 43` Solved!):**
    - `ExitBootServices()` X-Ray & Dual-GPU Fix (`uefi/m1a2_ebs/mbp133_m1a2_ebs.c`), ACPI `M1A2` reader (`scripts/Read-M1A2-Ebs.py`), runbook ([`docs/MILESTONE_1A2_RUNBOOK.md`](docs/MILESTONE_1A2_RUNBOOK.md)), and **verified findings** ([`docs/MILESTONE_1A2_FINDINGS.md`](docs/MILESTONE_1A2_FINDINGS.md)).
    - **Proved:** `AppleSetOs("Mac OS X 10.15")` skips Apple EFI's Boot Camp `ExitBootServices()` callback (keeping Intel `DEVEN.D2EN=1` instead of locking `HB80=1`), which left Polaris 11 VRAM unrelocated (`0x007F0000`). Writing all **3 Boot Camp `BAR5` registers post-EBS** (`MC_VM_FB_LOCATION=0xF47FF400`, `HDP_NONSURFACE_BASE=0xF4000000`, `GRPH_PRIMARY_SURFACE_ADDRESS_HIGH=0xF4` latched via `0x1A04`) brings up **Intel HD 530 + AMD Radeon Pro 455 concurrently with zero errors (`CM_PROB_NONE`)**, `2880×1800 @ 60 Hz`, working brightness slider (`101` levels), and full **`Standby (S3)` lid-close sleep/wake**.
-4. **Milestone 2 (Hybrid Dual-GPU & Production rEFInd Profiles — Planned):** Combine M1B's Intel display GMUX switch + `BDB[43]=0` + `SSDT_IGPU_MBP133` with M1A-2's 3-register AMD fix for Intel panel display + on-demand AMD 3D offload, packaged as clean one-click rEFInd profiles.
+4. **Milestone 2 (Completed & Verified on Hardware — Hybrid Mode 5 Works End-to-End!):**
+   - Unified 4-mode UEFI loader (`uefi/m2_hybrid/mbp133_m2_hybrid.c`), Hybrid S3 ACPI bridge (`uefi/m2_hybrid/SSDT_HYBRID_MBP133.asl`), `M2HY`/telemetry collector (`scripts/Read-M2-Hybrid.py`), runbook ([`docs/MILESTONE_2_RUNBOOK.md`](docs/MILESTONE_2_RUNBOOK.md)), and **verified findings** ([`docs/MILESTONE_2_FINDINGS.md`](docs/MILESTONE_2_FINDINGS.md)).
+   - **Proved:** Combining Apple NVRAM `gpu-power-prefs = iGPU` (`[S]`/`[D]` switcher), post-EBS 3-register Polaris 11 relocation, in-memory `VFCT` eDP/LCD1 removal (`dev_sup 0x068A -> 0x0688`, `dp`/`conn`/`enc` `5 -> 4`, bypassing `dxgkrnl!DpiFdoEnumChildDevices 0xC00000BB`), `PEG0GFX0._DOD -> XDOD`, and `SSDT_HYBRID_MBP133.aml` (never cutting GMUX port `0x50`) drives `2880×1800 @ 60 Hz` (`101` brightness levels, `dwm`/`Antigravity`, zero lag) on **Intel HD 530 (`OK`)** while keeping **AMD RX 560X / Pro 455 (`OK`, `5.7 MB` idle VRAM, DXGI `#0 HIGH_PERFORMANCE`)** active across **`Standby (S3)` lid-close sleep/wake**.

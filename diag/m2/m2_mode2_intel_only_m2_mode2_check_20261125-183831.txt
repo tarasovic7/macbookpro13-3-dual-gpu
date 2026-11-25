@@ -1,0 +1,80 @@
+=== MILESTONE 2 HYBRID DUAL-GPU REPORT ===
+Mode=2 (mode2_intel_only) | Version=1 | ChecksumOK=True (sum8=0)
+Flags=0x000001ff [BEFORE_EBS|AFTER_EBS|POST_ACTION|SETOS_OK|GMUX_IGD_OK|GMUX_RAIL_OFF|DDI_4LANES_OK|VBT_BDB43_OK|SSDT_INJECTED] | EBS Calls=1 Retries=0 | ECAM=0xe0000000
+
+--- PnP Display & Monitor ---
+  Display | Intel(R) HD Graphics 530 | OK | Problem=CM_PROB_NONE(0) | PCI\VEN_8086&DEV_191B&SUBSYS_015F106B&REV_06\3&11583659&0&10
+  Monitor | Integrated Monitor (Color LCD) | OK | Problem=CM_PROB_NONE(0) | DISPLAY\APPA030\4&885D6EB&0&UID265988
+
+--- Win32_VideoController ---
+  Intel(R) HD Graphics 530 | Status=OK Err=0 | Driver=31.0.101.2115 | Mode=2880x1800@60Hz | VRAM=1024MB
+
+--- WMI Brightness ---
+  DISPLAY\APPA030\4&885d6eb&0&UID265988_0 | Current=66 Levels=1
+
+--- DXGI Adapter Order (IDXGIFactory6) ---
+  [UNSPECIFIED]
+    #0 Intel(R) HD Graphics 530 (VEN=8086 DEV=191B LUID=0x00000000_0000ca0d VRAM=128MB Shared=8140MB)
+    #1 Microsoft Basic Render Driver (VEN=1414 DEV=008C LUID=0x00000000_0000d318 VRAM=0MB Shared=8140MB)
+  [MINIMUM_POWER]
+    #0 Intel(R) HD Graphics 530 (VEN=8086 DEV=191B LUID=0x00000000_0000ca0d VRAM=128MB Shared=8140MB)
+    #1 Microsoft Basic Render Driver (VEN=1414 DEV=008C LUID=0x00000000_0000d318 VRAM=0MB Shared=8140MB)
+  [HIGH_PERFORMANCE]
+    #0 Intel(R) HD Graphics 530 (VEN=8086 DEV=191B LUID=0x00000000_0000ca0d VRAM=128MB Shared=8140MB)
+    #1 Microsoft Basic Render Driver (VEN=1414 DEV=008C LUID=0x00000000_0000d318 VRAM=0MB Shared=8140MB)
+
+--- GPU Adapter Memory & Top Consumers ---
+  luid_0x00000000_0x0000ca0d_phys_0 | dedicated usage = 0 MB
+  luid_0x00000000_0x0000d318_phys_0 | dedicated usage = 0 MB
+  luid_0x00000000_0x0000ca0d_phys_0 | shared usage = 636.6 MB
+  luid_0x00000000_0x0000d318_phys_0 | shared usage = 0 MB
+  proc=dwm luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=326.8MB
+  proc=Antigravity luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=191.2MB
+  proc=csrss luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=72.1MB
+  proc=Microsoft.CmdPal.UI luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=67.7MB
+  proc=explorer luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=46.9MB
+  proc=msedgewebview2 luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=27.3MB
+  proc=PowerToys.QuickAccess luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=25.9MB
+  proc=MacBreeze luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=17.2MB
+  proc=StartMenuExperienceHost luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=12.6MB
+  proc=TextInputHost luid=0x00000000_0x0000ca0d Dedicated=0MB Shared=12.2MB
+
+--- Battery & Sleep States ---
+  PowerOnline=True Discharging=False DischargeRate=0mW Voltage=12536mV Cap=54360mWh
+  The following sleep states are available on this system:
+      Standby (S3)
+      Hibernate
+  The following sleep states are not available on this system:
+      Standby (S1)
+  	The system firmware does not support this standby state.
+      Standby (S2)
+  	The system firmware does not support this standby state.
+      Standby (S0 Low Power Idle)
+  	The system firmware does not support this standby state.
+
+--- SNAPSHOT: BEFORE_EBS ---
+  HostBridge : DEVEN=0x0000003f (D2EN=1) HB80=0x00000000 PEG_CMD=0x0007
+  IGPU 00:02 : VID:DID=0x8086:0x191b CMD=0x0007 BAR0=0x81000004 ASLS=0x7af97018 DDI_A=0x00000091 PWR2=0x5000000d
+  AMD  01:00 : VID:DID=0xffff:0xffff CMD=0xffff BAR5=0xffffffff FB_LOC=0xffffffff HDP=0xffffffff SURF=0xffffffff:0xffffffff
+  AMD  SMU7  : GRBM=0xffffffff PC0=0xffffffff FW=0xffffffff
+  GMUX       : sig=0x55aa disp=0x2 ddc=0x1 ext=0x1 pwr=0x0 brt=0xfe
+
+--- SNAPSHOT: AFTER_EBS ---
+  HostBridge : DEVEN=0x0000003f (D2EN=1) HB80=0x00000001 PEG_CMD=0x0007
+  IGPU 00:02 : VID:DID=0x8086:0x191b CMD=0x0007 BAR0=0x81000004 ASLS=0x7af97018 DDI_A=0x00000091 PWR2=0x5000000d
+  AMD  01:00 : VID:DID=0xffff:0xffff CMD=0xffff BAR5=0xffffffff FB_LOC=0xffffffff HDP=0xffffffff SURF=0xffffffff:0xffffffff
+  AMD  SMU7  : GRBM=0xffffffff PC0=0xffffffff FW=0xffffffff
+  GMUX       : sig=0x55aa disp=0x2 ddc=0x1 ext=0x1 pwr=0x0 brt=0xfe
+
+=== DIFF: BEFORE_EBS  vs  AFTER_EBS (1 change(s)) ===
+  Hb80: 0x00000000 -> 0x00000001
+
+--- SNAPSHOT: POST_ACTION ---
+  HostBridge : DEVEN=0x0000003f (D2EN=1) HB80=0x00000001 PEG_CMD=0x0007
+  IGPU 00:02 : VID:DID=0x8086:0x191b CMD=0x0007 BAR0=0x81000004 ASLS=0x7af97018 DDI_A=0x00000091 PWR2=0x5000000d
+  AMD  01:00 : VID:DID=0xffff:0xffff CMD=0xffff BAR5=0xffffffff FB_LOC=0xffffffff HDP=0xffffffff SURF=0xffffffff:0xffffffff
+  AMD  SMU7  : GRBM=0xffffffff PC0=0xffffffff FW=0xffffffff
+  GMUX       : sig=0x55aa disp=0x2 ddc=0x1 ext=0x1 pwr=0x0 brt=0xfe
+
+=== DIFF: AFTER_EBS  vs  POST_ACTION (0 change(s)) ===
+  (100% IDENTICAL — ZERO HARDWARE DIFFERENCES)
