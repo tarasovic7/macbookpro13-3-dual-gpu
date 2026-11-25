@@ -1,0 +1,105 @@
+﻿=== M1B WINDOWS VERIFICATION: m1b_mode1 | 2026-11-25T16:43:20.1326005+01:00 ===
+USB M1B_LOGS copied: m1b_last.txt (2228B), m1b_mode1.txt (2228B), vbt_orig.bin (3826B)
+
+--- PnP Devices (Display / GPU / Monitor / GMUX / Backlight) ---
+[AMD Radeon RX 560X] PCI\VEN_1002&DEV_67EF&SUBSYS_0166106B&REV_C7\4&FED5E4C&0&0008
+  Status=Unknown Problem=CM_PROB_PHANTOM
+  DEVPKEY_Device_Service = amduw23g
+  DEVPKEY_Device_LocationInfo = PCI bus 1, device 0, function 0
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.PEG0.GFX0
+  DEVPKEY_Device_DriverVersion = 31.0.23013.14001
+  DEVPKEY_Device_DriverDesc = AMD Radeon RX 560X
+
+[Intel(R) HD Graphics 530] PCI\VEN_8086&DEV_191B&SUBSYS_015F106B&REV_06\3&11583659&0&10
+  Status=OK Problem=CM_PROB_NONE
+  DEVPKEY_Device_Service = igfx
+  DEVPKEY_Device_LocationInfo = PCI bus 0, device 2, function 0
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_Stack = \Driver\igfx, \Driver\ACPI, \Driver\pci
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.IGPU
+  DEVPKEY_Device_DriverVersion = 31.0.101.2115
+  DEVPKEY_Device_DriverDesc = Intel(R) HD Graphics 530
+
+[Generic Monitor] DISPLAY\DEFAULT_MONITOR\1&8713BCA&0&UID0
+  Status=Unknown Problem=CM_PROB_PHANTOM
+  DEVPKEY_Device_Service = monitor
+  DEVPKEY_Device_DriverVersion = 10.0.26100.9818
+  DEVPKEY_Device_DriverDesc = Generic Non-PnP Monitor
+
+[Generic Monitor (Color LCD)] DISPLAY\APPA030\1&8713BCA&0&UID0
+  Status=Unknown Problem=CM_PROB_PHANTOM
+  DEVPKEY_Device_Service = monitor
+  DEVPKEY_Device_DriverVersion = 10.0.26100.9818
+  DEVPKEY_Device_DriverDesc = Generic PnP Monitor
+
+[Generic Monitor (DELL U2412M)] DISPLAY\DELA07B\5&DCF9AE9&6&UID257
+  Status=Unknown Problem=CM_PROB_PHANTOM
+  DEVPKEY_Device_Service = monitor
+  DEVPKEY_Device_DriverVersion = 10.0.26100.9818
+  DEVPKEY_Device_DriverDesc = Generic PnP Monitor
+
+[Generic Monitor (HD TO USB)] DISPLAY\HJW2109\5&DCF9AE9&6&UID265
+  Status=Unknown Problem=CM_PROB_PHANTOM
+  DEVPKEY_Device_Service = monitor
+  DEVPKEY_Device_DriverVersion = 10.0.26100.9818
+  DEVPKEY_Device_DriverDesc = Generic PnP Monitor
+
+[Integrated Monitor (Color LCD)] DISPLAY\APPA030\5&DCF9AE9&6&UID256
+  Status=Unknown Problem=CM_PROB_PHANTOM
+  DEVPKEY_Device_Service = monitor
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.PEG0.GFX0.LCD
+  DEVPKEY_Device_DriverVersion = 10.0.26100.9818
+  DEVPKEY_Device_DriverDesc = Generic PnP Monitor
+
+[Integrated Monitor (Color LCD)] DISPLAY\APPA030\4&885D6EB&0&UID265988
+  Status=OK Problem=CM_PROB_NONE
+  DEVPKEY_Device_Service = monitor
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_Stack = \Driver\monitor, \Driver\ACPI, \Driver\igfx
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.IGPU.DD01
+  DEVPKEY_Device_DriverVersion = 10.0.26100.9818
+  DEVPKEY_Device_DriverDesc = Generic PnP Monitor
+
+[Integrated Monitor (Color LCD)] DISPLAY\APPA030\5&DCF9AE9&6&UID0
+  Status=Unknown Problem=CM_PROB_PHANTOM
+  DEVPKEY_Device_Service = monitor
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.PEG0.GFX0.LCD
+  DEVPKEY_Device_DriverVersion = 10.0.26100.9818
+  DEVPKEY_Device_DriverDesc = Generic PnP Monitor
+
+[Apple graphics mux] ACPI\APP000B\4&1096773&0
+  Status=OK Problem=CM_PROB_NONE
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_Stack = \Driver\ACPI
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.LPCB.GMUX
+  DEVPKEY_Device_DriverVersion = 6.1.8100.0
+  DEVPKEY_Device_DriverDesc = Apple graphics mux
+
+[Apple panel backlight] ACPI\APP0002\10
+  Status=OK Problem=CM_PROB_NONE
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_Stack = \Driver\ACPI
+  DEVPKEY_Device_BiosDeviceName = \_SB.PNLF
+  DEVPKEY_Device_DriverVersion = 6.1.8100.0
+  DEVPKEY_Device_DriverDesc = Apple panel backlight
+
+[Intel(R) Xeon(R) E3 - 1200/1500 v5/6th Gen Intel(R) Core(TM) PCIe Controller (x16) - 1901] PCI\VEN_8086&DEV_1901&SUBSYS_015F106B&REV_07\3&11583659&0&08
+  Status=OK Problem=CM_PROB_NONE
+  DEVPKEY_Device_Service = pci
+  DEVPKEY_Device_LocationInfo = PCI bus 0, device 1, function 0
+  DEVPKEY_Device_ProblemCode = 0
+  DEVPKEY_Device_Stack = \Driver\pci, \Driver\ACPI, \Driver\pci
+  DEVPKEY_Device_BiosDeviceName = \_SB.PCI0.PEG0
+  DEVPKEY_Device_DriverVersion = 10.1.1.33
+  DEVPKEY_Device_DriverDesc = Intel(R) Xeon(R) E3 - 1200/1500 v5/6th Gen Intel(R) Core(TM) PCIe Controller (x16) - 1901
+
+--- Win32_VideoController ---
+  Name=Intel(R) HD Graphics 530 Status=OK ErrCode=0 Mode=2880x1800@60Hz BPP=32 Drv=31.0.101.2115
+
+--- WMI Monitor Brightness ---
+  Instance=DISPLAY\APPA030\4&885d6eb&0&UID265988_0 Active=True Current=90 Levels=101
+
+--- Battery Power Status (mW) ---
+  Sample 1: PowerOnline=True Discharging=False DischargeRate_mW=0 ChargeRate_mW=0 Voltage_mV=12681 Remaining_mWh=56390
+  Sample 2: PowerOnline=True Discharging=False DischargeRate_mW=0 ChargeRate_mW=0 Voltage_mV=12681 Remaining_mWh=56390
+  Sample 3: PowerOnline=True Discharging=False DischargeRate_mW=0 ChargeRate_mW=0 Voltage_mV=12681 Remaining_mWh=56390

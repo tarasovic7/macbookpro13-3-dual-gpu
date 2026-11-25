@@ -12,6 +12,7 @@ build/
 *.dmp
 *.wer
 diag/dump_1b0/*.bin
+diag/m1b/uefi/*.bin
 
 # Debugger symbol caches & temporary logs
 symbols/

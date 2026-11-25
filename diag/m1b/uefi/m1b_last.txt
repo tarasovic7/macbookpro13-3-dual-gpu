@@ -1,0 +1,50 @@
+MBP133_M1B_IGPU_V1
+MODE=1 (Intel-Only Native VBT)
+  [EDID Capture] EDID_ACTIVE size=128 timing=2880x1800 pclk=328920kHz
+  [GMUX BEFORE]
+    VERSION(0x04)=0x04001D00
+    Port 0x10(DISPLAY)=0x03
+    Port 0x14(IRQ_EN)=0x00
+    Port 0x16(IRQ_ST)=0x05
+    Port 0x28(DDC)=0x02
+    Port 0x40(EXT)=0x01
+    Port 0x50(DGPU_PWR)=0x03
+    MAX_BRIGHTNESS=0x000003FF
+    BRIGHTNESS=0x000000FE
+  [OpRegion/VBT] ASLS=0x7AF97018
+    size=8192 rvda=0x0000000000000000 rvds=0
+    VBT hdr: sig="$VBT SKYLAKE        " ver=0x0064 hdr_sz=48 vbt_sz=3826 csum=0x5C sum8=0 bdb_off=0x0030
+    Save \M1B_LOGS\vbt_orig.bin: 0x0000000000000000
+    BDB ver=196 hdr_sz=22 total_sz=3777
+      BDB[9] off=+0x03EE sz=96 head=00 00 32 00 32 00 00 00 32 00 32 00 00 00 32 00 
+      BDB[27] off=+0x05FB sz=280 head=D0 07 0A 00 D0 07 F4 01 88 13 D0 07 0A 00 D0 07 
+      BDB[40] off=+0x07E3 sz=24 head=02 00 73 00 00 00 00 00 00 00 00 00 00 00 00 00 
+      BDB[41] off=+0x07FE sz=148
+      BDB[43] off=+0x0D9A sz=129
+      LFP panel=2 fp=1024x768 pclk=65000kHz BDB40.psr_dword=0x00000000
+  [AppleSetOs] Locate=0x0000000000000000 count=1
+    handle[0] Ver=3 Vendor=0x0000000000000000 Version=0x0000000000000000
+  GMUX switch attempt 1: w=(1,1,1) rb=0x02
+  GMUX rail OFF: w=(1,1) pwr_irq=1 0x50_rb=0x00
+  GMUX IRQ status cleared, mask restored=1
+  [GMUX AFTER]
+    VERSION(0x04)=0x04001D00
+    Port 0x10(DISPLAY)=0x02
+    Port 0x14(IRQ_EN)=0x00
+    Port 0x16(IRQ_ST)=0x00
+    Port 0x28(DDC)=0x01
+    Port 0x40(EXT)=0x01
+    Port 0x50(DGPU_PWR)=0x00
+    MAX_BRIGHTNESS=0x000003FF
+    BRIGHTNESS=0x000000FE
+  [eDP Probe] PWR_WELL_CTL2=0x50000001 PP_STATUS=0x00000000 PP_CONTROL=0x00000008
+    Power wells now=0x5000000D
+    DPCD[0..15]: rev=0x11 max_rate=0x0A max_lanes=4 eDP_cfg=0x0B eDP_rev=2 PSR_cap=0x01
+    I2C-over-AUX EDID OK (valid APPA030 128B)
+  [DDI_BUF_CTL_A] before=0x00000081 after=0x00000091 [4_LANES OK]
+  [VBT Patch] Keeping Apple native $VBT SKYLAKE timings
+  [VBT BDB43] before(p0,p2)=0x4A,0x4A -> after=0x00 esz=6 sum8=0 OK save=0x0000000000000000
+  [ACPI Patcher] Loading \EFI\tools\SSDT_IGPU_MBP133.aml
+    DSDT len=34523 _BCM(1)@0x2262 _PTS(1)@0x830E _WAK(1)@0x84F8
+    ACPI patch OK: DSDT _BCM/_PTS/_WAK->X*, SSDT@0x7AFFDA98 XSDT entries=23 (old RSDP synced)
+LOG_BYTES=2300 TRUNCATED=0
