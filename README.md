@@ -9,6 +9,17 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 > [!CAUTION]
 > **Hybrid `gpu-power-prefs = iGPU` vs. Classic Boot Camp:** When `gpu-power-prefs = iGPU` (`01 00 00 00`) is set in Apple NVRAM, booting classic Boot Camp directly without rEFInd/`mbp133_m2_hybrid.efi` produces a **black screen**. Always use **`Boot Camp Default`** in rEFInd or reset Apple NVRAM at startup with **`Cmd + Option + P + R`** before booting stock Boot Camp directly!
 
+## Live Proof: Both GPUs Working Simultaneously (Hybrid Mode 5)
+
+Real-world Windows 11 Pro capture on `MacBookPro13,3` running **Hybrid Mode 5** (internal Retina `2880×1800 @ 60 Hz` driven by Intel HD 530 while AMD Radeon RX 560X / Pro 455 renders 3D workloads on demand):
+
+- **GPU 0 (`AMD Radeon RX 560X`):** **`99%` (`76 °C`)** running *World of Tanks* (`99.1%` GPU in Processes).
+- **GPU 1 (`Intel(R) HD Graphics 530`):** **`57%`** (`3D: 57%`, `Video Processing: 24%`) driving `Desktop Window Manager` (`34.2%`) and YouTube playback in `Google Chrome` (`23.8%`) simultaneously with zero UI lag.
+
+![Hybrid Dual-GPU Performance — AMD RX 560X 99% (World of Tanks) + Intel HD 530 57% (Desktop & YouTube)](docs/images/hybrid_dual_gpu_performance.jpg)
+
+![Hybrid Dual-GPU Processes — World of Tanks 99.1% + Desktop Window Manager 34.2% + Google Chrome 23.8%](docs/images/hybrid_dual_gpu_processes.jpg)
+
 ## Key Findings (Phase 0 Forensics Complete)
 
 - **Root Cause of Polaris 11 `Code 43` (`BugCheck 0x1B0 / P1=0x2 / P2=0xC0000001`) after `AppleSetOs`:**
