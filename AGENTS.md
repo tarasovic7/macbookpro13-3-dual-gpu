@@ -13,7 +13,7 @@ Welcome to **MacBookPro13,3 Windows 11 Dual-GPU Hack**!
   - [`docs/undocumented_hardware_findings.html`](docs/undocumented_hardware_findings.html)
 
 ## Engineering & Safety Rules
-1. **Never modify the internal NVMe EFI System Partition (`bootmgfw.efi`).** Test strictly on an external FAT32 USB rEFInd drive (`\EFI\tools\`).
+1. **Always test strictly on an external FAT32 USB rEFInd drive (`\EFI\tools\`) first, and NEVER overwrite `\EFI\Microsoft\Boot\bootmgfw.efi`.** Only install to isolated `\EFI\refind\` + `\EFI\tools\` on the internal NVMe ESP (`scripts/Install-InternalESP.ps1`) *after* the USB setup is 100% verified, keeping the USB drive as a rescue boot stick.
 2. **Never hardcode hardware offsets across different MacBook models.** Always measure target registers via `ExitBootServices()` snapshots and ETW traces first (see [`docs/BUILD_AND_PORT_GUIDE.md`](docs/BUILD_AND_PORT_GUIDE.md)).
 3. **Zero-relocation UEFI builds:** GNU-EFI outputs must have empty `nm -u` and `0` relocations from `readelf -r` (avoid static string-pointer arrays like `static const char *arr[]`).
 4. **Checksum integrity:** Any runtime-patched ACPI (`DSDT`/`SSDT`/`VFCT`), `$VBT`, or Option ROM buffer must have `sum8 == 0` verified before chainloading Windows.

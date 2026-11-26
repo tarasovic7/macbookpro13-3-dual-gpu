@@ -61,12 +61,14 @@ Evidence captured **after S3 sleep/wake** (`21:17:11 -> 21:17:30`) in [`diag/m2/
 
 ## 4. Delivered Files & Rollback Safety
 
-- [`uefi/m2_hybrid/mbp133_m2_hybrid.c`](../uefi/m2_hybrid/mbp133_m2_hybrid.c) — Unified 4-mode UEFI loader (`M2HY` ACPI table, `ExitBootServices()` 3-reg hook, `PatchVfctRemoveEdp()`, `PatchPeg0Gfx0Dod()`, NVRAM `gpu-power-prefs` switcher; GNU-EFI `-Wall -Wextra -Werror`, empty `nm -u`, `0` relocations)
+- [`uefi/m2_hybrid/mbp133_m2_hybrid.c`](../uefi/m2_hybrid/mbp133_m2_hybrid.c) — Unified 4-mode UEFI loader (`M2HY` ACPI table, `ExitBootServices()` 3-reg hook, `PatchVfctRemoveEdp()`, `PatchPeg0Gfx0Dod()`, automatic NVRAM `gpu-power-prefs` switcher with `PCH 0x0CF9` `ColdRebootNow()`; GNU-EFI `-Wall -Wextra -Werror`, empty `nm -u`, `0` relocations)
 - [`uefi/m2_hybrid/Makefile`](../uefi/m2_hybrid/Makefile) — GNU-EFI build configuration
 - [`uefi/m2_hybrid/SSDT_HYBRID_MBP133.asl`](../uefi/m2_hybrid/SSDT_HYBRID_MBP133.asl) — Hybrid S3 + GMUX brightness bridge (`MBP133/M2HYBCM`)
 - [`scripts/Read-M2-Hybrid.py`](../scripts/Read-M2-Hybrid.py) — Live ACPI `M2HY` + `VFCT` reader, DXGI/VRAM/brightness/S3 collector (`--self-test` verified)
-- [`scripts/usb_refind/refind.conf`](../scripts/usb_refind/refind.conf) — USB `REFIND_USB` stanza (`MBP13,3 M2 Hybrid`)
-- [`docs/MILESTONE_2_RUNBOOK.md`](MILESTONE_2_RUNBOOK.md) — Test & rollback runbook
+- [`scripts/Deploy-USB.ps1`](../scripts/Deploy-USB.ps1) — Clean 4-mode (`clean`) vs diagnostic (`dev`) USB deployment
+- [`scripts/Install-InternalESP.ps1`](../scripts/Install-InternalESP.ps1) + [`scripts/usb_refind/refind_internal.conf`](../scripts/usb_refind/refind_internal.conf) + [`scripts/macos/bless-refind.command`](../scripts/macos/bless-refind.command) — Hardware-verified internal NVMe ESP 3-mode default boot setup (`\EFI\refind\` + `\EFI\tools\`, used only AFTER USB testing succeeds)
+- [`scripts/usb_refind/refind.conf`](../scripts/usb_refind/refind.conf) — Clean USB `REFIND_USB` 4-mode configuration
+- [`docs/MILESTONE_2_RUNBOOK.md`](MILESTONE_2_RUNBOOK.md) & [`docs/BUILD_AND_PORT_GUIDE.md`](BUILD_AND_PORT_GUIDE.md) — Test, build, USB-first workflow, and rollback guides
 
-> [!NOTE]
-> Internal NVMe ESP (`bootmgfw.efi`) and prior verified USB fallbacks (`mbp133_m1b_igpu.efi`, `mbp133_m1a2_ebs.efi`, `SSDT_IGPU_MBP133.aml`) remain untouched. Reset `gpu-power-prefs` anytime via `[S]`/`[D]` in `mbp133_m2_hybrid.efi`, macOS boot, or `Cmd+Option+P+R`.
+> [!IMPORTANT]
+> **USB-First Safety & Rollback:** Always test strictly on an external USB rEFInd drive first, and keep that working USB drive as a rescue stick even after installing to the internal SSD (`Install-InternalESP.ps1 -SetDefault` + macOS Recovery `Cmd+R` `bless-refind.command`). Internal `\EFI\Microsoft\Boot\bootmgfw.efi` and `\EFI\APPLE\` remain untouched (`-Uninstall` cleanly reverts). Reset `gpu-power-prefs` anytime via **`Boot Camp Default`** in rEFInd, macOS boot, or **`Cmd+Option+P+R`** (mandatory before booting classic Boot Camp directly).

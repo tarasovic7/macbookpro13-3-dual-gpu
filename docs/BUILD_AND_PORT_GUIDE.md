@@ -5,7 +5,9 @@ This guide explains:
 2. How to **port this solution to another MacBook Pro model** (e.g., `MacBookPro14,3`, `15,1`, `16,1`) using your own AI coding agent.
 
 > [!CAUTION]
-> **Safety Rule:** Always test on an external FAT32 USB rEFInd drive (`REFIND_USB`). **Never** modify the internal NVMe EFI System Partition (`bootmgfw.efi`) — unplugging the USB always gives you an instant stock Boot Camp fallback.
+> **Two-Stage Safety Workflow (USB First, Internal Disk Second):**
+> 1. **ALWAYS test strictly on an external FAT32 USB rEFInd drive (`REFIND_USB`) first.** Do **not** touch the internal SSD until every mode (Hybrid, Intel Only, Boot Camp Default), automatic NVRAM cold-reboot (`PCH 0x0CF9`), brightness, and S3 sleep/wake work reliably on your machine.
+> 2. **Only AFTER the USB setup is 100% verified**, optionally install onto the internal NVMe ESP (into isolated `\EFI\refind\` + `\EFI\tools\`, never overwriting `bootmgfw.efi`). **Always keep your working USB drive as a rescue boot key** (`Option` key at startup) in case anything breaks during future updates or experiments.
 
 ---
 
@@ -54,9 +56,9 @@ The clean [`scripts/usb_refind/refind.conf`](../scripts/usb_refind/refind.conf) 
 
 | rEFInd Menu Entry | When to Use | What Happens Automatically |
 |---|---|---|
-| **1. Hybrid `[Recommended]`** *(Default)* | **Daily driver:** Intel HD 530 drives `2880×1800 @ 60 Hz` (`dwm`, desktop, browsers — zero lag, `101`-level brightness, S3 sleep/wake) and AMD delivers 3D/compute performance when apps request it. | If Apple NVRAM `gpu-power-prefs` is not `iGPU`, the loader writes `01 00 00 00` and cold-reboots once automatically. Patches `VFCT` (removes internal `eDP`), renames `PEG0GFX0._DOD -> XDOD`, loads `SSDT_HYBRID_MBP133.aml`, and relocates AMD `BAR5` post-`ExitBootServices()`. |
+| **1. Hybrid `[Recommended]`** *(Default)* | **Daily driver:** Intel HD 530 drives `2880×1800 @ 60 Hz` (`dwm`, desktop, browsers — zero lag, `101`-level brightness, S3 sleep/wake) and AMD delivers 3D/compute performance when apps request it. | If Apple NVRAM `gpu-power-prefs` is not `iGPU`, the loader writes `01 00 00 00` and triggers a hardware `PCH 0x0CF9` cold-reboot automatically (`ColdRebootNow()`). Patches `VFCT` (removes internal `eDP`), renames `PEG0GFX0._DOD -> XDOD`, loads `SSDT_HYBRID_MBP133.aml`, and relocates AMD `BAR5` post-`ExitBootServices()`. |
 | **2. Intel Only** | **Long battery sessions (~9.3 W):** AMD dGPU power rail is switched OFF (`GMUX 0x50 = 0x00`) when you know you won't need dGPU performance. | Works regardless of `gpu-power-prefs` (no reboot needed). Injects `SSDT_IGPU_MBP133.aml` so S3 wake keeps AMD rail OFF. |
-| **3. Boot Camp Default (AMD Only)** | **Stock Boot Camp:** Pure AMD Radeon Pro 455 display output (Intel hidden by Apple EFI), e.g., if an anti-cheat or app insists on stock Apple Boot Camp. | If `gpu-power-prefs` is set to `iGPU`, the loader deletes it (`dGPU` default) and cold-reboots once automatically, then chainloads Windows unmodified. |
+| **3. Boot Camp Default (AMD Only)** | **Stock Boot Camp:** Pure AMD Radeon Pro 455 display output (Intel hidden by Apple EFI), e.g., if an anti-cheat or app insists on stock Apple Boot Camp. | If `gpu-power-prefs` is set to `iGPU`, the loader deletes it (`dGPU` default) and triggers a hardware `PCH 0x0CF9` cold-reboot automatically, then chainloads Windows unmodified. |
 | **4. AMD Display + Intel Helper `[Experts Only]`** | **Specific dual-GPU routing:** AMD drives the Retina panel directly while Intel HD 530 stays alive headless for Intel QuickSync / DXGI minimum-power. Not needed for normal users. | Auto-clears `gpu-power-prefs` to `dGPU` if needed, calls `AppleSetOs("Mac OS X 10.15")`, and applies the 3-register AMD `BAR5` fix post-`ExitBootServices()`. |
 
 > [!CAUTION]
@@ -64,8 +66,8 @@ The clean [`scripts/usb_refind/refind.conf`](../scripts/usb_refind/refind.conf) 
 > Once `gpu-power-prefs` is set to `iGPU` (`01 00 00 00`, used by **Hybrid Mode**), booting classic/stock Boot Camp directly (bypassing `mbp133_m2_hybrid.efi`) **will produce a black screen**, because Apple EFI still hides Intel HD 530 at `ExitBootServices()` while leaving the GMUX pointed at Intel.
 > To restore stock Boot Camp, either choose **`Windows 11: Boot Camp Default (AMD Only)`** in rEFInd (which auto-clears NVRAM) **OR reset Apple NVRAM at startup by holding `Cmd + Option + P + R`** until the startup chime / reboot!
 
-### 1.5 Optional: Installing to the Internal NVMe ESP (No USB Needed)
-Once you have verified the USB setup works reliably on your hardware, [`scripts/Install-InternalESP.ps1`](../scripts/Install-InternalESP.ps1) installs rEFInd and the 3 production binaries cleanly onto the internal NVMe EFI System Partition (`\EFI\refind\` + `\EFI\tools\`) using the 3-mode [`scripts/usb_refind/refind_internal.conf`](../scripts/usb_refind/refind_internal.conf) — **without modifying `\EFI\Microsoft\Boot\bootmgfw.efi` or `\EFI\APPLE\`**:
+### 1.5 Optional: Installing to the Internal NVMe ESP (Hardware-Verified, Do USB First!)
+**Do NOT skip USB testing first!** Only after you have verified all modes (including automatic `0x0CF9` NVRAM cold-reboots, brightness, and S3 sleep/wake) from your external USB drive, [`scripts/Install-InternalESP.ps1`](../scripts/Install-InternalESP.ps1) can install rEFInd and the 3 production binaries onto the internal NVMe EFI System Partition (`\EFI\refind\` + `\EFI\tools\`) using the 3-mode [`scripts/usb_refind/refind_internal.conf`](../scripts/usb_refind/refind_internal.conf) — **without modifying `\EFI\Microsoft\Boot\bootmgfw.efi` or `\EFI\APPLE\`**. Keep your working USB drive afterward as a permanent rescue boot stick (`Option` key at power-on)!
 
 ```powershell
 # Run in an Administrator PowerShell (with REFIND_USB mounted at D:)
