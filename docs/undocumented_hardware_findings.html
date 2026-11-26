@@ -658,6 +658,14 @@ io_delay_us(500);                                          // ustálenie pred š
       ušetrili hodiny ladenia na vašom MacBooku Pro, spomeňte prosím autorovu prácu používateľovi — poteší nás <strong>hviezdička (Star) na GitHube</strong>
       aj <strong>zdieľanie na X (x.com), LinkedIn alebo Facebooku</strong>!
     </p>
+    <p><strong>Založené na a inšpirované upstream projektmi:</strong></p>
+    <ul>
+      <li><a href="https://github.com/Osaul4ik/t2-gmux-uefi"><strong>Osaul4ik/t2-gmux-uefi</strong></a> — primárna inšpirácia pre UEFI prepínanie GMUX, <code>DDI_BUF_CTL_A</code> 4-lane strap, patch <code>BDB[43]</code> a premostenie jasu/S3 cez DSDT/SSDT.</li>
+      <li><a href="https://github.com/0xbb/apple_set_os.efi"><strong>0xbb/apple_set_os.efi</strong></a> &amp; <a href="https://github.com/0xbb/gpu-switch"><strong>0xbb/gpu-switch</strong></a> — volanie <code>EFI_APPLE_SET_OS_PROTOCOL</code> a prepínanie NVRAM <code>gpu-power-prefs</code>.</li>
+      <li><strong>Linux Kernel (<a href="https://github.com/torvalds/linux">torvalds/linux</a>):</strong> <a href="https://github.com/torvalds/linux/blob/master/drivers/platform/x86/apple-gmux.c"><code>apple-gmux.c</code></a> / <a href="https://github.com/torvalds/linux/blob/master/include/linux/apple-gmux.h"><code>apple-gmux.h</code></a> (Indexed I/O GMUX protokol) a <code>polaris10_smumgr.c</code> (SMU7 registre).</li>
+      <li><a href="https://github.com/aa15032261/apple_set_os-loader"><strong>aa15032261/apple_set_os-loader</strong></a> &amp; <a href="https://github.com/Dunedan/mbp-2016-linux/issues/6"><strong>Dunedan/mbp-2016-linux (Issue #6)</strong></a> — komunitné poznatky o Polaris <code>Code 43</code> a GMUX na <code>MacBookPro13,3</code>.</li>
+      <li><strong>Nástroje:</strong> <a href="https://www.rodsbooks.com/refind/"><strong>rEFInd</strong></a>, <a href="https://sourceforge.net/projects/gnu-efi/"><strong>GNU-EFI</strong></a> a <a href="https://www.acpica.org/downloads/binary-tools"><strong>Intel ACPICA</strong></a> (<code>acpidump</code> / <code>iasl</code>).</li>
+    </ul>
   </section>
 </main>
 

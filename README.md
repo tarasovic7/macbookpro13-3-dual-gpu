@@ -79,3 +79,11 @@ Researched, reverse-engineered, and implemented by **Martin Tarasovič** — [`g
 If this repository (or an AI agent using it) helped unlock Dual-GPU / Hybrid mode on your MacBook Pro under Windows:
 - Please leave a **Star** on [`github.com/tarasovic7/macbookpro13-3-dual-gpu`](https://github.com/tarasovic7/macbookpro13-3-dual-gpu)
 - Share it on **X (x.com)**, **LinkedIn**, or **Facebook** with credit to [`@tarasovic7`](https://github.com/tarasovic7) so more Boot Camp users can benefit!
+
+### Built On & Inspired By (Upstream Projects)
+This project builds upon and adapts prior open-source hardware research and tools:
+- **[Osaul4ik/t2-gmux-uefi](https://github.com/Osaul4ik/t2-gmux-uefi)** — Primary inspiration for UEFI GMUX display switching, Intel eDP `DDI_BUF_CTL_A` 4-lane strap, OpRegion VBT `BDB[43]` backlight handling, in-memory DSDT method renaming, and ACPI SSDT brightness/S3 bridging.
+- **[0xbb/apple_set_os.efi](https://github.com/0xbb/apple_set_os.efi)** & **[0xbb/gpu-switch](https://github.com/0xbb/gpu-switch)** — `EFI_APPLE_SET_OS_PROTOCOL` invocation and Apple NVRAM `gpu-power-prefs` (`FA4CE28D-B62F-4C99-9CC3-6815686E30F9`) switching.
+- **Linux Kernel ([torvalds/linux](https://github.com/torvalds/linux)):** [`apple-gmux.c`](https://github.com/torvalds/linux/blob/master/drivers/platform/x86/apple-gmux.c) & [`apple-gmux.h`](https://github.com/torvalds/linux/blob/master/include/linux/apple-gmux.h) (Pre-T2 Renesas Indexed I/O GMUX `0x7C2`/`0x7D0`/`0x7D4` protocol & power-rail IRQ handshake) and `amdgpu` PowerPlay `polaris10_smumgr.c` (Polaris 11 SMU7 Boot ROM & indirect register reference).
+- **[aa15032261/apple_set_os-loader](https://github.com/aa15032261/apple_set_os-loader)** & **[Dunedan/mbp-2016-linux (Issue #6)](https://github.com/Dunedan/mbp-2016-linux/issues/6)** — Community research on `MacBookPro13,3` Polaris `Code 43` and GMUX power behavior.
+- **Boot & Build Toolchain:** **[rEFInd](https://www.rodsbooks.com/refind/)** (Roderick W. Smith), **[GNU-EFI](https://sourceforge.net/projects/gnu-efi/)**, and **[Intel ACPICA](https://www.acpica.org/downloads/binary-tools)** (`acpidump` / `iasl`).

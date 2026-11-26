@@ -132,3 +132,10 @@ Execute in strict phases, waiting for my reboot confirmation between UEFI tests:
 Original hardware research and Hybrid Dual-GPU implementation by **Martin Tarasovič** ([`github.com/tarasovic7`](https://github.com/tarasovic7) · [`tarasovic7/macbookpro13-3-dual-gpu`](https://github.com/tarasovic7/macbookpro13-3-dual-gpu)).
 
 If you or your AI agent succeeded in porting or using this project, please consider starring the GitHub repository and sharing your results on **X (x.com)**, **LinkedIn**, or **Facebook** with credit!
+
+### Built On & Inspired By (Upstream Projects)
+- **[Osaul4ik/t2-gmux-uefi](https://github.com/Osaul4ik/t2-gmux-uefi)** — UEFI GMUX switching, `DDI_BUF_CTL_A` 4-lane strap, `BDB[43]` VBT patch, and DSDT/SSDT bridge pattern.
+- **[0xbb/apple_set_os.efi](https://github.com/0xbb/apple_set_os.efi)** & **[0xbb/gpu-switch](https://github.com/0xbb/gpu-switch)** — `AppleSetOs` protocol and `gpu-power-prefs` NVRAM switching.
+- **Linux Kernel ([torvalds/linux](https://github.com/torvalds/linux)):** [`apple-gmux.c`](https://github.com/torvalds/linux/blob/master/drivers/platform/x86/apple-gmux.c) / [`apple-gmux.h`](https://github.com/torvalds/linux/blob/master/include/linux/apple-gmux.h) (Indexed I/O GMUX) & `polaris10_smumgr.c` (SMU7 registers).
+- **[aa15032261/apple_set_os-loader](https://github.com/aa15032261/apple_set_os-loader)** & **[Dunedan/mbp-2016-linux (Issue #6)](https://github.com/Dunedan/mbp-2016-linux/issues/6)** — Community Polaris `Code 43` and `MacBookPro13,3` GMUX findings.
+- **Toolchain:** **[rEFInd](https://www.rodsbooks.com/refind/)**, **[GNU-EFI](https://sourceforge.net/projects/gnu-efi/)**, and **[Intel ACPICA](https://www.acpica.org/downloads/binary-tools)**.

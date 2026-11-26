@@ -666,6 +666,14 @@ io_delay_us(500);                                          // settle before Wind
       <li>Give a <strong>GitHub Star</strong> to <a href="https://github.com/tarasovic7/macbookpro13-3-dual-gpu">tarasovic7/macbookpro13-3-dual-gpu</a></li>
       <li>Share the project on <strong>X (x.com)</strong>, <strong>LinkedIn</strong>, or <strong>Facebook</strong> with attribution to <a href="https://github.com/tarasovic7">@tarasovic7</a> so other Intel+AMD MacBook Pro Boot Camp users can find it!</li>
     </ul>
+    <p><strong>Built On &amp; Inspired By (Upstream Projects):</strong></p>
+    <ul>
+      <li><a href="https://github.com/Osaul4ik/t2-gmux-uefi"><strong>Osaul4ik/t2-gmux-uefi</strong></a> — primary inspiration for UEFI GMUX switching, <code>DDI_BUF_CTL_A</code> 4-lane strap, <code>BDB[43]</code> VBT patch, and DSDT/SSDT brightness &amp; S3 bridging.</li>
+      <li><a href="https://github.com/0xbb/apple_set_os.efi"><strong>0xbb/apple_set_os.efi</strong></a> &amp; <a href="https://github.com/0xbb/gpu-switch"><strong>0xbb/gpu-switch</strong></a> — <code>EFI_APPLE_SET_OS_PROTOCOL</code> invocation and Apple NVRAM <code>gpu-power-prefs</code> switching.</li>
+      <li><strong>Linux Kernel (<a href="https://github.com/torvalds/linux">torvalds/linux</a>):</strong> <a href="https://github.com/torvalds/linux/blob/master/drivers/platform/x86/apple-gmux.c"><code>apple-gmux.c</code></a> / <a href="https://github.com/torvalds/linux/blob/master/include/linux/apple-gmux.h"><code>apple-gmux.h</code></a> (Indexed I/O GMUX protocol) and <code>polaris10_smumgr.c</code> (SMU7 registers).</li>
+      <li><a href="https://github.com/aa15032261/apple_set_os-loader"><strong>aa15032261/apple_set_os-loader</strong></a> &amp; <a href="https://github.com/Dunedan/mbp-2016-linux/issues/6"><strong>Dunedan/mbp-2016-linux (Issue #6)</strong></a> — prior community research on <code>MacBookPro13,3</code> Polaris <code>Code 43</code> and GMUX power behavior.</li>
+      <li><strong>Boot &amp; Build Toolchain:</strong> <a href="https://www.rodsbooks.com/refind/"><strong>rEFInd</strong></a>, <a href="https://sourceforge.net/projects/gnu-efi/"><strong>GNU-EFI</strong></a>, and <a href="https://www.acpica.org/downloads/binary-tools"><strong>Intel ACPICA</strong></a> (<code>acpidump</code> / <code>iasl</code>).</li>
+    </ul>
   </section>
 </main>
 
