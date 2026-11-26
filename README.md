@@ -3,6 +3,7 @@
 Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabling **Intel HD Graphics 530** (`PCI 00:02.0`) alongside **AMD Radeon Pro 455** (`Polaris 11`, `PCI 01:00.0`) on an Apple **MacBookPro13,3** (15" Late 2016 Touch Bar, **Apple T1** — pre-T2 Indexed I/O GMUX `Renesas R4F2113`) running **Windows 11 Boot Camp** (with HVCI enabled).
 
 > **Interactive Checkpoint & Full Documentation:** Open [`index.html`](index.html) locally in any browser (100% offline, searchable, links directly to all dumps, decompiled ACPI tables, scripts, and reference sources), or read the Markdown specification in [`docs/macbookpro13_3_windows_dual_gpu_spec.md`](docs/macbookpro13_3_windows_dual_gpu_spec.md).
+> **Undocumented Hardware Discoveries (SK Interactive Reference):** Open [`docs/undocumented_hardware_findings.html`](docs/undocumented_hardware_findings.html) for an offline interactive reference of all Apple EFI (`HB80`), Polaris 11 3-reg, Pre-T2 Indexed I/O GMUX, `VFCT`, `dxgkrnl`, and S3 discoveries.
 > **Want to build it yourself or port it to another MacBook Pro?** See [`docs/BUILD_AND_PORT_GUIDE.md`](docs/BUILD_AND_PORT_GUIDE.md) (WSL build, `scripts/Deploy-USB.ps1 -Profile clean|dev`, and a copy-paste AI-Agent Porting Guide).
 
 ## Key Findings (Phase 0 Forensics Complete)
