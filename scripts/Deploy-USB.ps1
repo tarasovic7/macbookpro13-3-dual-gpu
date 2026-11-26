@@ -108,6 +108,23 @@ if ($cSrcHash -ne $cDstHash) {
 }
 Write-Host "  Verified $ConfDst (from $(Split-Path -Leaf $ConfSrc))"
 
+$MacosSrcDir = Join-Path $PSScriptRoot 'macos'
+$MacosDstDir = Join-Path $UsbDrive 'MACOS'
+if (Test-Path $MacosSrcDir) {
+    New-Item -ItemType Directory -Force $MacosDstDir | Out-Null
+    foreach ($mf in @('bless-refind.command', 'README_MACOS.txt')) {
+        $ms = Join-Path $MacosSrcDir $mf
+        if (Test-Path $ms) {
+            $md = Join-Path $MacosDstDir $mf
+            Copy-Item $ms $md -Force
+            $msh = (Get-FileHash $ms -Algorithm SHA256).Hash
+            $mdh = (Get-FileHash $md -Algorithm SHA256).Hash
+            if ($msh -ne $mdh) { throw "SHA-256 verification failed for $md" }
+            Write-Host "  Verified $md (SHA256=$mdh)"
+        }
+    }
+}
+
 Write-Host "`nFinal $UsbDrive layout:"
 Get-ChildItem $UsbDrive | Select-Object Name, LastWriteTime | Format-Table -AutoSize
 Get-ChildItem $ToolsDir | Select-Object Name, Length, LastWriteTime | Format-Table -AutoSize
