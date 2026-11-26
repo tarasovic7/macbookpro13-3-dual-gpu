@@ -543,6 +543,9 @@ io_delay_us(500);                                          // ustálenie pred š
         <tr><td><strong><code>01 00 00 00</code> (<code>iGPU</code>)</strong></td><td>Apple EFI sám inicializuje Intel HD 530 ako primárnu POST/GOP GPU (<code>GMUX 0x10=0x02</code>, <code>DDI_A=0x80000017</code>, <code>PP_STATUS=0x80000008</code>).</td><td>Windows čisto nabootuje na Intel HD 530 bez surprise-removal. <em>Pozor:</em> ak je táto premenná zapísaná a používateľ nabootuje obyčajný Boot Camp bez nášho loadera, Apple EFI schová Intel pri EBS a GMUX ostane na odpojenom iGPU → čierna obrazovka (preto <code>EnsureGpuPrefsForMode()</code> stav pred štartom automaticky prepína).</td></tr>
       </tbody>
     </table>
+    <div class="callout danger">
+      <strong>Dôležité pre používateľov klasického Boot Campu:</strong> Pokiaľ je v NVRAM zapísané <code>gpu-power-prefs = iGPU</code> (režim Hybrid), priamy štart klasického Boot Campu bez nášho loadera dá čiernu obrazovku. Na obnovu holého Boot Campu treba vybrať <strong><code>Boot Camp Default (AMD Only)</code></strong> v rEFInd, alebo resetovať Apple NVRAM pri zapnutí MacBooku podržaním kombinácie <strong><code>Cmd + Option + P + R</code></strong>!
+    </div>
   </section>
 
   <!-- SECTION 7 -->

@@ -551,6 +551,9 @@ io_delay_us(500);                                          // settle before Wind
         <tr><td><strong><code>01 00 00 00</code> (<code>iGPU</code>)</strong></td><td>Apple EFI natively initializes Intel HD 530 as the POST/GOP primary GPU (<code>GMUX 0x10=0x02</code>, <code>DDI_A=0x80000017</code>, <code>PP_STATUS=0x80000008</code>).</td><td>Windows boots cleanly on Intel HD 530 with zero surprise-removals. <em>Caveat:</em> booting stock Boot Camp without our loader while this NVRAM var is set causes Apple EFI to hide Intel at EBS while leaving GMUX on IGD → black screen (which is why <code>EnsureGpuPrefsForMode()</code> switches it automatically per mode).</td></tr>
       </tbody>
     </table>
+    <div class="callout danger">
+      <strong>Important for Classic Boot Camp Recovery:</strong> While <code>gpu-power-prefs = iGPU</code> is set in NVRAM, booting classic/stock Boot Camp directly (bypassing rEFInd / <code>mbp133_m2_hybrid.efi</code>) will show a black screen. Use <strong><code>Boot Camp Default (AMD Only)</code></strong> in rEFInd, or reset Apple NVRAM at startup by holding <strong><code>Cmd + Option + P + R</code></strong>!
+    </div>
   </section>
 
   <!-- SECTION 7 -->

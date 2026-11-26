@@ -1,4 +1,4 @@
-#Requires -RunAsAdministrator
+﻿#Requires -RunAsAdministrator
 <#
 .SYNOPSIS
     Safely installs rEFInd + the 3 clean MacBookPro13,3 Windows GPU modes onto the internal NVMe EFI System Partition.
@@ -144,11 +144,10 @@ try {
     Write-Host "Safety check PASSED: bootmgfw.efi SHA-256 is 100% unchanged."
 
     if (-not $Uninstall) {
-        Write-Host "`nNOTE FOR APPLE EFI:"
-        Write-Host "  If booting without USB still jumps straight to Windows instead of rEFInd,"
-        Write-Host "  run this once in macOS Terminal (or Recovery Terminal if SIP blocks bless):"
-        Write-Host "    sudo diskutil mount disk0s1"
-        Write-Host "    sudo bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/EFI/refind/refind_x64.efi --shortform"
+        Write-Host "`nNEXT STEP (REQUIRED ONCE FOR APPLE EFI ON MACBOOKPRO13,3):"
+        Write-Host "  macOS Recovery (Cmd+R) IS REQUIRED — normal macOS SIP blocks bless on disk0s1."
+        Write-Host "  Reboot holding Cmd+R -> Utilities -> Terminal, mount/keep REFIND_USB plugged in, and run:"
+        Write-Host "    sh /Volumes/REFIND_USB/MACOS/bless-refind.command"
     }
 } finally {
     if ($mounted) {

@@ -4,7 +4,10 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 
 > **Interactive Checkpoint & Full Documentation:** Open [`index.html`](index.html) locally in any browser (100% offline, searchable, links directly to all dumps, decompiled ACPI tables, scripts, and reference sources), or read the Markdown specification in [`docs/macbookpro13_3_windows_dual_gpu_spec.md`](docs/macbookpro13_3_windows_dual_gpu_spec.md).
 > **Undocumented Hardware Discoveries (Interactive Reference):** Open [`docs/undocumented_hardware_findings_en.html`](docs/undocumented_hardware_findings_en.html) (**English**) or [`docs/undocumented_hardware_findings.html`](docs/undocumented_hardware_findings.html) (**Slovak**) for a 100% offline reference of all Apple EFI (`HB80`), Polaris 11 3-reg, Pre-T2 Indexed I/O GMUX, `VFCT`, `dxgkrnl`, and S3 discoveries.
-> **Want to build it yourself or port it to another MacBook Pro?** See [`docs/BUILD_AND_PORT_GUIDE.md`](docs/BUILD_AND_PORT_GUIDE.md) and [`AGENTS.md`](AGENTS.md) (WSL build, `scripts/Deploy-USB.ps1 -Profile clean|dev`, and a copy-paste AI-Agent Porting Guide).
+> **Want to build it yourself or port it to another MacBook Pro?** See [`docs/BUILD_AND_PORT_GUIDE.md`](docs/BUILD_AND_PORT_GUIDE.md) and [`AGENTS.md`](AGENTS.md) (WSL build, `scripts/Deploy-USB.ps1 -Profile clean|dev`, internal SSD installer, and a copy-paste AI-Agent Porting Guide).
+>
+> [!CAUTION]
+> **Hybrid `gpu-power-prefs = iGPU` vs. Classic Boot Camp:** When `gpu-power-prefs = iGPU` (`01 00 00 00`) is set in Apple NVRAM, booting classic Boot Camp directly without rEFInd/`mbp133_m2_hybrid.efi` produces a **black screen**. Always use **`Boot Camp Default`** in rEFInd or reset Apple NVRAM at startup with **`Cmd + Option + P + R`** before booting stock Boot Camp directly!
 
 ## Key Findings (Phase 0 Forensics Complete)
 

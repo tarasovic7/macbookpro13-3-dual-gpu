@@ -10,10 +10,13 @@
 
 ## Ako vrátiť `gpu-power-prefs` späť na predvolenú AMD dGPU (Rollback)
 
+> [!CAUTION]
+> **Dôležité upozornenie pre klasický Boot Camp:** Pokiaľ je v Apple NVRAM nastavené **`gpu-power-prefs = iGPU` (`01 00 00 00`)**, klasické nabootovanie Boot Campu napriamo (bez `mbp133_m2_hybrid.efi` / rEFInd) skončí **čiernou obrazovkou**! Ak chceš znova používať klasický Boot Camp bez loadera, **musíš vymazať NVRAM** buď cez **`Windows 11: Boot Camp Default (AMD Only)`** v rEFInd, alebo **podržaním klávesovej skratky `Cmd + Option + P + R` pri štarte MacBooku** (až do zaznenia reštartu/gongu).
+
 Kedykoľvek troma spôsobmi:
-1. V menu `mbp133_m2_hybrid.efi` stlač **`[S]`** (keď je aktívne `iGPU`) alebo **`[D]`** (*Force Delete gpu-power-prefs*).
-2. Nabootovaním **macOS** (macOS premennú automaticky vymaže).
-3. Klasickým resetom NVRAM pri štarte MacBooku: **`Cmd + Option + P + R`**.
+1. V rEFInd vyber **`Windows 11: Boot Camp Default (AMD Only)`** (alebo v menu `mbp133_m2_hybrid.efi` stlač **`[S]`** / **`[D]`**).
+2. Pri štarte MacBooku podrž **`Cmd + Option + P + R`** (klasický reset Apple NVRAM — povinné, ak chceš znova spúšťať holý Boot Camp priamo!).
+3. Nabootovaním **macOS** (macOS premennú automaticky vymaže).
 
 ---
 

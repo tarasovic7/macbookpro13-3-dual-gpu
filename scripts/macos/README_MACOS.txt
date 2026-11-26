@@ -1,17 +1,22 @@
-MacBookPro13,3 — Nastavenie predvoleného bootu rEFInd z interného SSD (macOS / Recovery)
-========================================================================================
+MacBookPro13,3 — Nastavenie predvoleného bootu rEFInd z interného SSD (macOS Recovery)
+=========================================================================================
 
-Tento priečinok je potrebný IBA raz, ak Apple EFI po inštalácii cez
-Install-InternalESP.ps1 ignoruje Windows bcdedit a bez USB kľúča štartuje rovno do Windows.
+DÔLEŽITÉ: Normálny macOS blokuje príkaz `bless --setBoot` na interný EFI oddiel kvôli SIP.
+Pre nastavenie predvoleného bootu na interný disk je NEVYHNUTNÉ použiť macOS Recovery!
 
-Postup v macOS (alebo v macOS Recovery cez Cmd+R):
-1. Najprv maj spustený Windows krok:
+Postup:
+1. Najprv maj spustený Windows inštalačný skript (v Administratorskom PowerShelli):
    powershell -ExecutionPolicy Bypass -File .\scripts\Install-InternalESP.ps1 -SetDefault
-2. V macOS otvor Terminal (alebo v Recovery Cmd+R: Utilities -> Terminal) a spusti:
+2. Reštartuj MacBook a pri štarte drž **Cmd + R**, kým nenabehne **macOS Recovery**.
+3. V hornom menu otvor **Utilities → Terminal** (pri zapojenom USB kľúči REFIND_USB) a spusti:
    sh /Volumes/REFIND_USB/MACOS/bless-refind.command
 
+UPOZORNENIE PRE KLASICKÝ BOOT CAMP:
+Pokiaľ máš v NVRAM zapnuté `gpu-power-prefs = iGPU` (Hybrid režim), priamy štart holého
+Boot Campu bez rEFInd dá čiernu obrazovku. Pre návrat na holý Boot Camp použi v rEFInd
+položku "Boot Camp Default", alebo pri štarte drž **Cmd + Option + P + R** (reset NVRAM).
+
 EN:
-If MacBookPro13,3 skips internal rEFInd and boots directly into Windows without the USB
-after running Install-InternalESP.ps1 -SetDefault, boot into macOS (or Cmd+R Recovery
-Terminal if SIP blocks bless) and run:
+macOS Recovery (Cmd + R -> Utilities -> Terminal) is REQUIRED because normal macOS SIP
+blocks `bless --setBoot` on `disk0s1`. With REFIND_USB plugged in, run:
    sh /Volumes/REFIND_USB/MACOS/bless-refind.command

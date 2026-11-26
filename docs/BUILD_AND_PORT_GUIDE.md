@@ -59,7 +59,10 @@ The clean [`scripts/usb_refind/refind.conf`](../scripts/usb_refind/refind.conf) 
 | **3. Boot Camp Default (AMD Only)** | **Stock Boot Camp:** Pure AMD Radeon Pro 455 display output (Intel hidden by Apple EFI), e.g., if an anti-cheat or app insists on stock Apple Boot Camp. | If `gpu-power-prefs` is set to `iGPU`, the loader deletes it (`dGPU` default) and cold-reboots once automatically, then chainloads Windows unmodified. |
 | **4. AMD Display + Intel Helper `[Experts Only]`** | **Specific dual-GPU routing:** AMD drives the Retina panel directly while Intel HD 530 stays alive headless for Intel QuickSync / DXGI minimum-power. Not needed for normal users. | Auto-clears `gpu-power-prefs` to `dGPU` if needed, calls `AppleSetOs("Mac OS X 10.15")`, and applies the 3-register AMD `BAR5` fix post-`ExitBootServices()`. |
 
-**Rollback `gpu-power-prefs` anytime:** Boot **Mode 3 (Boot Camp Default)** once, open the interactive menu and press `[D]`, boot **macOS**, or press **`Cmd + Option + P + R`** at startup.
+> [!CAUTION]
+> **Classic Boot Camp Warning When `gpu-power-prefs = iGPU` Is Set:**
+> Once `gpu-power-prefs` is set to `iGPU` (`01 00 00 00`, used by **Hybrid Mode**), booting classic/stock Boot Camp directly (bypassing `mbp133_m2_hybrid.efi`) **will produce a black screen**, because Apple EFI still hides Intel HD 530 at `ExitBootServices()` while leaving the GMUX pointed at Intel.
+> To restore stock Boot Camp, either choose **`Windows 11: Boot Camp Default (AMD Only)`** in rEFInd (which auto-clears NVRAM) **OR reset Apple NVRAM at startup by holding `Cmd + Option + P + R`** until the startup chime / reboot!
 
 ### 1.5 Optional: Installing to the Internal NVMe ESP (No USB Needed)
 Once you have verified the USB setup works reliably on your hardware, [`scripts/Install-InternalESP.ps1`](../scripts/Install-InternalESP.ps1) installs rEFInd and the 3 production binaries cleanly onto the internal NVMe EFI System Partition (`\EFI\refind\` + `\EFI\tools\`) using the 3-mode [`scripts/usb_refind/refind_internal.conf`](../scripts/usb_refind/refind_internal.conf) — **without modifying `\EFI\Microsoft\Boot\bootmgfw.efi` or `\EFI\APPLE\`**:
@@ -68,15 +71,17 @@ Once you have verified the USB setup works reliably on your hardware, [`scripts/
 # Run in an Administrator PowerShell (with REFIND_USB mounted at D:)
 powershell -ExecutionPolicy Bypass -File .\scripts\Install-InternalESP.ps1 -SetDefault
 
+# Update internal binaries later without re-running bless:
+powershell -ExecutionPolicy Bypass -File .\scripts\Install-InternalESP.ps1
+
 # Clean rollback at any time:
 powershell -ExecutionPolicy Bypass -File .\scripts\Install-InternalESP.ps1 -Uninstall
 ```
 
-> [!NOTE]
-> On `MacBookPro13,3`, Apple's EFI NVRAM `efi-boot-device` sometimes overrides Windows `bcdedit`. If rebooting without the USB still jumps straight into Windows instead of rEFInd, boot **macOS** once and run:
+> [!IMPORTANT]
+> **macOS Recovery (`Cmd + R`) IS REQUIRED on `MacBookPro13,3`:** Normal macOS SIP blocks `bless --setBoot` on the internal EFI partition (`disk0s1`), and Apple EFI ignores Windows `bcdedit`. After running `-SetDefault`, reboot holding **`Cmd + R`** into **macOS Recovery → Utilities → Terminal** (with `REFIND_USB` plugged in) and run:
 > ```bash
-> sudo diskutil mount disk0s1
-> sudo bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/EFI/refind/refind_x64.efi --shortform
+> sh /Volumes/REFIND_USB/MACOS/bless-refind.command
 > ```
 
 ---

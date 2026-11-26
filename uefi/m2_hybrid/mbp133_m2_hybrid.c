@@ -2085,6 +2085,30 @@ static void LogGpuPrefs(EFI_RUNTIME_SERVICES *RT, LOG_BUF *L) {
     log_nl(L);
 }
 
+static void ColdRebootNow(EFI_BOOT_SERVICES *BS, EFI_RUNTIME_SERVICES *RT,
+                          SIMPLE_TEXT_OUTPUT_INTERFACE *ConOut) {
+    BS->Stall(1500000);
+    RT->ResetSystem(EfiResetCold, EFI_SUCCESS, 0, NULL);
+    BS->Stall(500000);
+    RT->ResetSystem(EfiResetWarm, EFI_SUCCESS, 0, NULL);
+    BS->Stall(500000);
+
+    ConPrintA(ConOut, "  UEFI ResetSystem returned - triggering PCH 0xCF9 cold reset...\n");
+    BS->Stall(200000);
+    io_out8(0x0CF9u, 0x02u);
+    io_delay_us(1000);
+    io_out8(0x0CF9u, 0x0Eu); /* FULL_RST | RST_CPU | SYS_RST */
+    io_delay_us(50000);
+    io_out8(0x0CF9u, 0x06u); /* Hard reset fallback */
+    io_delay_us(50000);
+    io_out8(0x0064u, 0xFEu); /* Legacy KBC reset pulse */
+
+    ConPrintA(ConOut, "  NVRAM saved OK - please power-cycle / reboot manually now.\n");
+    while (1) {
+        BS->Stall(1000000);
+    }
+}
+
 static BOOLEAN EnsureGpuPrefsForMode(EFI_BOOT_SERVICES *BS, EFI_RUNTIME_SERVICES *RT,
                                      SIMPLE_TEXT_OUTPUT_INTERFACE *ConOut,
                                      SIMPLE_INPUT_INTERFACE *ConIn, UINT32 Mode) {
@@ -2130,8 +2154,8 @@ static BOOLEAN EnsureGpuPrefsForMode(EFI_BOOT_SERVICES *BS, EFI_RUNTIME_SERVICES
     EFI_STATUS pst = GpuPrefsApply(RT, to_igpu);
     if (!EFI_ERROR(pst)) {
         ConPrintA(ConOut, "  Verified OK! Cold rebooting now...\n");
-        BS->Stall(1500000);
-        RT->ResetSystem(EfiResetCold, EFI_SUCCESS, 0, NULL);
+        ColdRebootNow(BS, RT, ConOut);
+        return FALSE;
     }
 
     ConPrintA(ConOut, "  ERROR: NVRAM update failed: 0x");
@@ -2381,8 +2405,7 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
             EFI_STATUS pst = GpuPrefsApply(RT, to_igpu);
             if (!EFI_ERROR(pst)) {
                 ConPrintA(ConOut, "Verified OK! Cold rebooting in 1.5s so Apple EFI applies it...\n");
-                BS->Stall(1500000);
-                RT->ResetSystem(EfiResetCold, EFI_SUCCESS, 0, NULL);
+                ColdRebootNow(BS, RT, ConOut);
             } else {
                 ConPrintA(ConOut, "ERROR: SetVariable/verify failed: 0x");
                 ConPrintHex(ConOut, pst, 16);
@@ -2399,8 +2422,7 @@ EFI_STATUS efi_main(EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
             }
         } else if (c == L'r' || c == L'R') {
             ConPrintA(ConOut, "\nRebooting...\n");
-            BS->Stall(300000);
-            RT->ResetSystem(EfiResetCold, EFI_SUCCESS, 0, NULL);
+            ColdRebootNow(BS, RT, ConOut);
         } else if (c == L'q' || c == L'Q' || k.ScanCode == 0x17u) {
             break;
         }
