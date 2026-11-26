@@ -61,6 +61,24 @@ The clean [`scripts/usb_refind/refind.conf`](../scripts/usb_refind/refind.conf) 
 
 **Rollback `gpu-power-prefs` anytime:** Boot **Mode 3 (Boot Camp Default)** once, open the interactive menu and press `[D]`, boot **macOS**, or press **`Cmd + Option + P + R`** at startup.
 
+### 1.5 Optional: Installing to the Internal NVMe ESP (No USB Needed)
+Once you have verified the USB setup works reliably on your hardware, [`scripts/Install-InternalESP.ps1`](../scripts/Install-InternalESP.ps1) installs rEFInd and the 3 production binaries cleanly onto the internal NVMe EFI System Partition (`\EFI\refind\` + `\EFI\tools\`) using the 3-mode [`scripts/usb_refind/refind_internal.conf`](../scripts/usb_refind/refind_internal.conf) — **without modifying `\EFI\Microsoft\Boot\bootmgfw.efi` or `\EFI\APPLE\`**:
+
+```powershell
+# Run in an Administrator PowerShell (with REFIND_USB mounted at D:)
+powershell -ExecutionPolicy Bypass -File .\scripts\Install-InternalESP.ps1 -SetDefault
+
+# Clean rollback at any time:
+powershell -ExecutionPolicy Bypass -File .\scripts\Install-InternalESP.ps1 -Uninstall
+```
+
+> [!NOTE]
+> On `MacBookPro13,3`, Apple's EFI NVRAM `efi-boot-device` sometimes overrides Windows `bcdedit`. If rebooting without the USB still jumps straight into Windows instead of rEFInd, boot **macOS** once and run:
+> ```bash
+> sudo diskutil mount disk0s1
+> sudo bless --mount /Volumes/EFI --setBoot --file /Volumes/EFI/EFI/refind/refind_x64.efi --shortform
+> ```
+
 ---
 
 ## Part 2: Porting to Another MacBook Pro With Your AI Agent
