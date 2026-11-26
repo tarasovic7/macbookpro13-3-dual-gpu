@@ -3,8 +3,8 @@
 Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabling **Intel HD Graphics 530** (`PCI 00:02.0`) alongside **AMD Radeon Pro 455** (`Polaris 11`, `PCI 01:00.0`) on an Apple **MacBookPro13,3** (15" Late 2016 Touch Bar, **Apple T1** — pre-T2 Indexed I/O GMUX `Renesas R4F2113`) running **Windows 11 Boot Camp** (with HVCI enabled).
 
 > **Interactive Checkpoint & Full Documentation:** Open [`index.html`](index.html) locally in any browser (100% offline, searchable, links directly to all dumps, decompiled ACPI tables, scripts, and reference sources), or read the Markdown specification in [`docs/macbookpro13_3_windows_dual_gpu_spec.md`](docs/macbookpro13_3_windows_dual_gpu_spec.md).
-> **Undocumented Hardware Discoveries (SK Interactive Reference):** Open [`docs/undocumented_hardware_findings.html`](docs/undocumented_hardware_findings.html) for an offline interactive reference of all Apple EFI (`HB80`), Polaris 11 3-reg, Pre-T2 Indexed I/O GMUX, `VFCT`, `dxgkrnl`, and S3 discoveries.
-> **Want to build it yourself or port it to another MacBook Pro?** See [`docs/BUILD_AND_PORT_GUIDE.md`](docs/BUILD_AND_PORT_GUIDE.md) (WSL build, `scripts/Deploy-USB.ps1 -Profile clean|dev`, and a copy-paste AI-Agent Porting Guide).
+> **Undocumented Hardware Discoveries (Interactive Reference):** Open [`docs/undocumented_hardware_findings_en.html`](docs/undocumented_hardware_findings_en.html) (**English**) or [`docs/undocumented_hardware_findings.html`](docs/undocumented_hardware_findings.html) (**Slovak**) for a 100% offline reference of all Apple EFI (`HB80`), Polaris 11 3-reg, Pre-T2 Indexed I/O GMUX, `VFCT`, `dxgkrnl`, and S3 discoveries.
+> **Want to build it yourself or port it to another MacBook Pro?** See [`docs/BUILD_AND_PORT_GUIDE.md`](docs/BUILD_AND_PORT_GUIDE.md) and [`AGENTS.md`](AGENTS.md) (WSL build, `scripts/Deploy-USB.ps1 -Profile clean|dev`, and a copy-paste AI-Agent Porting Guide).
 
 ## Key Findings (Phase 0 Forensics Complete)
 
@@ -56,3 +56,11 @@ Engineering research, firmware/ACPI forensics, and UEFI/SSDT blueprint for enabl
 4. **Milestone 2 (Completed & Verified on Hardware — Hybrid Mode 5 Works End-to-End!):**
    - Unified 4-mode UEFI loader (`uefi/m2_hybrid/mbp133_m2_hybrid.c`), Hybrid S3 ACPI bridge (`uefi/m2_hybrid/SSDT_HYBRID_MBP133.asl`), `M2HY`/telemetry collector (`scripts/Read-M2-Hybrid.py`), runbook ([`docs/MILESTONE_2_RUNBOOK.md`](docs/MILESTONE_2_RUNBOOK.md)), and **verified findings** ([`docs/MILESTONE_2_FINDINGS.md`](docs/MILESTONE_2_FINDINGS.md)).
    - **Proved:** Combining Apple NVRAM `gpu-power-prefs = iGPU` (`[S]`/`[D]` switcher), post-EBS 3-register Polaris 11 relocation, in-memory `VFCT` eDP/LCD1 removal (`dev_sup 0x068A -> 0x0688`, `dp`/`conn`/`enc` `5 -> 4`, bypassing `dxgkrnl!DpiFdoEnumChildDevices 0xC00000BB`), `PEG0GFX0._DOD -> XDOD`, and `SSDT_HYBRID_MBP133.aml` (never cutting GMUX port `0x50`) drives `2880×1800 @ 60 Hz` (`101` brightness levels, `dwm`/`Antigravity`, zero lag) on **Intel HD 530 (`OK`)** while keeping **AMD RX 560X / Pro 455 (`OK`, `5.7 MB` idle VRAM, DXGI `#0 HIGH_PERFORMANCE`)** active across **`Standby (S3)` lid-close sleep/wake**.
+
+## Author & Credits
+
+Researched, reverse-engineered, and implemented by **Martin Tarasovič** — [`github.com/tarasovic7`](https://github.com/tarasovic7).
+
+If this repository (or an AI agent using it) helped unlock Dual-GPU / Hybrid mode on your MacBook Pro under Windows:
+- Please leave a **Star** on [`github.com/tarasovic7/macbookpro13-3-dual-gpu`](https://github.com/tarasovic7/macbookpro13-3-dual-gpu)
+- Share it on **X (x.com)**, **LinkedIn**, or **Facebook** with credit to [`@tarasovic7`](https://github.com/tarasovic7) so more Boot Camp users can benefit!

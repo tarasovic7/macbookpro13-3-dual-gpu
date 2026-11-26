@@ -96,3 +96,14 @@ Execute in strict phases, waiting for my reboot confirmation between UEFI tests:
 - Phase 2 (`iGPU Primary + Secondary dGPU`): Port `uefi/m2_hybrid/` using my measured post-EBS dGPU fix, GMUX switch, VBT `BDB[43]` patch, and `gpu-power-prefs` switcher. If the secondary dGPU still shows Code 43 while Intel works, capture a `Microsoft-Windows-DxgKrnl` ETW trace (`logman`) during `pnputil /restart-device` to check whether `DxgkDdiStartDevice` succeeded and `DpiFdoEnumChildDevices` rejected `TypeIntegratedDisplay (0xC00000BB)`; if so, parse and patch my `VFCT` + dGPU `_DOD` dynamically.
 - Phase 3 (S3 Sleep/Wake): Ensure `SSDT_HYBRID_*.aml` restores GMUX display routing and brightness on `_WAK` without cutting dGPU power (`0x50` / GMUX rail) across S3 suspend/resume.
 ```
+
+> [!TIP]
+> Also point your agent to [`AGENTS.md`](../AGENTS.md) and [`docs/undocumented_hardware_findings_en.html`](undocumented_hardware_findings_en.html) for the full undocumented register & ACPI map.
+
+---
+
+## Credits & Community Note
+
+Original hardware research and Hybrid Dual-GPU implementation by **Martin Tarasovič** ([`github.com/tarasovic7`](https://github.com/tarasovic7) · [`tarasovic7/macbookpro13-3-dual-gpu`](https://github.com/tarasovic7/macbookpro13-3-dual-gpu)).
+
+If you or your AI agent succeeded in porting or using this project, please consider starring the GitHub repository and sharing your results on **X (x.com)**, **LinkedIn**, or **Facebook** with credit!
